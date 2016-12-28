@@ -1,0 +1,51 @@
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    style="@style/ToolBarStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bgr_header"
+    android:paddingTop="@dimen/tool_bar_top_padding"
+    app:contentInsetStart="0dp">
+
+    <com.inspius.coreapp.widget.InspiusTintableImageView
+        android:id="@+id/imvHeaderBack"
+        android:layout_width="@dimen/tab_height"
+        android:layout_height="@dimen/tab_height"
+        android:layout_gravity="start"
+        android:background="?attr/selectableItemBackground"
+        android:padding="10dp"
+        android:src="@drawable/ic_action_back"
+        app:tint="@color/custom_icon_while_selector" />
+
+    <ImageView
+        android:id="@+id/imvHeaderDownload"
+        android:layout_width="@dimen/tab_height"
+        android:layout_height="@dimen/tab_height"
+        android:layout_gravity="end"
+        android:background="?attr/selectableItemBackground"
+        android:padding="10dp"
+        android:src="@drawable/ic_video_download_selector"
+        app:tint="@color/custom_icon_while_selector" />
+
+    <ImageView
+        android:id="@+id/imvHeaderWishList"
+        android:layout_width="@dimen/tab_height"
+        android:layout_height="@dimen/tab_height"
+        android:layout_gravity="end"
+        android:padding="10dp"
+        android:src="@drawable/ic_video_wish_list_selector"
+        app:tint="@color/custom_icon_while_selector" />
+
+    <TextView
+        android:id="@+id/tvnHeaderTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:lines="1"
+        android:text="@string/app_name"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+</android.support.v7.widget.Toolbar>

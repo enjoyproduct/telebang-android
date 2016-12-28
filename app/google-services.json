@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "504282031577",
+    "firebase_url": "https://yo365-cd7d6.firebaseio.com",
+    "project_id": "yo365-cd7d6",
+    "storage_bucket": "yo365-cd7d6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:504282031577:android:26b765fcf8680e52",
+        "android_client_info": {
+          "package_name": "com.inspius.yo365"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "504282031577-b9cleot7ft642snk1nkmf4dug0i28d2b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmXwHQ7Z6ESVMeyRV6vB63IO1yrVPMcBU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

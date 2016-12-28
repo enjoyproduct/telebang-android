@@ -1,0 +1,50 @@
+<resources>
+    <!-- Change App Name -->
+    <string name="app_name">Yo365</string>
+
+    <!-- Change AdMob Banner Id -->
+    <string name="banner_ad_unit_id">ca-app-pub-8000676937410247/5916810013</string>
+
+    <!-- Change AdMob Interstitial Id -->
+    <string name="interstitial_ad_unit_id">ca-app-pub-8000676937410247/2823742819</string>
+
+    <string name="slogan">Social Network Of Video</string>
+    <string name="fm_version">Version %s</string>
+    <string name="cm_submit">Submit</string>
+
+    <!-- Tab Menu -->
+    <string name="menu_home">Home</string>
+    <string name="menu_categories">Categories</string>
+    <string name="menu_trending">Trending</string>
+    <string name="menu_watch_list">Watch List</string>
+
+    <!-- Customer -->
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="forgot_password">Forgot password ?</string>
+    <string name="register">Register</string>
+    <string name="view_as_guest">View as guest</string>
+    <string name="email">Email</string>
+    <string name="login_password_confirm">Confirm Password</string>
+    <string name="login_with_facebook">Sign in with Facebook</string>
+    <string name="login_with_sign_up">New to Yo365? Sign up now</string>
+
+    <!-- Tab -->
+    <string name="demo_title_custom_tab_icons1">Custom Tab Icons 1</string>
+
+    <!-- other -->
+    <string name="all_categories">All Categories</string>
+    <string name="suggest_categories">Category Suggest</string>
+
+    <!-- Message -->
+    <string name="msg_forgot_pass_notice">Please enter the email you used to register. Check your email for the instruction to receive your password</string>
+    <string name="no_internet">You need Internet connection to use our application. Please check your device\'s connection settings</string>
+    <string name="msg_loading">Loading... Please wait</string>
+    <string name="msg_loading_content">Please wait while the content loads</string>
+    <string name="msg_forgot_pass_success">An email will be sent to you with reset password link</string>
+    <string name="msg_register_success">Create account successful</string>
+    <string name="msg_request_login">You need to login to continue</string>
+    <string name="msg_delete_video">Are you sure you want to delete this video?</string>
+
+</resources>

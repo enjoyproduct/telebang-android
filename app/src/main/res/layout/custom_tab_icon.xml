@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <com.inspius.coreapp.widget.InspiusTintableImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/imvIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:src="@drawable/ic_tab_home"
+        app:tint="@color/custom_tab_main_selector" />
+
+    <TextView
+        android:id="@+id/tvnName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:singleLine="true"
+        android:text="Home"
+        android:textColor="@color/custom_tab_main_selector"
+        android:textSize="10sp" />
+
+</LinearLayout>
+
