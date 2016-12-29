@@ -1,17 +1,27 @@
 package com.inspius.yo365.fragment.customer;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.inspius.coreapp.helper.Logger;
 import com.inspius.yo365.R;
 import com.inspius.yo365.api.APIResponseListener;
 import com.inspius.yo365.base.BaseLoginFragment;
-import com.inspius.yo365.fragment.SlideMenuFragment;
 import com.inspius.yo365.helper.DialogUtil;
 import com.inspius.yo365.helper.Validation;
+
+import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -21,7 +31,7 @@ import butterknife.OnClick;
  */
 
 public class LoginFragment extends BaseLoginFragment {
-    public static final String TAG = SlideMenuFragment.class.getSimpleName();
+    public static final String TAG = LoginFragment.class.getSimpleName();
 
     public static LoginFragment newInstance() {
         LoginFragment fragment = new LoginFragment();
@@ -33,6 +43,11 @@ public class LoginFragment extends BaseLoginFragment {
 
     @BindView(R.id.edtPassword)
     EditText edtPassWord;
+
+    @BindView(R.id.cbnRemember)
+    CheckBox cbnRemember;
+
+    CallbackManager callbackManager;
 
     @Override
     public int getLayout() {
@@ -53,6 +68,8 @@ public class LoginFragment extends BaseLoginFragment {
                 return false;
             }
         });
+
+        registerCallbackFacebook();
     }
 
     @Override
@@ -60,9 +77,57 @@ public class LoginFragment extends BaseLoginFragment {
         return TAG;
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    void registerCallbackFacebook() {
+        callbackManager = CallbackManager.Factory.create();
+
+        LoginManager.getInstance().registerCallback(callbackManager,
+                new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        requestLoginFacebook(loginResult.getAccessToken().getToken());
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        // App code
+                    }
+
+                    @Override
+                    public void onError(FacebookException exception) {
+                        // App code
+                        DialogUtil.showMessageBox(mContext, exception.getMessage());
+                    }
+                });
+    }
+
+
+    void requestLoginFacebook(String accessToken) {
+        mLoginActivity.showLoading(getString(R.string.msg_loading_content));
+        mCustomerManager.callLoginFacebook(accessToken, new APIResponseListener() {
+            @Override
+            public void onError(String message) {
+                mLoginActivity.hideLoading();
+                DialogUtil.showMessageBox(mContext, message);
+            }
+
+            @Override
+            public void onSuccess(Object results) {
+                mLoginActivity.hideLoading();
+
+                mLoginActivity.onLoginSuccess();
+            }
+        });
+    }
+
     @OnClick(R.id.btnFacebook)
     void doFacebook() {
-
+        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("email"));
     }
 
     @OnClick(R.id.tvnRegister)
@@ -92,8 +157,10 @@ public class LoginFragment extends BaseLoginFragment {
             return;
         }
 
+        boolean isRemember = cbnRemember.isChecked();
+
         mLoginActivity.showLoading(getString(R.string.msg_loading));
-        mCustomerManager.callLogin(user, pass, new APIResponseListener() {
+        mCustomerManager.callLogin(isRemember, user, pass, new APIResponseListener() {
             @Override
             public void onError(String message) {
                 mLoginActivity.hideLoading();

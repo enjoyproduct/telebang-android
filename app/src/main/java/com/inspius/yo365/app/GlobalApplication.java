@@ -2,6 +2,8 @@ package com.inspius.yo365.app;
 
 import android.content.Context;
 
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 import com.inspius.coreapp.InspiusApplication;
 import com.inspius.coreapp.config.InspiusConfig;
 import com.inspius.coreapp.helper.InspiusUtils;
@@ -34,6 +36,10 @@ public class GlobalApplication extends InspiusApplication {
         MultiDex.install(getBaseContext());
         mInstance = this;
         initImageLoader(mAppContext);
+
+        // facebook
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(this);
     }
 
     @Override

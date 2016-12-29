@@ -43,7 +43,7 @@
                 style="@style/EditText.Common"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_username"
+                android:drawableLeft="@drawable/ic_edt_username"
                 android:drawablePadding="10dp"
                 android:hint="@string/username"
                 android:padding="15dp"
@@ -55,7 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:drawableLeft="@drawable/ic_password"
+                android:drawableLeft="@drawable/ic_edt_password"
                 android:hint="@string/password"
                 android:imeOptions="actionDone"
                 android:inputType="textPassword"
@@ -63,10 +63,12 @@
                 android:textSize="13sp" />
 
             <CheckBox
-                android:id="@+id/checkBox"
+                android:id="@+id/cbnRemember"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:alpha="0.7"
+                android:button="@drawable/ic_checkbox_common_selector"
                 android:text="Remember me?"
                 android:textColor="#E2E0E0"
                 android:textSize="13sp" />
@@ -84,6 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:alpha="0.7"
                 android:gravity="center"
                 android:text="@string/forgot_password"
                 android:textColor="#E2E0E0"
@@ -101,7 +104,11 @@
                 android:id="@+id/btnFacebook"
                 style="@style/Button.Common"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:background="#3B5998"
+                android:drawableLeft="@drawable/ic_btn_facebook"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
                 android:text="@string/login_with_facebook"
                 android:textAllCaps="false" />
 

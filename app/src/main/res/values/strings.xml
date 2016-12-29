@@ -8,6 +8,10 @@
     <!-- Change AdMob Interstitial Id -->
     <string name="interstitial_ad_unit_id">ca-app-pub-8000676937410247/2823742819</string>
 
+    <!-- Change Facebook Dev Id -->
+    <string name="facebook_app_id">1907357799494032</string>
+    <string name="fb_login_protocol_scheme">fb1907357799494032</string>
+
     <string name="slogan">Social Network Of Video</string>
     <string name="fm_version">Version %s</string>
     <string name="cm_submit">Submit</string>
@@ -46,5 +50,6 @@
     <string name="msg_register_success">Create account successful</string>
     <string name="msg_request_login">You need to login to continue</string>
     <string name="msg_delete_video">Are you sure you want to delete this video?</string>
+    <string name="msg_cannot_sign_in">Cannot sign in</string>
 
 </resources>

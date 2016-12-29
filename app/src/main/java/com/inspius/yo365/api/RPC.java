@@ -53,6 +53,29 @@ public class RPC {
         });
     }
 
+    public static void signInWithFacebook(final String accessToken, final APIResponseListener listener) {
+        RequestParams params = new RequestParams();
+        params.put(AppConstant.KEY_ACCESS_TOKEN, accessToken);
+
+        AppRestClient.post(AppConstant.RELATIVE_URL_LOGIN_FACE_BOOK, params, new BaseJsonHttpResponseHandler<ResponseJSON>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ResponseJSON response) {
+                parseResponseCustomer(response, listener);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ResponseJSON errorResponse) {
+                onError(throwable, listener);
+            }
+
+            @Override
+            protected ResponseJSON parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                return onResponse(rawJsonData);
+            }
+        });
+    }
+
+
     public static void requestForgotPassword(final String email, final APIResponseListener listener) {
         RequestParams params = new RequestParams();
         params.put(AppConstant.KEY_EMAIL, email);
@@ -76,7 +99,7 @@ public class RPC {
         });
     }
 
-    public static void requestRegister(final String username, final String email, final String password, final String passwordVerify, final APIResponseListener listener) {
+    public static void requestRegister(final String username, final String email, final String password, final APIResponseListener listener) {
         RequestParams params = new RequestParams();
         params.put(AppConstant.KEY_USERNAME, username);
         params.put(AppConstant.KEY_EMAIL, email);

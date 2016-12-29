@@ -1,18 +1,27 @@
 package com.inspius.yo365.fragment.customer;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 import com.inspius.yo365.R;
 import com.inspius.yo365.api.APIResponseListener;
 import com.inspius.yo365.base.BaseLoginFragment;
 import com.inspius.yo365.fragment.SlideMenuFragment;
 import com.inspius.yo365.helper.DialogUtil;
 import com.inspius.yo365.helper.Validation;
+
+import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -41,6 +50,11 @@ public class RegisterFragment extends BaseLoginFragment {
     @BindView(R.id.edtPasswordVerify)
     EditText edtPasswordVerify;
 
+    @BindView(R.id.cbnTerm)
+    CheckBox cbnTerm;
+
+    CallbackManager callbackManager;
+
     @Override
     public String getTagText() {
         return TAG;
@@ -62,6 +76,8 @@ public class RegisterFragment extends BaseLoginFragment {
                 return false;
             }
         });
+
+        registerCallbackFacebook();
     }
 
     @OnClick(R.id.btnSubmit)
@@ -89,8 +105,13 @@ public class RegisterFragment extends BaseLoginFragment {
             return;
         }
 
+        if (!cbnTerm.isChecked()) {
+            DialogUtil.showMessageErrorForm(mContext, "Please agree to the Terms and Conditions");
+            return;
+        }
+
         mLoginActivity.showLoading(getString(R.string.msg_loading));
-        mCustomerManager.callRegister(username, email, password, passwordVerify, new APIResponseListener() {
+        mCustomerManager.callRegister(username, email, password, new APIResponseListener() {
             @Override
             public void onError(String message) {
                 mLoginActivity.hideLoading();
@@ -109,5 +130,62 @@ public class RegisterFragment extends BaseLoginFragment {
                 });
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @OnClick(R.id.btnFacebook)
+    void doFacebook() {
+        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("email"));
+    }
+
+    void registerCallbackFacebook() {
+        callbackManager = CallbackManager.Factory.create();
+
+        LoginManager.getInstance().registerCallback(callbackManager,
+                new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        requestLoginFacebook(loginResult.getAccessToken().getToken());
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        // App code
+                    }
+
+                    @Override
+                    public void onError(FacebookException exception) {
+                        // App code
+                        DialogUtil.showMessageBox(mContext, exception.getMessage());
+                    }
+                });
+    }
+
+    void requestLoginFacebook(String accessToken) {
+        mLoginActivity.showLoading(getString(R.string.msg_loading_content));
+        mCustomerManager.callLoginFacebook(accessToken, new APIResponseListener() {
+            @Override
+            public void onError(String message) {
+                mLoginActivity.hideLoading();
+                DialogUtil.showMessageBox(mContext, message);
+            }
+
+            @Override
+            public void onSuccess(Object results) {
+                mLoginActivity.hideLoading();
+
+                mLoginActivity.onLoginSuccess();
+            }
+        });
+    }
+
+    @OnClick(R.id.imvHeaderBack)
+    void doBack() {
+        onBackPressed();
     }
 }

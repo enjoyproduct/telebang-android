@@ -25,7 +25,7 @@ public class AppConfig {
     /**
      * Splash loading duration
      */
-    public static long SPLASH_DURATION = 3000;
+    public static long SPLASH_DURATION = 1000;
 
     /**
      * Change SHOW_ADS_INTERSTITIAL

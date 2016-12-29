@@ -2,6 +2,7 @@ package com.inspius.yo365.activity;
 
 import android.os.Bundle;
 
+import com.inspius.coreapp.helper.InspiusUtils;
 import com.inspius.yo365.R;
 import com.inspius.yo365.base.StdActivity;
 import com.inspius.yo365.fragment.SplashFragment;
@@ -17,6 +18,8 @@ public class MainActivity extends StdActivity {
         ButterKnife.bind(this);
 
         initFragment();
+
+        InspiusUtils.printHashKey(this);
     }
 
     @Override

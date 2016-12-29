@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.widget.TextView;
 
 import com.inspius.yo365.R;
+import com.inspius.yo365.activity.AppSlideActivity;
 import com.inspius.yo365.activity.LoginActivity;
 import com.inspius.yo365.api.APIResponseListener;
 import com.inspius.yo365.api.RPC;
@@ -52,7 +53,7 @@ public class SplashFragment extends StdFragment {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        getCategories();
+
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
@@ -62,7 +63,7 @@ public class SplashFragment extends StdFragment {
                         return;
 
 
-                    nextScreen();
+                    getCategories();
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -70,6 +71,45 @@ public class SplashFragment extends StdFragment {
             }
         };
         new Thread(runnable).start();
+    }
+
+    void getCategories() {
+        if (getActivity() == null || isDestroy)
+            return;
+
+        RPC.getCategories(new APIResponseListener() {
+            @Override
+            public void onError(String message) {
+                autoLogin();
+            }
+
+            @Override
+            public void onSuccess(Object results) {
+                DataCategoryJSON data = (DataCategoryJSON) results;
+                AppSession.getInstance().setCategoryData(data);
+
+                autoLogin();
+            }
+        });
+    }
+
+    void autoLogin() {
+        if (getActivity() == null || isDestroy)
+            return;
+
+        mCustomerManager.callAutoLoginRequest(new APIResponseListener() {
+            @Override
+            public void onError(String message) {
+                nextScreen();
+            }
+
+            @Override
+            public void onSuccess(Object results) {
+                Intent intent = new Intent(mContext, AppSlideActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
     }
 
     void nextScreen() {
@@ -92,23 +132,5 @@ public class SplashFragment extends StdFragment {
     public void onDestroy() {
         super.onDestroy();
         isDestroy = true;
-    }
-
-    void getCategories() {
-        if (getActivity() == null || isDestroy)
-            return;
-
-        RPC.getCategories(new APIResponseListener() {
-            @Override
-            public void onError(String message) {
-
-            }
-
-            @Override
-            public void onSuccess(Object results) {
-                DataCategoryJSON data = (DataCategoryJSON) results;
-                AppSession.getInstance().setCategoryData(data);
-            }
-        });
     }
 }

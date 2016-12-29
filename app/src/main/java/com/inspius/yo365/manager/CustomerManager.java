@@ -1,9 +1,9 @@
 package com.inspius.yo365.manager;
 
-import android.app.Activity;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.facebook.login.LoginManager;
 import com.inspius.coreapp.helper.InspiusSharedPrefUtils;
 import com.inspius.yo365.api.APIResponseListener;
 import com.inspius.yo365.api.RPC;
@@ -63,9 +63,12 @@ public class CustomerManager {
         return AppConstant.LOGIN_TYPE.NOT_LOGIN;
     }
 
-    private void logoutFacebook(Activity activity, final APIResponseListener listener) {
+    private void logoutFacebook(final APIResponseListener listener) {
         stateLogin = AppConstant.LOGIN_TYPE.NOT_LOGIN;
         InspiusSharedPrefUtils.removeFromPrefs(mContext, AppConstant.KEY_ACCESS_TOKEN);
+
+        LoginManager.getInstance().logOut();
+
         listener.onSuccess(true);
         notificationStateLogin();
     }
@@ -107,11 +110,10 @@ public class CustomerManager {
     }
 
     /**
-     * @param activity
      * @param listener
      * @return
      */
-    public boolean callAutoLoginRequest(Activity activity, final APIResponseListener listener) {
+    public boolean callAutoLoginRequest(final APIResponseListener listener) {
         AppConstant.LOGIN_TYPE type = getLoginCacheType();
 
         switch (type) {
@@ -123,12 +125,12 @@ public class CustomerManager {
             case SYSTEM:
                 String email = getUsername();
                 String password = getPassword();
-                callLogin(email, password, listener);
+                callLogin(true, email, password, listener);
                 break;
 
             case FACEBOOK:
                 String accessToken = getFacebookAccessToken();
-                callLoginFacebook(activity, accessToken, listener);
+                callLoginFacebook(accessToken, listener);
                 break;
         }
 
@@ -136,10 +138,9 @@ public class CustomerManager {
     }
 
     /**
-     * @param activity
      * @param listener
      */
-    public void callLogout(Activity activity, APIResponseListener listener) {
+    public void callLogout(APIResponseListener listener) {
         switch (stateLogin) {
             case NOT_LOGIN:
                 listener.onSuccess(true);
@@ -155,7 +156,7 @@ public class CustomerManager {
                 break;
 
             case FACEBOOK:
-                logoutFacebook(activity, listener);
+                logoutFacebook(listener);
                 break;
         }
     }
@@ -165,7 +166,7 @@ public class CustomerManager {
      * @param password
      * @param listener
      */
-    public void callLogin(final String username, final String password, final APIResponseListener listener) {
+    public void callLogin(final boolean isRemember, final String username, final String password, final APIResponseListener listener) {
         RPC.requestAuthentic(username, password, new APIResponseListener() {
             @Override
             public void onError(String message) {
@@ -178,6 +179,11 @@ public class CustomerManager {
             @Override
             public void onSuccess(Object results) {
                 parseLoginSystemSuccess(username, password, results, listener);
+
+                if (!isRemember) {
+                    InspiusSharedPrefUtils.removeFromPrefs(mContext, AppConstant.KEY_USERNAME);
+                    InspiusSharedPrefUtils.removeFromPrefs(mContext, AppConstant.KEY_PASSWORD);
+                }
             }
         });
     }
@@ -186,11 +192,10 @@ public class CustomerManager {
      * @param username
      * @param email
      * @param password
-     * @param passwordConfirmation
      * @param listener
      */
-    public void callRegister(final String username, final String email, final String password, String passwordConfirmation, final APIResponseListener listener) {
-        RPC.requestRegister(username, email, password, passwordConfirmation, new APIResponseListener() {
+    public void callRegister(final String username, final String email, final String password, final APIResponseListener listener) {
+        RPC.requestRegister(username, email, password, new APIResponseListener() {
             @Override
             public void onError(String message) {
                 listener.onError(message);
@@ -204,13 +209,22 @@ public class CustomerManager {
     }
 
     /**
-     * @param activity
      * @param accessToken
      * @param listener
      */
-    public void callLoginFacebook(Activity activity, final String accessToken, final APIResponseListener listener) {
-        final Object results = null;
-        parseLoginFacebookSuccess(accessToken, results, listener);
+    public void callLoginFacebook(final String accessToken, final APIResponseListener listener) {
+        RPC.signInWithFacebook(accessToken, new APIResponseListener() {
+            @Override
+            public void onError(String message) {
+                stateLogin = AppConstant.LOGIN_TYPE.NOT_LOGIN;
+                listener.onError(message);
+            }
+
+            @Override
+            public void onSuccess(Object results) {
+                parseLoginFacebookSuccess(accessToken, results, listener);
+            }
+        });
     }
 
     /**

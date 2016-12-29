@@ -76,4 +76,9 @@ public class ForgotPasswordFragment extends BaseLoginFragment {
             }
         });
     }
+
+    @OnClick(R.id.imvHeaderBack)
+    void doBack() {
+        onBackPressed();
+    }
 }

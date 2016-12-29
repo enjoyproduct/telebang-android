@@ -21,8 +21,9 @@ public class AppConstant {
     public static final String KEY_COMMENT_TEXT = "comment_text";
 
     public static final String RELATIVE_URL_LOGIN = "/api/login";
-    public static final String RELATIVE_URL_REGISTER = "/register";
-    public static final String RELATIVE_URL_FORGOT_PASSWORD = "/forgot_password";
+    public static final String RELATIVE_URL_LOGIN_FACE_BOOK = "/api/loginFacebook";
+    public static final String RELATIVE_URL_REGISTER = "/api/register";
+    public static final String RELATIVE_URL_FORGOT_PASSWORD = "/api/forgot_password";
     public static final String RELATIVE_URL_VIDEO_LATEST = "/api/getListVideoLasted/%s/%s";
     public static final String RELATIVE_URL_VIDEO_MOST = "/api/getListVideoMostView/%s/%s";
     public static final String RELATIVE_URL_CATEGORIES = "api/categories";
@@ -30,8 +31,8 @@ public class AppConstant {
     public static final String RELATIVE_URL_GET_USER_LIKE_STATUS = "/api/getLikeVideoStatus/%s/%s";
     public static final String RELATIVE_URL_USER_LIKE_VIDEO = "/api/likevideo";
     public static final String RELATIVE_URL_GET_VIDEO_BY_ID = "/api/getVideoById/%s";
-    public static final String RELATIVE_URL_GET_VIDEO_COMMENTS = "api/getListCommentVideo/%s/%s/%s";
-    public static final String RELATIVE_URL_INSERT_COMMENT = "api/insertCommentVideo";
+    public static final String RELATIVE_URL_GET_VIDEO_COMMENTS = "/api/getListCommentVideo/%s/%s/%s";
+    public static final String RELATIVE_URL_INSERT_COMMENT = "/api/insertCommentVideo";
 
     public static final String URL_YOUTUBE_THUMBNAIL = "http://img.youtube.com/vi/%s/hqdefault.jpg";
 
