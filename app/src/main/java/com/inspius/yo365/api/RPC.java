@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.inspius.coreapp.helper.InspiusUtils;
 import com.inspius.coreapp.helper.Logger;
 import com.inspius.yo365.app.AppConstant;
+import com.inspius.yo365.model.CommentJSON;
 import com.inspius.yo365.model.CustomerJSON;
 import com.inspius.yo365.model.DataCategoryJSON;
 import com.inspius.yo365.model.LikeStatusResponse;
@@ -268,7 +269,7 @@ public class RPC {
     public static void requestUserLikeVideo(int customerID, int videoID, final APIResponseListener listener) {
         RequestParams params = new RequestParams();
         params.put(AppConstant.KEY_VIDEO_ID, videoID);
-        params.put(AppConstant.CUSTOMER_ID, customerID);
+        params.put(AppConstant.KEY_CUSTOMER_ID, customerID);
 
         AppRestClient.post(AppConstant.RELATIVE_URL_USER_LIKE_VIDEO, params, new BaseJsonHttpResponseHandler<ResponseJSON>() {
             @Override
@@ -308,6 +309,67 @@ public class RPC {
                     if (response.isResponseSuccessfully(listener)) {
                         VideoJSON data = new ObjectMapper().readValue(response.getContentString(), VideoJSON.class);
 
+                        listener.onSuccess(data);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ResponseJSON errorResponse) {
+                onError(throwable, listener);
+            }
+
+            @Override
+            protected ResponseJSON parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                return onResponse(rawJsonData);
+            }
+        });
+    }
+
+    public static void getVideoComments(int videoID, int pageNumber, final APIResponseListener listener) {
+        String fmUrl = AppConstant.RELATIVE_URL_GET_VIDEO_COMMENTS;
+        String url = String.format(fmUrl, videoID, pageNumber, AppConstant.LIMIT_VIDEO_COMMENT);
+
+        AppRestClient.get(url, null, new BaseJsonHttpResponseHandler<ResponseJSON>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ResponseJSON response) {
+                try {
+                    if (response.isResponseSuccessfully(listener)) {
+                        List<CommentJSON> listData = new ObjectMapper().readValue(response.getContentString(), new TypeReference<List<CommentJSON>>() {
+                        });
+                        listener.onSuccess(listData);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ResponseJSON errorResponse) {
+                onError(throwable, listener);
+            }
+
+            @Override
+            protected ResponseJSON parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                return onResponse(rawJsonData);
+            }
+        });
+    }
+
+    public static void postCommentVideo(int customerID, int videoID, String comment, final APIResponseListener listener) {
+        RequestParams params = new RequestParams();
+        params.put(AppConstant.KEY_VIDEO_ID, videoID);
+        params.put(AppConstant.KEY_COMMENT_TEXT, comment);
+        params.put(AppConstant.KEY_CUSTOMER_ID, customerID);
+
+        AppRestClient.post(AppConstant.RELATIVE_URL_INSERT_COMMENT, params, new BaseJsonHttpResponseHandler<ResponseJSON>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ResponseJSON response) {
+                try {
+                    if (response.isResponseSuccessfully(listener)) {
+                        CommentJSON data = new ObjectMapper().readValue(response.getContentString(), CommentJSON.class);
                         listener.onSuccess(data);
                     }
                 } catch (Exception e) {

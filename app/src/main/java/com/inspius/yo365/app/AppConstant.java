@@ -6,6 +6,7 @@ package com.inspius.yo365.app;
 public class AppConstant {
     public static int RESPONSE_CODE_SUCCESS = 1;
     public static int LIMIT_VIDEOS_HOMES = 10;
+    public static int LIMIT_VIDEO_COMMENT = 20;
 
     public static final String KEY_BUNDLE_URL_PAGE = "url-page";
     public static final String KEY_BUNDLE_TITLE = "title";
@@ -16,7 +17,8 @@ public class AppConstant {
     public static final String KEY_EMAIL = "email";
     public static final String KEY_ACCESS_TOKEN = "access-token";
     public static final String KEY_VIDEO_ID = "video_id";
-    public static final String CUSTOMER_ID = "customer_id";
+    public static final String KEY_CUSTOMER_ID = "customer_id";
+    public static final String KEY_COMMENT_TEXT = "comment_text";
 
     public static final String RELATIVE_URL_LOGIN = "/api/login";
     public static final String RELATIVE_URL_REGISTER = "/register";
@@ -28,12 +30,20 @@ public class AppConstant {
     public static final String RELATIVE_URL_GET_USER_LIKE_STATUS = "/api/getLikeVideoStatus/%s/%s";
     public static final String RELATIVE_URL_USER_LIKE_VIDEO = "/api/likevideo";
     public static final String RELATIVE_URL_GET_VIDEO_BY_ID = "/api/getVideoById/%s";
+    public static final String RELATIVE_URL_GET_VIDEO_COMMENTS = "api/getListCommentVideo/%s/%s/%s";
+    public static final String RELATIVE_URL_INSERT_COMMENT = "api/insertCommentVideo";
 
     public static final String URL_YOUTUBE_THUMBNAIL = "http://img.youtube.com/vi/%s/hqdefault.jpg";
 
     public static final String KEY_BUNDLE_VIDEO = "video";
     public static final String KEY_BUNDLE_AUTO_PLAY = "auto_play";
 
+
+    /**
+     * Date, Time format
+     */
+    public static final String DATE_FORMAT = "yyyy-MM-dd";
+    public static final String DATE_TIME_FORMAT = "yyyy-MM-dd hh:mm:ss";
 
     /**
      * ENUM

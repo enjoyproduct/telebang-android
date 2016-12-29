@@ -12,4 +12,5 @@
     <color name="loading_ball">#ff9a00</color>
     <color name="divider_color_list_video">#EEEEEE</color>
     <color name="divider_color_list_category">#EEEEEE</color>
+    <color name="divider_color_list_comment">#EEEEEE</color>
 </resources>

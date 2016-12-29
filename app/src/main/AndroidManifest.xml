@@ -45,6 +45,14 @@
             android:theme="@style/Theme.AppTheme" />
 
         <activity
+            android:name=".activity.VideoCommentActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/Theme.AppTheme" />
+
+        <activity
             android:name=".activity.AppSlideActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"

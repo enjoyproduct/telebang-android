@@ -1,6 +1,7 @@
 package com.inspius.yo365.fragment;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,6 +13,7 @@ import com.google.android.gms.ads.AdView;
 import com.inspius.coreapp.helper.InspiusIntentUtils;
 import com.inspius.coreapp.helper.InspiusUtils;
 import com.inspius.yo365.R;
+import com.inspius.yo365.activity.VideoCommentActivity;
 import com.inspius.yo365.api.APIResponseListener;
 import com.inspius.yo365.api.RPC;
 import com.inspius.yo365.app.AppConfig;
@@ -25,6 +27,9 @@ import com.inspius.yo365.manager.DatabaseManager;
 import com.inspius.yo365.model.LikeStatusResponse;
 import com.inspius.yo365.model.VideoModel;
 import com.inspius.yo365.service.DownloadRequestQueue;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -72,6 +77,9 @@ public class VideoDetailFragment extends StdFragment {
     @BindView(R.id.tvnLike)
     TextView tvnLike;
 
+    @BindView(R.id.imvThumbnail)
+    ImageView imvThumbnail;
+
 //    @BindView(R.id.tvnSeries)
 //    TextView tvnSeries;
 
@@ -109,6 +117,18 @@ public class VideoDetailFragment extends StdFragment {
 //        tvnAuthor.setText(videoModel.getAuthor());
         tvnDescription.setText(Html.fromHtml(videoModel.getDescription()));
         tvnViewCounter.setText(videoModel.getViewCounterStringFormat());
+
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.no_image_default)
+                .showImageForEmptyUri(R.drawable.no_image_default)
+                .showImageOnFail(R.drawable.no_image_default)
+                .cacheOnDisk(true)
+                .considerExifParams(true)
+                .bitmapConfig(Bitmap.Config.RGB_565)
+                .imageScaleType(ImageScaleType.EXACTLY)
+                .build();
+        ImageLoader.getInstance().displayImage(videoModel.getThumbnail(), imvThumbnail, options);
+
 
         DBVideoDownload dbVideoDownload = DatabaseManager.getInstance().getVideoDownloadByVideoID(videoModel.getVideoId());
         if (dbVideoDownload != null)
@@ -317,5 +337,12 @@ public class VideoDetailFragment extends StdFragment {
     @OnClick(R.id.btnPlay)
     void doPlayVideo() {
 
+    }
+
+    @OnClick(R.id.linearComment)
+    void doComment() {
+        Intent intent = new Intent(mContext, VideoCommentActivity.class);
+        intent.putExtra(AppConstant.KEY_BUNDLE_VIDEO, videoModel);
+        startActivity(intent);
     }
 }

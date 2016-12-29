@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import com.inspius.coreapp.helper.InspiusIntentUtils;
 import com.inspius.yo365.R;
@@ -103,5 +105,13 @@ public class AppUtil {
         }
 
         return true;
+    }
+
+    public static void hideKeyBoard(Activity mActivity) {
+        View view = mActivity.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) mActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }

@@ -7,6 +7,7 @@
     <!--Recycle View-->
     <dimen name="divider_height_list_menu">0dp</dimen>
     <dimen name="divider_height_list_category">1px</dimen>
+    <dimen name="divider_height_list_comment">1px</dimen>
     <dimen name="divider_height_list_video_1">1px</dimen>
     <dimen name="divider_height_list_video_2">10dp</dimen>
     <dimen name="divider_grid_video">10dp</dimen>
