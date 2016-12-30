@@ -160,7 +160,7 @@ public class SlideMenuFragment extends BaseAppSlideFragment implements AdapterAc
                 break;
 
             case MY_ACCOUNT:
-
+                fragment = SettingFragment.newInstance();
                 break;
 
             case ABOUT_US:

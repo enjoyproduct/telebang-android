@@ -31,7 +31,7 @@ public class ExampleDaoGenerator {
     public static void main(String[] args) throws Exception {
         Schema schema = new Schema(1, "com.inspius.yo365.greendao");
 
-//        addKeywordSearch(schema);
+        addRecentKeyword(schema);
         addWishListVideo(schema);
         addDownloadList(schema);
 
@@ -64,4 +64,11 @@ public class ExampleDaoGenerator {
         note.addStringProperty("VideoCreateAt").notNull();
         note.addStringProperty("VideoPath").notNull();
     }
+
+    private static void addRecentKeyword(Schema schema) {
+        Entity note = schema.addEntity("DBKeyword");
+        note.addIdProperty();
+        note.addStringProperty("keyword").notNull();
+    }
+
 }

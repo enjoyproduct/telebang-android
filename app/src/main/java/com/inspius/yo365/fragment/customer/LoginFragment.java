@@ -59,6 +59,11 @@ public class LoginFragment extends BaseLoginFragment {
         edtUserName.setText(mCustomerManager.getUsername());
         edtPassWord.setText(mCustomerManager.getPassword());
 
+        if (!TextUtils.isEmpty(mCustomerManager.getUsername()) && !TextUtils.isEmpty(mCustomerManager.getPassword())) {
+            edtUserName.setText(mCustomerManager.getUsername());
+            edtPassWord.setText(mCustomerManager.getPassword());
+        }
+
         edtPassWord.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER))

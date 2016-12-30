@@ -1,0 +1,97 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/inc_header_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/linear_keywords"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F1F1F1"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recent keywords"
+            android:textSize="13sp"
+            android:textColor="#8F8E94" />
+
+        <cuneyt.example.com.tagview.Tag.TagView
+            android:id="@+id/tag_group"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvn_title_video_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Suggest Videos"
+            android:textColor="#222222"
+            android:textSize="16sp" />
+
+        <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.marshalchen.ultimaterecyclerview.UltimateRecyclerView
+                android:id="@+id/ultimate_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                app:recyclerviewClipToPadding="true"
+                app:recyclerviewEmptyView="@layout/empty_view"
+                app:recyclerviewScrollbars="vertical" />
+
+            <com.wang.avi.AVLoadingIndicatorView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/avloadingIndicatorView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                app:indicatorColor="@color/loading_ball"
+                app:indicatorName="BallTrianglePathIndicator" />
+
+            <LinearLayout
+                android:id="@+id/linearLayoutNoComment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/img_smile" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="10dp"
+                    android:text="Sorry, no videos matched your criteria." />
+
+            </LinearLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

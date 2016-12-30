@@ -3,6 +3,8 @@ package com.inspius.yo365.manager;
 import android.content.Context;
 
 import com.inspius.yo365.app.GlobalApplication;
+import com.inspius.yo365.greendao.DBKeyword;
+import com.inspius.yo365.greendao.DBKeywordDao;
 import com.inspius.yo365.greendao.DBVideoDownload;
 import com.inspius.yo365.greendao.DBVideoDownloadDao;
 import com.inspius.yo365.greendao.DBWishListVideo;
@@ -174,5 +176,32 @@ public class DatabaseManager implements IDatabaseManager {
     public void deleteVideoDownloadByID(long id) {
         DBVideoDownloadDao dao = daoSession.getDBVideoDownloadDao();
         dao.deleteByKey(id);
+    }
+
+    @Override
+    public DBKeyword insertKeyword(String keyword) {
+        DBKeyword entity = new DBKeyword();
+        entity.setKeyword(keyword);
+
+        DBKeywordDao dao = daoSession.getDBKeywordDao();
+
+        long id = dao.insert(entity);
+        if (id > 0) {
+            entity.setId(id);
+
+            return entity;
+        }
+
+        return null;
+    }
+
+    @Override
+    public List<DBKeyword> getListKeyword(int limit) {
+        DBKeywordDao dao = daoSession.getDBKeywordDao();
+        if (dao.count() > 100)
+            dao.deleteAll();
+
+        QueryBuilder<DBKeyword> queryBuilder = dao.queryBuilder().orderDesc(DBKeywordDao.Properties.Id).limit(limit);
+        return queryBuilder.list();
     }
 }

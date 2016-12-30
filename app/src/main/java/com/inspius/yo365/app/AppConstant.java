@@ -13,6 +13,7 @@ public class AppConstant {
     public static int RESPONSE_CODE_SUCCESS = 1;
     public static int LIMIT_VIDEOS_HOMES = 10;
     public static int LIMIT_VIDEO_COMMENT = 20;
+    public static int LIMIT_VIDEO_SEARCH = 10;
     public static int REQUEST_ALBUM_PIC = 1;
 
     public static final String KEY_BUNDLE_URL_PAGE = "url-page";
@@ -39,6 +40,10 @@ public class AppConstant {
     public static final String KEY_COUNTRY = "country";
     public static final String KEY_ZIP = "zip";
 
+    public static final String KEY_KEYWORD = "keyword";
+    public static final String KEY_LIMIT = "limit";
+    public static final String KEY_PAGE_NUMBER = "page";
+
     public static final String RELATIVE_URL_LOGIN = "/api/login";
     public static final String RELATIVE_URL_LOGIN_FACE_BOOK = "/api/loginFacebook";
     public static final String RELATIVE_URL_REGISTER = "/api/register";
@@ -56,6 +61,7 @@ public class AppConstant {
     public static final String RELATIVE_URL_GET_VIDEO_BY_ID = "/api/getVideoById/%s";
     public static final String RELATIVE_URL_GET_VIDEO_COMMENTS = "/api/getListCommentVideo/%s/%s/%s";
     public static final String RELATIVE_URL_INSERT_COMMENT = "/api/insertCommentVideo";
+    public static final String RELATIVE_URL_SEARCH_BY_KEYWORD = "api/getListVideoByKeyword";
 
     public static final String URL_YOUTUBE_THUMBNAIL = "http://img.youtube.com/vi/%s/hqdefault.jpg";
 

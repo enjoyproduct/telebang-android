@@ -1,7 +1,6 @@
 package com.inspius.yo365.fragment;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
@@ -23,13 +22,12 @@ import com.inspius.yo365.greendao.DBVideoDownload;
 import com.inspius.yo365.greendao.DBWishListVideo;
 import com.inspius.yo365.helper.AppUtil;
 import com.inspius.yo365.helper.DialogUtil;
+import com.inspius.yo365.helper.ImageUtil;
 import com.inspius.yo365.manager.DatabaseManager;
 import com.inspius.yo365.model.LikeStatusResponse;
 import com.inspius.yo365.model.VideoModel;
 import com.inspius.yo365.service.DownloadRequestQueue;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -118,17 +116,7 @@ public class VideoDetailFragment extends StdFragment {
         tvnDescription.setText(Html.fromHtml(videoModel.getDescription()));
         tvnViewCounter.setText(videoModel.getViewCounterStringFormat());
 
-        DisplayImageOptions options = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.drawable.no_image_default)
-                .showImageForEmptyUri(R.drawable.no_image_default)
-                .showImageOnFail(R.drawable.no_image_default)
-                .cacheOnDisk(true)
-                .considerExifParams(true)
-                .bitmapConfig(Bitmap.Config.RGB_565)
-                .imageScaleType(ImageScaleType.EXACTLY)
-                .build();
-        ImageLoader.getInstance().displayImage(videoModel.getThumbnail(), imvThumbnail, options);
-
+        ImageLoader.getInstance().displayImage(videoModel.getThumbnail(), imvThumbnail, ImageUtil.optionsImageDefault);
 
         DBVideoDownload dbVideoDownload = DatabaseManager.getInstance().getVideoDownloadByVideoID(videoModel.getVideoId());
         if (dbVideoDownload != null)

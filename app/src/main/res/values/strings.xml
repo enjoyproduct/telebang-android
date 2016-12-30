@@ -22,6 +22,7 @@
     <string name="menu_trending">Trending</string>
     <string name="menu_watch_list">Watch List</string>
     <string name="menu_setting">Setting</string>
+    <string name="menu_search">Search Video</string>
 
     <!-- Customer -->
     <string name="username">Username</string>
@@ -49,13 +50,13 @@
     <string name="change_profile">Change Profile</string>
     <string name="change_avatar">Change Avatar</string>
 
-
     <!-- Tab -->
     <string name="demo_title_custom_tab_icons1">Custom Tab Icons 1</string>
 
     <!-- other -->
     <string name="all_categories">All Categories</string>
     <string name="suggest_categories">Category Suggest</string>
+    <string name="suggest_video">Suggest Video</string>
 
     <!-- Message -->
     <string name="msg_forgot_pass_notice">Please enter the email you used to register. Check your email for the instruction to receive your password</string>

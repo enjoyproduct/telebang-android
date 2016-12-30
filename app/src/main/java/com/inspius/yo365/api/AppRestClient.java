@@ -39,6 +39,10 @@ public class AppRestClient {
         asyncClient.cancelRequestsByTAG(TAG, true);
     }
 
+    public static void get(String url, AsyncHttpResponseHandler responseHandler) {
+        get(url, null, responseHandler);
+    }
+
     public static void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
         getClient().get(getAbsoluteUrl(url), params, responseHandler).setTag(url);
     }

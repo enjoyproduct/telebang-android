@@ -111,7 +111,7 @@ public class AppFragment extends BaseAppSlideFragment {
 
     @OnClick(R.id.imvHeaderSearch)
     void doShowSearch() {
-
+        mHostActivity.addFragment(VideoSearchFragment.newInstance());
     }
 
     void updateHeaderTitle(String name) {

@@ -239,7 +239,7 @@ public class RPC {
         String fmUrl = AppConstant.RELATIVE_URL_VIDEO_LATEST;
         String url = String.format(fmUrl, pageNumber, AppConstant.LIMIT_VIDEOS_HOMES);
 
-        AppRestClient.get(url, null, new BaseJsonHttpResponseHandler<ResponseJSON>() {
+        AppRestClient.get(url, new BaseJsonHttpResponseHandler<ResponseJSON>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ResponseJSON response) {
                 if (response.isResponseSuccessfully(listener))
@@ -262,7 +262,7 @@ public class RPC {
         String fmUrl = AppConstant.RELATIVE_URL_VIDEO_MOST;
         String url = String.format(fmUrl, pageNumber, AppConstant.LIMIT_VIDEOS_HOMES);
 
-        AppRestClient.get(url, null, new BaseJsonHttpResponseHandler<ResponseJSON>() {
+        AppRestClient.get(url, new BaseJsonHttpResponseHandler<ResponseJSON>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ResponseJSON response) {
                 if (response.isResponseSuccessfully(listener))
@@ -285,7 +285,7 @@ public class RPC {
         String fmUrl = AppConstant.RELATIVE_URL_VIDEO_TRENDING;
         String url = String.format(fmUrl, pageNumber, AppConstant.LIMIT_VIDEOS_HOMES);
 
-        AppRestClient.get(url, null, new BaseJsonHttpResponseHandler<ResponseJSON>() {
+        AppRestClient.get(url, new BaseJsonHttpResponseHandler<ResponseJSON>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ResponseJSON response) {
                 if (response.isResponseSuccessfully(listener))
@@ -315,7 +315,7 @@ public class RPC {
     }
 
     public static void getCategories(final APIResponseListener listener) {
-        AppRestClient.get(AppConstant.RELATIVE_URL_CATEGORIES, null, new BaseJsonHttpResponseHandler<ResponseJSON>() {
+        AppRestClient.get(AppConstant.RELATIVE_URL_CATEGORIES, new BaseJsonHttpResponseHandler<ResponseJSON>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ResponseJSON response) {
                 try {
@@ -344,7 +344,32 @@ public class RPC {
         String fmUrl = AppConstant.RELATIVE_URL_GET_VIDEOS_BY_CATEGORY;
         String url = String.format(fmUrl, categoryId, pageNumber, AppConstant.LIMIT_VIDEOS_HOMES);
 
-        AppRestClient.get(url, null, new BaseJsonHttpResponseHandler<ResponseJSON>() {
+        AppRestClient.get(url, new BaseJsonHttpResponseHandler<ResponseJSON>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ResponseJSON response) {
+                if (response.isResponseSuccessfully(listener))
+                    onVideosResponse(response.getContentString(), listener);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ResponseJSON errorResponse) {
+                onError(throwable, listener);
+            }
+
+            @Override
+            protected ResponseJSON parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                return onResponse(rawJsonData);
+            }
+        });
+    }
+
+    public static void getVideosByKeyword(String keyWord, int pageNumber, final APIResponseListener listener) {
+        RequestParams params = new RequestParams();
+        params.put(AppConstant.KEY_KEYWORD, keyWord);
+        params.put(AppConstant.KEY_PAGE_NUMBER, String.valueOf(pageNumber));
+        params.put(AppConstant.KEY_LIMIT, AppConstant.LIMIT_VIDEO_SEARCH);
+
+        AppRestClient.post(AppConstant.RELATIVE_URL_SEARCH_BY_KEYWORD, params, new BaseJsonHttpResponseHandler<ResponseJSON>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ResponseJSON response) {
                 if (response.isResponseSuccessfully(listener))
@@ -367,7 +392,7 @@ public class RPC {
         String fmUrl = AppConstant.RELATIVE_URL_GET_USER_LIKE_STATUS;
         String url = String.format(fmUrl, videoID, customerID);
 
-        AppRestClient.get(url, null, new BaseJsonHttpResponseHandler<ResponseJSON>() {
+        AppRestClient.get(url, new BaseJsonHttpResponseHandler<ResponseJSON>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ResponseJSON response) {
                 try {
@@ -429,7 +454,7 @@ public class RPC {
         String fmUrl = AppConstant.RELATIVE_URL_GET_VIDEO_BY_ID;
         String url = String.format(fmUrl, videoID);
 
-        AppRestClient.get(url, null, new BaseJsonHttpResponseHandler<ResponseJSON>() {
+        AppRestClient.get(url, new BaseJsonHttpResponseHandler<ResponseJSON>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ResponseJSON response) {
                 try {
@@ -459,7 +484,7 @@ public class RPC {
         String fmUrl = AppConstant.RELATIVE_URL_GET_VIDEO_COMMENTS;
         String url = String.format(fmUrl, videoID, pageNumber, AppConstant.LIMIT_VIDEO_COMMENT);
 
-        AppRestClient.get(url, null, new BaseJsonHttpResponseHandler<ResponseJSON>() {
+        AppRestClient.get(url, new BaseJsonHttpResponseHandler<ResponseJSON>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ResponseJSON response) {
                 try {

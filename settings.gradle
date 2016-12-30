@@ -1,1 +1,1 @@
-include ':app', ':DaoExampleGenerator'
+include ':app', ':DaoExampleGenerator', ':TagViewLib'

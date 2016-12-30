@@ -1,0 +1,40 @@
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    style="@style/ToolBarStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bgr_header"
+    android:paddingTop="@dimen/tool_bar_top_padding"
+    app:contentInsetStart="0dp">
+
+    <TextView
+        android:id="@+id/imvHeaderBack"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/tab_height"
+        android:layout_gravity="end"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@android:string/cancel"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edtSearchField"
+        style="@style/EditText.Common"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bgr_edittext_search"
+        android:drawableLeft="@drawable/ic_edt_search"
+        android:drawablePadding="10dp"
+        android:hint="Enter your keyword"
+        android:imeOptions="actionDone"
+        android:padding="10dp"
+        android:textColor="@android:color/black"
+        android:textColorHint="#7A797B"
+        android:textSize="13sp" />
+
+</android.support.v7.widget.Toolbar>

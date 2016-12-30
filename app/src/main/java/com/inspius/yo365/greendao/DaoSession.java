@@ -8,9 +8,11 @@ import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.identityscope.IdentityScopeType;
 import org.greenrobot.greendao.internal.DaoConfig;
 
+import com.inspius.yo365.greendao.DBKeyword;
 import com.inspius.yo365.greendao.DBWishListVideo;
 import com.inspius.yo365.greendao.DBVideoDownload;
 
+import com.inspius.yo365.greendao.DBKeywordDao;
 import com.inspius.yo365.greendao.DBWishListVideoDao;
 import com.inspius.yo365.greendao.DBVideoDownloadDao;
 
@@ -23,9 +25,11 @@ import com.inspius.yo365.greendao.DBVideoDownloadDao;
  */
 public class DaoSession extends AbstractDaoSession {
 
+    private final DaoConfig dBKeywordDaoConfig;
     private final DaoConfig dBWishListVideoDaoConfig;
     private final DaoConfig dBVideoDownloadDaoConfig;
 
+    private final DBKeywordDao dBKeywordDao;
     private final DBWishListVideoDao dBWishListVideoDao;
     private final DBVideoDownloadDao dBVideoDownloadDao;
 
@@ -33,22 +37,32 @@ public class DaoSession extends AbstractDaoSession {
             daoConfigMap) {
         super(db);
 
+        dBKeywordDaoConfig = daoConfigMap.get(DBKeywordDao.class).clone();
+        dBKeywordDaoConfig.initIdentityScope(type);
+
         dBWishListVideoDaoConfig = daoConfigMap.get(DBWishListVideoDao.class).clone();
         dBWishListVideoDaoConfig.initIdentityScope(type);
 
         dBVideoDownloadDaoConfig = daoConfigMap.get(DBVideoDownloadDao.class).clone();
         dBVideoDownloadDaoConfig.initIdentityScope(type);
 
+        dBKeywordDao = new DBKeywordDao(dBKeywordDaoConfig, this);
         dBWishListVideoDao = new DBWishListVideoDao(dBWishListVideoDaoConfig, this);
         dBVideoDownloadDao = new DBVideoDownloadDao(dBVideoDownloadDaoConfig, this);
 
+        registerDao(DBKeyword.class, dBKeywordDao);
         registerDao(DBWishListVideo.class, dBWishListVideoDao);
         registerDao(DBVideoDownload.class, dBVideoDownloadDao);
     }
     
     public void clear() {
+        dBKeywordDaoConfig.clearIdentityScope();
         dBWishListVideoDaoConfig.clearIdentityScope();
         dBVideoDownloadDaoConfig.clearIdentityScope();
+    }
+
+    public DBKeywordDao getDBKeywordDao() {
+        return dBKeywordDao;
     }
 
     public DBWishListVideoDao getDBWishListVideoDao() {
