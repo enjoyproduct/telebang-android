@@ -8,12 +8,14 @@ import com.inspius.yo365.app.AppConstant;
 import com.inspius.yo365.model.CommentJSON;
 import com.inspius.yo365.model.CustomerJSON;
 import com.inspius.yo365.model.DataCategoryJSON;
+import com.inspius.yo365.model.ImageFileModel;
 import com.inspius.yo365.model.LikeStatusResponse;
 import com.inspius.yo365.model.ResponseJSON;
 import com.inspius.yo365.model.VideoJSON;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -123,6 +125,96 @@ public class RPC {
         });
     }
 
+    public static void changePassword(final int accountID, final String currentPass, final String newPass, final APIResponseListener listener) {
+        RequestParams params = new RequestParams();
+        params.put(AppConstant.KEY_USER_ID, String.valueOf(accountID));
+        params.put(AppConstant.KEY_OLD_PASS, currentPass);
+        params.put(AppConstant.KEY_NEW_PASS, newPass);
+
+        AppRestClient.post(AppConstant.RELATIVE_URL_CHANGE_PASSWORD, params, new BaseJsonHttpResponseHandler<ResponseJSON>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ResponseJSON response) {
+                try {
+                    if (response.isResponseSuccessfully(listener)) {
+                        listener.onSuccess("Password updated successfully!");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    callbackError(e.getMessage(), listener);
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ResponseJSON errorResponse) {
+                onError(throwable, listener);
+            }
+
+            @Override
+            protected ResponseJSON parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                return onResponse(rawJsonData);
+            }
+        });
+    }
+
+    public static void changeProfile(final CustomerJSON customerModel, final APIResponseListener listener) {
+        RequestParams params = new RequestParams();
+        params.put(AppConstant.KEY_USER_ID, String.valueOf(customerModel.id));
+        params.put(AppConstant.KEY_EMAIL, customerModel.email);
+        params.put(AppConstant.KEY_FIRST_NAME, customerModel.firstName);
+        params.put(AppConstant.KEY_LAST_NAME, customerModel.lastName);
+        params.put(AppConstant.KEY_PHONE_NUMBER, customerModel.phone);
+        params.put(AppConstant.KEY_ADDRESS, customerModel.address);
+        params.put(AppConstant.KEY_CITY, customerModel.city);
+        params.put(AppConstant.KEY_COUNTRY, customerModel.country);
+        params.put(AppConstant.KEY_ZIP, customerModel.zip);
+
+        AppRestClient.post(AppConstant.RELATIVE_URL_CHANGE_PROFILE, params, new BaseJsonHttpResponseHandler<ResponseJSON>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ResponseJSON response) {
+                parseResponseCustomer(response, listener);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ResponseJSON errorResponse) {
+                onError(throwable, listener);
+            }
+
+            @Override
+            protected ResponseJSON parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                return onResponse(rawJsonData);
+            }
+        });
+    }
+
+    public static void changeAvatar(int accountID, ImageFileModel model, final APIResponseListener listener) {
+        RequestParams params = new RequestParams();
+        params.put(AppConstant.KEY_USER_ID, accountID);
+        try {
+            String type = model.getMimeType();
+            params.put(AppConstant.KEY_AVATAR, model.getFile(), type);
+        } catch (FileNotFoundException e) {
+            listener.onError("Can't change avatar!");
+            return;
+        }
+
+        AppRestClient.post(AppConstant.RELATIVE_URL_CHANGE_AVATAR, params, new BaseJsonHttpResponseHandler<ResponseJSON>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ResponseJSON response) {
+                parseResponseCustomer(response, listener);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ResponseJSON errorResponse) {
+                onError(throwable, listener);
+            }
+
+            @Override
+            protected ResponseJSON parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                return onResponse(rawJsonData);
+            }
+        });
+    }
+
     /**
      * @param response
      * @param listener
@@ -150,15 +242,8 @@ public class RPC {
         AppRestClient.get(url, null, new BaseJsonHttpResponseHandler<ResponseJSON>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ResponseJSON response) {
-                try {
-                    if (response.isResponseSuccessfully(listener)) {
-                        List<VideoJSON> listData = new ObjectMapper().readValue(response.getContentNode().get("videos").toString(), new TypeReference<List<VideoJSON>>() {
-                        });
-                        listener.onSuccess(listData);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                if (response.isResponseSuccessfully(listener))
+                    onVideosResponse(response.getContentNode().get("videos").toString(), listener);
             }
 
             @Override
@@ -180,15 +265,8 @@ public class RPC {
         AppRestClient.get(url, null, new BaseJsonHttpResponseHandler<ResponseJSON>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ResponseJSON response) {
-                try {
-                    if (response.isResponseSuccessfully(listener)) {
-                        List<VideoJSON> listData = new ObjectMapper().readValue(response.getContentNode().get("videos").toString(), new TypeReference<List<VideoJSON>>() {
-                        });
-                        listener.onSuccess(listData);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                if (response.isResponseSuccessfully(listener))
+                    onVideosResponse(response.getContentNode().get("videos").toString(), listener);
             }
 
             @Override
@@ -201,6 +279,39 @@ public class RPC {
                 return onResponse(rawJsonData);
             }
         });
+    }
+
+    public static void getTrendingVideos(final int pageNumber, final APIResponseListener listener) {
+        String fmUrl = AppConstant.RELATIVE_URL_VIDEO_TRENDING;
+        String url = String.format(fmUrl, pageNumber, AppConstant.LIMIT_VIDEOS_HOMES);
+
+        AppRestClient.get(url, null, new BaseJsonHttpResponseHandler<ResponseJSON>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ResponseJSON response) {
+                if (response.isResponseSuccessfully(listener))
+                    onVideosResponse(response.getContentString(), listener);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ResponseJSON errorResponse) {
+                onError(throwable, listener);
+            }
+
+            @Override
+            protected ResponseJSON parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                return onResponse(rawJsonData);
+            }
+        });
+    }
+
+    private static void onVideosResponse(String response, APIResponseListener listener) {
+        try {
+            List<VideoJSON> listData = new ObjectMapper().readValue(response, new TypeReference<List<VideoJSON>>() {
+            });
+            listener.onSuccess(listData);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void getCategories(final APIResponseListener listener) {
@@ -236,15 +347,8 @@ public class RPC {
         AppRestClient.get(url, null, new BaseJsonHttpResponseHandler<ResponseJSON>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ResponseJSON response) {
-                try {
-                    if (response.isResponseSuccessfully(listener)) {
-                        List<VideoJSON> listData = new ObjectMapper().readValue(response.getContentString(), new TypeReference<List<VideoJSON>>() {
-                        });
-                        listener.onSuccess(listData);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                if (response.isResponseSuccessfully(listener))
+                    onVideosResponse(response.getContentString(), listener);
             }
 
             @Override

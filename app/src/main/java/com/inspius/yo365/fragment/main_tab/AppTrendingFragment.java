@@ -107,7 +107,7 @@ public class AppTrendingFragment extends BaseAppTabFragment implements AdapterVi
             mAdapter.clear();
         }
 
-        RPC.getMostVideos(pageNumber, new APIResponseListener() {
+        RPC.getTrendingVideos(pageNumber, new APIResponseListener() {
             @Override
             public void onError(String message) {
                 stopAnimLoading();

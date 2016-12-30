@@ -5,6 +5,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.inspius.coreapp.InspiusFragment;
 import com.inspius.coreapp.helper.InspiusIntentUtils;
@@ -15,22 +17,36 @@ import com.inspius.yo365.app.AppConstant;
 import com.inspius.yo365.app.MenuSetting;
 import com.inspius.yo365.base.BaseAppSlideFragment;
 import com.inspius.yo365.helper.AppUtil;
+import com.inspius.yo365.helper.ImageUtil;
 import com.inspius.yo365.listener.AdapterActionListener;
+import com.inspius.yo365.listener.CustomerListener;
+import com.inspius.yo365.model.CustomerJSON;
 import com.inspius.yo365.model.MenuModel;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
 import com.marshalchen.ultimaterecyclerview.ui.divideritemdecoration.HorizontalDividerItemDecoration;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 
-public class SlideMenuFragment extends BaseAppSlideFragment implements AdapterActionListener {
+public class SlideMenuFragment extends BaseAppSlideFragment implements AdapterActionListener, CustomerListener {
     public static final String TAG = SlideMenuFragment.class.getSimpleName();
 
     @BindView(R.id.ultimate_recycler_view)
     UltimateRecyclerView ultimateRecyclerView;
+
+    @BindView(R.id.imvAvatar)
+    ImageView imvAvatar;
+
+    @BindView(R.id.tvn_customer_name)
+    TextView tvnCustomerName;
+
+    @BindView(R.id.tvn_customer_email)
+    TextView tvnCustomerEmail;
 
     private SlideMenuAdapter menuAdapter;
     private List<MenuModel> listMenuItem;
@@ -65,13 +81,49 @@ public class SlideMenuFragment extends BaseAppSlideFragment implements AdapterAc
 
         AppConstant.MENU_TYPE typeActive = MenuSetting.getInstance().getDefaultTypeMenuActive();
         actionWithMenuType(typeActive);
+
+        initCustomerInfo();
+    }
+
+    @Override
+    public void onResume() {
+        mCustomerManager.subscribeStateLogin(this);
+        super.onResume();
+    }
+
+    @Override
+    public void onDestroy() {
+        menuTypeActive = null;
+        mCustomerManager.unSubscribeStateLogin(this);
+        super.onDestroy();
+    }
+
+    @Override
+    public void onCustomerProfileChanged(CustomerJSON customer) {
+        initCustomerInfo();
+    }
+
+    @Override
+    public void onCustomerLoggedIn(CustomerJSON customer) {
+        initCustomerInfo();
+    }
+
+    @Override
+    public void onCustomerLogout() {
+
+    }
+
+    void initCustomerInfo() {
+        tvnCustomerName.setText(mCustomerManager.getCustomerJSON().getFullName());
+        tvnCustomerEmail.setText(mCustomerManager.getCustomerJSON().email);
+
+        ImageLoader.getInstance().displayImage(mCustomerManager.getCustomerJSON().avatar, imvAvatar, ImageUtil.optionsImageAvatar);
     }
 
     @Override
     public String getTagText() {
         return TAG;
     }
-
 
     @Override
     public void onItemClickListener(int position, Object model) {
@@ -151,9 +203,9 @@ public class SlideMenuFragment extends BaseAppSlideFragment implements AdapterAc
         }
     }
 
-    @Override
-    public void onDestroy() {
-        menuTypeActive = null;
-        super.onDestroy();
+    @OnClick(R.id.imvSetting)
+    void doSetting() {
+        mAppActivity.toggleDrawer();
+        addFragment(null, SettingFragment.newInstance());
     }
 }

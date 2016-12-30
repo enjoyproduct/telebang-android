@@ -5,7 +5,6 @@ package com.inspius.yo365.adapter;
  */
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
@@ -16,15 +15,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.inspius.yo365.R;
+import com.inspius.yo365.helper.ImageUtil;
 import com.inspius.yo365.listener.AdapterActionListener;
 import com.inspius.yo365.model.CommentModel;
 import com.inspius.yo365.widget.CalloutLink;
 import com.inspius.yo365.widget.Hashtag;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerviewViewHolder;
 import com.marshalchen.ultimaterecyclerview.UltimateViewAdapter;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,21 +37,10 @@ public class ListCommentVideoAdapter extends UltimateViewAdapter<ListCommentVide
     AdapterActionListener listener;
 
     private Context mContext;
-    private DisplayImageOptions options;
 
     public ListCommentVideoAdapter(Context mContext) {
         this.mContext = mContext;
         this.mItems = new ArrayList<>();
-
-        options = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.drawable.img_avatar_default)
-                .showImageForEmptyUri(R.drawable.img_avatar_default)
-                .showImageOnFail(R.drawable.img_avatar_default)
-                .cacheOnDisk(true)
-                .considerExifParams(true)
-                .bitmapConfig(Bitmap.Config.RGB_565)
-                .imageScaleType(ImageScaleType.EXACTLY)
-                .build();
     }
 
     public void setAdapterActionListener(AdapterActionListener listener) {
@@ -83,7 +70,7 @@ public class ListCommentVideoAdapter extends UltimateViewAdapter<ListCommentVide
             holder.tvnUserName.setText(model.getFullName());
             holder.tvnTime.setText(model.getCreateAt());
 
-            ImageLoader.getInstance().displayImage(model.getUserAvatar(), holder.imvAvatar, options);
+            ImageLoader.getInstance().displayImage(model.getUserAvatar(), holder.imvAvatar, ImageUtil.optionsImageAvatar);
 
             String comments = model.getCommentContent();
             ArrayList<int[]> hashtagSpans = getSpans(comments, '#');

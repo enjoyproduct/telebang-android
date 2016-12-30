@@ -11,7 +11,7 @@ import com.inspius.yo365.app.AppConstant;
 import com.inspius.yo365.app.GlobalApplication;
 import com.inspius.yo365.listener.CustomerListener;
 import com.inspius.yo365.model.CustomerJSON;
-import com.inspius.yo365.model.CustomerModel;
+import com.inspius.yo365.model.ImageFileModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ import java.util.List;
 public class CustomerManager {
     private static CustomerManager mInstance;
     private AppConstant.LOGIN_TYPE stateLogin = AppConstant.LOGIN_TYPE.NOT_LOGIN;
-    private CustomerModel customerModel;
+    private CustomerJSON customerModel;
     private List<CustomerListener> listeners = new ArrayList<>();
     private Context mContext;
 
@@ -75,7 +75,7 @@ public class CustomerManager {
 
     private void parseLoginSystemSuccess(String email, String password, Object results, APIResponseListener listener) {
         updateLoginSystem(email, password);
-        customerModel = new CustomerModel((CustomerJSON) (results));
+        customerModel = (CustomerJSON) results;
 
         if (listener != null)
             listener.onSuccess(customerModel);
@@ -83,7 +83,7 @@ public class CustomerManager {
 
     private void parseLoginFacebookSuccess(String accessToken, Object results, APIResponseListener listener) {
         updateLoginFacebook(accessToken);
-        customerModel = new CustomerModel((CustomerJSON) (results));
+        customerModel = (CustomerJSON) results;
 
         if (listener != null)
             listener.onSuccess(customerModel);
@@ -228,9 +228,72 @@ public class CustomerManager {
     }
 
     /**
+     * @param currentPass
+     * @param newPass
+     * @param listener
+     */
+    public void callChangePassword(final String currentPass, final String newPass, final APIResponseListener listener) {
+        RPC.changePassword(getAccountID(), currentPass, newPass, new APIResponseListener() {
+            @Override
+            public void onError(String message) {
+                listener.onError(message);
+            }
+
+            @Override
+            public void onSuccess(Object results) {
+                updatePassword(newPass);
+                listener.onSuccess(results);
+            }
+        });
+    }
+
+    /**
+     * @param customerUpdate
+     * @param listener
+     */
+    public void callChangeProfile(CustomerJSON customerUpdate, final APIResponseListener listener) {
+        customerUpdate.id = getAccountID();
+
+        RPC.changeProfile(customerUpdate, new APIResponseListener() {
+            @Override
+            public void onError(String message) {
+
+                listener.onError(message);
+            }
+
+            @Override
+            public void onSuccess(Object results) {
+                customerModel = (CustomerJSON) results;
+                listener.onSuccess(customerModel);
+
+                for (CustomerListener listener : listeners)
+                    listener.onCustomerProfileChanged(customerModel);
+            }
+        });
+    }
+
+    public void callChangeAvatar(ImageFileModel imageFileModel, final APIResponseListener listener) {
+        RPC.changeAvatar(getAccountID(), imageFileModel, new APIResponseListener() {
+            @Override
+            public void onError(String message) {
+                listener.onError(message);
+            }
+
+            @Override
+            public void onSuccess(Object results) {
+                customerModel = (CustomerJSON) results;
+                listener.onSuccess(customerModel);
+
+                for (CustomerListener listener : listeners)
+                    listener.onCustomerProfileChanged(customerModel);
+            }
+        });
+    }
+
+    /**
      * @return
      */
-    public CustomerModel getCustomerModel() {
+    public CustomerJSON getCustomerJSON() {
         if (!isLogin())
             return null;
 
@@ -244,8 +307,16 @@ public class CustomerManager {
         if (!isLogin() || customerModel == null)
             return -1;
 
-        return customerModel.getCustomerID();
+        return customerModel.id;
     }
+
+    public boolean isPremiumAccount() {
+        if (!isLogin() || customerModel == null)
+            return false;
+
+        return (customerModel.vip == 1) ? true : false;
+    }
+
 
     /**
      * @return

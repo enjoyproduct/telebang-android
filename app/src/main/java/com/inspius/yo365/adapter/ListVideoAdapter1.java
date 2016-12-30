@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.inspius.yo365.R;
+import com.inspius.yo365.helper.ImageUtil;
 import com.inspius.yo365.listener.AdapterVideoActionListener;
 import com.inspius.yo365.model.VideoModel;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerviewViewHolder;
@@ -27,20 +28,8 @@ public class ListVideoAdapter1 extends UltimateViewAdapter<ListVideoAdapter1.Hol
     private List<VideoModel> mItems;
     private AdapterVideoActionListener listener;
 
-    private DisplayImageOptions options;
-
     public ListVideoAdapter1() {
         this.mItems = new ArrayList<>();
-
-        options = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.drawable.no_image_default)
-                .showImageForEmptyUri(R.drawable.no_image_default)
-                .showImageOnFail(R.drawable.no_image_default)
-                .cacheOnDisk(true)
-                .considerExifParams(true)
-                .bitmapConfig(Bitmap.Config.RGB_565)
-                .imageScaleType(ImageScaleType.EXACTLY)
-                .build();
     }
 
     public void setAdapterActionListener(AdapterVideoActionListener listener) {
@@ -81,7 +70,7 @@ public class ListVideoAdapter1 extends UltimateViewAdapter<ListVideoAdapter1.Hol
                 }
             });
 
-            ImageLoader.getInstance().displayImage(model.getThumbnail(), holder.imvThumbnail, options);
+            ImageLoader.getInstance().displayImage(model.getThumbnail(), holder.imvThumbnail, ImageUtil.optionsImageDefault);
         }
     }
 

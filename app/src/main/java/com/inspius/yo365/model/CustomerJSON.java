@@ -1,5 +1,7 @@
 package com.inspius.yo365.model;
 
+import android.text.TextUtils;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -28,4 +30,17 @@ public class CustomerJSON {
     public String country;
     public String zip;
     public int vip;
+
+    public String getFullName() {
+        String fullName = "";
+        fullName = String.format("%s %s", firstName, lastName).trim();
+
+        if (TextUtils.isEmpty(fullName))
+            fullName = username.trim();
+
+        if (TextUtils.isEmpty(fullName))
+            fullName = "Guest";
+
+        return fullName;
+    }
 }

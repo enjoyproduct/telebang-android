@@ -1,20 +1,16 @@
 package com.inspius.yo365.adapter;
 
-import android.graphics.Bitmap;
-import android.graphics.EmbossMaskFilter;
-import android.graphics.MaskFilter;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.inspius.yo365.R;
+import com.inspius.yo365.helper.ImageUtil;
 import com.inspius.yo365.listener.AdapterActionListener;
 import com.inspius.yo365.model.CategoryJSON;
 import com.marshalchen.ultimaterecyclerview.UltimateGridLayoutAdapter;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerviewViewHolder;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
 import java.util.List;
 
@@ -25,22 +21,11 @@ public class GridAllCategoryAdapter extends UltimateGridLayoutAdapter<CategoryJS
     private List<CategoryJSON> mItems;
     AdapterActionListener listener;
 
-    private DisplayImageOptions optionsThumbnail;
 
     public GridAllCategoryAdapter(List<CategoryJSON> items) {
         super(items);
 
         this.mItems = items;
-
-        optionsThumbnail = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.drawable.no_image_default)
-                .showImageForEmptyUri(R.drawable.no_image_default)
-                .showImageOnFail(R.drawable.no_image_default)
-                .cacheOnDisk(true)
-                .considerExifParams(true)
-                .bitmapConfig(Bitmap.Config.RGB_565)
-                .imageScaleType(ImageScaleType.EXACTLY)
-                .build();
     }
 
     public void setAdapterActionListener(AdapterActionListener listener) {
@@ -61,8 +46,8 @@ public class GridAllCategoryAdapter extends UltimateGridLayoutAdapter<CategoryJS
 //
 //            holder.tvnName.getPaint().setMaskFilter(filter);
 
-            ImageLoader.getInstance().displayImage(model.image, holder.imvBackground, optionsThumbnail);
-            ImageLoader.getInstance().displayImage(model.icon, holder.imvIcon, optionsThumbnail);
+            ImageLoader.getInstance().displayImage(model.image, holder.imvBackground, ImageUtil.optionsImageDefault);
+            ImageLoader.getInstance().displayImage(model.icon, holder.imvIcon, ImageUtil.optionsImageDefault);
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

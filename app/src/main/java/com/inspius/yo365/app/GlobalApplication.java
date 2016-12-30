@@ -7,11 +7,15 @@ import com.facebook.appevents.AppEventsLogger;
 import com.inspius.coreapp.InspiusApplication;
 import com.inspius.coreapp.config.InspiusConfig;
 import com.inspius.coreapp.helper.InspiusUtils;
+import com.inspius.yo365.R;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
+import android.graphics.Bitmap;
 import android.support.multidex.MultiDex;
 
 /**
@@ -72,4 +76,6 @@ public class GlobalApplication extends InspiusApplication {
         // Initialize ImageLoader with configuration.
         ImageLoader.getInstance().init(config.build());
     }
+
+
 }

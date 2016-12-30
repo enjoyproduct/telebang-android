@@ -1,5 +1,11 @@
 package com.inspius.yo365.app;
 
+import android.graphics.Bitmap;
+
+import com.inspius.yo365.R;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+
 /**
  * Created by Billy on 12/1/15.
  */
@@ -7,6 +13,7 @@ public class AppConstant {
     public static int RESPONSE_CODE_SUCCESS = 1;
     public static int LIMIT_VIDEOS_HOMES = 10;
     public static int LIMIT_VIDEO_COMMENT = 20;
+    public static int REQUEST_ALBUM_PIC = 1;
 
     public static final String KEY_BUNDLE_URL_PAGE = "url-page";
     public static final String KEY_BUNDLE_TITLE = "title";
@@ -19,13 +26,29 @@ public class AppConstant {
     public static final String KEY_VIDEO_ID = "video_id";
     public static final String KEY_CUSTOMER_ID = "customer_id";
     public static final String KEY_COMMENT_TEXT = "comment_text";
+    public static final String KEY_USER_ID = "user_id";
+    public static final String KEY_OLD_PASS = "old_password";
+    public static final String KEY_NEW_PASS = "new_password";
+    public static final String KEY_AVATAR = "avatar";
+
+    public static final String KEY_FIRST_NAME = "firstname";
+    public static final String KEY_LAST_NAME = "lastname";
+    public static final String KEY_PHONE_NUMBER = "phonenumber";
+    public static final String KEY_ADDRESS = "address";
+    public static final String KEY_CITY = "city";
+    public static final String KEY_COUNTRY = "country";
+    public static final String KEY_ZIP = "zip";
 
     public static final String RELATIVE_URL_LOGIN = "/api/login";
     public static final String RELATIVE_URL_LOGIN_FACE_BOOK = "/api/loginFacebook";
     public static final String RELATIVE_URL_REGISTER = "/api/register";
     public static final String RELATIVE_URL_FORGOT_PASSWORD = "/api/forgot_password";
+    public static final String RELATIVE_URL_CHANGE_PASSWORD = "/api/change_password";
+    public static final String RELATIVE_URL_CHANGE_PROFILE = "/api/change_profile";
+    public static final String RELATIVE_URL_CHANGE_AVATAR = "api/change_avatar";
     public static final String RELATIVE_URL_VIDEO_LATEST = "/api/getListVideoLasted/%s/%s";
     public static final String RELATIVE_URL_VIDEO_MOST = "/api/getListVideoMostView/%s/%s";
+    public static final String RELATIVE_URL_VIDEO_TRENDING = "/api/getListVideoTrending/%s/%s";
     public static final String RELATIVE_URL_CATEGORIES = "api/categories";
     public static final String RELATIVE_URL_GET_VIDEOS_BY_CATEGORY = "/api/getListVideoByCategory/%s/%s/%s";
     public static final String RELATIVE_URL_GET_USER_LIKE_STATUS = "/api/getLikeVideoStatus/%s/%s";
@@ -38,7 +61,6 @@ public class AppConstant {
 
     public static final String KEY_BUNDLE_VIDEO = "video";
     public static final String KEY_BUNDLE_AUTO_PLAY = "auto_play";
-
 
     /**
      * Date, Time format
