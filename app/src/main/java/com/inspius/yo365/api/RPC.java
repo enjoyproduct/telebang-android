@@ -10,6 +10,8 @@ import com.inspius.yo365.model.CustomerJSON;
 import com.inspius.yo365.model.DataCategoryJSON;
 import com.inspius.yo365.model.ImageFileModel;
 import com.inspius.yo365.model.LikeStatusResponse;
+import com.inspius.yo365.model.NewsCategoryJSON;
+import com.inspius.yo365.model.NewsJSON;
 import com.inspius.yo365.model.ResponseJSON;
 import com.inspius.yo365.model.VideoJSON;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -542,6 +544,94 @@ public class RPC {
     }
 
     /* ======================================= END VIDEOS =======================================*/
+
+    /* ======================================= START MODULE =======================================*/
+
+    public static void getNews(final int pageNumber, final APIResponseListener listener) {
+        String fmUrl = AppConstant.RELATIVE_URL_GET_NEWS;
+        String url = String.format(fmUrl, pageNumber, AppConstant.LIMIT_NEWS);
+
+        AppRestClient.get(url, new BaseJsonHttpResponseHandler<ResponseJSON>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ResponseJSON response) {
+                try {
+                    if (response.isResponseSuccessfully(listener)) {
+                        List<NewsJSON> listData = new ObjectMapper().readValue(response.getContentString(), new TypeReference<List<NewsJSON>>() {
+                        });
+                        listener.onSuccess(listData);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ResponseJSON errorResponse) {
+                onError(throwable, listener);
+            }
+
+            @Override
+            protected ResponseJSON parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                return onResponse(rawJsonData);
+            }
+        });
+    }
+
+    public static void getNewsCategories(final APIResponseListener listener) {
+        AppRestClient.get(AppConstant.RELATIVE_URL_GET_NEWS_CATEGORIES, new BaseJsonHttpResponseHandler<ResponseJSON>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ResponseJSON response) {
+                try {
+                    if (response.isResponseSuccessfully(listener)) {
+                        List<NewsCategoryJSON> listData = new ObjectMapper().readValue(response.getContentString(), new TypeReference<List<NewsCategoryJSON>>() {
+                        });
+                        listener.onSuccess(listData);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ResponseJSON errorResponse) {
+                onError(throwable, listener);
+            }
+
+            @Override
+            protected ResponseJSON parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                return onResponse(rawJsonData);
+            }
+        });
+    }
+
+    public static void updateNewsViewCounter(int newsID, final APIResponseListener listener) {
+        String fmUrl = AppConstant.RELATIVE_URL_GET_NEWS_UPDATE_VIEW;
+        String url = String.format(fmUrl, newsID);
+        AppRestClient.get(url, new BaseJsonHttpResponseHandler<ResponseJSON>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ResponseJSON response) {
+                try {
+                    if (response.isResponseSuccessfully(listener)) {
+                        listener.onSuccess(response.getContentString());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ResponseJSON errorResponse) {
+                onError(throwable, listener);
+            }
+
+            @Override
+            protected ResponseJSON parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                return onResponse(rawJsonData);
+            }
+        });
+    }
+    /* ======================================= END MODULE =======================================*/
+
 
     /* ======================================= COMMON =======================================*/
 

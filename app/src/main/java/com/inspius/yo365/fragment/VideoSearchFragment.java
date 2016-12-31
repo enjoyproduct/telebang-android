@@ -102,7 +102,7 @@ public class VideoSearchFragment extends BaseAppSlideFragment implements Adapter
                     if (!currentKeyword.equalsIgnoreCase(keyword)) {
                         pageNumber = 1;
                         requestGetVideos(keyword);
-                        
+
                         if (!TextUtils.isEmpty(keyword))
                             DatabaseManager.getInstance().insertKeyword(keyword);
                     }

@@ -11,6 +11,6 @@
     <dimen name="divider_height_list_video_1">1px</dimen>
     <dimen name="divider_height_list_video_2">10dp</dimen>
     <dimen name="divider_grid_video">10dp</dimen>
+    <dimen name="divider_grid_news_categories">10dp</dimen>
     <dimen name="divider_grid_categories">15dp</dimen>
-
 </resources>

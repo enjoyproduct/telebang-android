@@ -11,11 +11,15 @@ import java.text.DecimalFormat;
 
 public class VideoUtil {
     public static String getStatsFormat(String value) {
+        return getStatsFormat(Long.valueOf(value));
+    }
+
+    public static String getStatsFormat(long value) {
         try {
             DecimalFormat digitformat = new DecimalFormat("###,###,###,###");
-            return digitformat.format(Long.valueOf(value));
+            return digitformat.format(value);
         } catch (NumberFormatException numberFormatExp) {
-            return value;
+            return String.valueOf(value);
         }
     }
 

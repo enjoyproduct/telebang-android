@@ -51,11 +51,11 @@ public class VideoModel implements Serializable {
     }
 
     public String getViewCounterNumberFormat() {
-        return VideoUtil.getStatsFormat(String.valueOf(viewCounter1));
+        return viewCounter1;
     }
 
     public String getViewCounterStringFormat() {
-        return VideoUtil.getStatsFormat(String.valueOf(viewCounter2));
+        return viewCounter2;
     }
 
     public String getTimeRemain() {

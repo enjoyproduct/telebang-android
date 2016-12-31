@@ -14,6 +14,7 @@ public class AppConstant {
     public static int LIMIT_VIDEOS_HOMES = 10;
     public static int LIMIT_VIDEO_COMMENT = 20;
     public static int LIMIT_VIDEO_SEARCH = 10;
+    public static int LIMIT_NEWS = 15;
     public static int REQUEST_ALBUM_PIC = 1;
 
     public static final String KEY_BUNDLE_URL_PAGE = "url-page";
@@ -62,6 +63,9 @@ public class AppConstant {
     public static final String RELATIVE_URL_GET_VIDEO_COMMENTS = "/api/getListCommentVideo/%s/%s/%s";
     public static final String RELATIVE_URL_INSERT_COMMENT = "/api/insertCommentVideo";
     public static final String RELATIVE_URL_SEARCH_BY_KEYWORD = "api/getListVideoByKeyword";
+    public static final String RELATIVE_URL_GET_NEWS = "api/getListNews/%s/%s";
+    public static final String RELATIVE_URL_GET_NEWS_CATEGORIES = "api/getNewsCategories";
+    public static final String RELATIVE_URL_GET_NEWS_UPDATE_VIEW = "api/updateViewNewsCounter/%s";
 
     public static final String URL_YOUTUBE_THUMBNAIL = "http://img.youtube.com/vi/%s/hqdefault.jpg";
 
@@ -78,7 +82,7 @@ public class AppConstant {
      * ENUM
      */
     public enum MENU_TYPE {
-        HOME, CATEGORIES, WATCH_LIST, MY_ACCOUNT, ABOUT_US, TERM, FEEDBACK, HELP, SHARE, DOWNLOAD
+        HOME, CATEGORIES, WATCH_LIST, MY_ACCOUNT, ABOUT_US, TERM, FEEDBACK, HELP, SHARE, DOWNLOAD, NEWS
     }
 
     public enum LOGIN_TYPE {

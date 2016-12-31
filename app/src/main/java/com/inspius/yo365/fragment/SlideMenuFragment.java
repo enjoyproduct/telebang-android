@@ -22,6 +22,7 @@ import com.inspius.yo365.listener.AdapterActionListener;
 import com.inspius.yo365.listener.CustomerListener;
 import com.inspius.yo365.model.CustomerJSON;
 import com.inspius.yo365.model.MenuModel;
+import com.inspius.yo365.modules.news.MNewsSlideFragment;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
 import com.marshalchen.ultimaterecyclerview.ui.divideritemdecoration.HorizontalDividerItemDecoration;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -177,6 +178,9 @@ public class SlideMenuFragment extends BaseAppSlideFragment implements AdapterAc
 
             case HELP:
                 fragment = WebViewFragment.newInstance("Help", AppConfig.URL_PAGE_HELP);
+                break;
+            case NEWS:
+                fragment = MNewsSlideFragment.newInstance();
                 break;
         }
 

@@ -37,11 +37,11 @@ public class MenuSetting {
         // Watch item
         listMenuAtSlideMenu.add(new MenuModel(AppConstant.MENU_TYPE.WATCH_LIST, "Watch List", R.drawable.ic_slide_menu_watch_list, true));
 
-        // Watch item
+        // Download item
         listMenuAtSlideMenu.add(new MenuModel(AppConstant.MENU_TYPE.DOWNLOAD, "Download List", R.drawable.ic_action_video_download, true));
 
         // Account item
-        listMenuAtSlideMenu.add(new MenuModel(AppConstant.MENU_TYPE.MY_ACCOUNT, "My Account", R.drawable.ic_slide_menu_account, true));
+        listMenuAtSlideMenu.add(new MenuModel(AppConstant.MENU_TYPE.NEWS, "News/Blog", R.drawable.ic_slide_menu_account, true));
 
 
         // About item

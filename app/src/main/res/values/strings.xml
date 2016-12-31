@@ -24,6 +24,10 @@
     <string name="menu_setting">Setting</string>
     <string name="menu_search">Search Video</string>
 
+    <!-- News -->
+    <string name="news_latest">Latest</string>
+    <string name="news_categories">Categories</string>
+
     <!-- Customer -->
     <string name="username">Username</string>
     <string name="password">Password</string>
