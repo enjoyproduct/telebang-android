@@ -26,6 +26,8 @@ import com.inspius.yo365.helper.ImageUtil;
 import com.inspius.yo365.manager.DatabaseManager;
 import com.inspius.yo365.model.LikeStatusResponse;
 import com.inspius.yo365.model.VideoModel;
+import com.inspius.yo365.player.ExoPlayerActivity;
+import com.inspius.yo365.player.YoutubePlayerActivity;
 import com.inspius.yo365.service.DownloadRequestQueue;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -107,6 +109,9 @@ public class VideoDetailFragment extends StdFragment {
 
         // init ads
         initAds();
+
+        // update view counter
+        requestUpdateVideoCounter(AppConstant.COUNTER_FIELD.VIEW);
     }
 
     void initInfo() {
@@ -275,6 +280,8 @@ public class VideoDetailFragment extends StdFragment {
 
         Intent intent = InspiusIntentUtils.shareText(videoModel.getTitle(), urlShare);
         startActivity(intent);
+
+        requestUpdateVideoCounter(AppConstant.COUNTER_FIELD.SHARE);
     }
 
     @OnClick(R.id.imvHeaderDownload)
@@ -322,9 +329,36 @@ public class VideoDetailFragment extends StdFragment {
         return true;
     }
 
+    @OnClick(R.id.imvPlay)
+    void doPlayClicked() {
+        doPlayVideo();
+    }
+
     @OnClick(R.id.btnPlay)
     void doPlayVideo() {
+        if (videoModel == null)
+            return;
 
+        if (!isCustomerPlayOrDownloadVideo())
+            return;
+
+        Intent intent = null;
+        switch (videoModel.getVideoType()) {
+            case YOUTUBE:
+                intent = new Intent(mContext, YoutubePlayerActivity.class);
+                break;
+
+            case MP3:
+                break;
+
+            default:
+                intent = new Intent(mContext, ExoPlayerActivity.class);
+                break;
+        }
+        intent.putExtra(AppConstant.KEY_BUNDLE_VIDEO, videoModel);
+        intent.putExtra(AppConstant.KEY_BUNDLE_AUTO_PLAY, true);
+
+        startActivity(intent);
     }
 
     @OnClick(R.id.linearComment)
@@ -332,5 +366,9 @@ public class VideoDetailFragment extends StdFragment {
         Intent intent = new Intent(mContext, VideoCommentActivity.class);
         intent.putExtra(AppConstant.KEY_BUNDLE_VIDEO, videoModel);
         startActivity(intent);
+    }
+
+    void requestUpdateVideoCounter(AppConstant.COUNTER_FIELD field) {
+        RPC.updateVideoCounter(mCustomerManager.getAccountID(), videoModel.getVideoId(), field, null);
     }
 }

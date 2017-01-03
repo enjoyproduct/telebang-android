@@ -124,7 +124,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:singleLine="true"
-                android:text="Comments"
+                android:text="Comment"
                 android:textColor="#8F8E94"
                 android:textSize="12sp" />
         </LinearLayout>

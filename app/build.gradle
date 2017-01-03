@@ -86,5 +86,8 @@ dependencies {
 
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile project(':TagViewLib')
+    compile 'com.google.android.exoplayer:exoplayer:r2.1.1'
+
+    compile files('libs/YouTubeAndroidPlayerApi.jar')
 }
 apply plugin: 'com.google.gms.google-services'

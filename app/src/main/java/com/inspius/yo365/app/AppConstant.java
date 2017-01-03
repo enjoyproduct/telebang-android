@@ -32,6 +32,7 @@ public class AppConstant {
     public static final String KEY_OLD_PASS = "old_password";
     public static final String KEY_NEW_PASS = "new_password";
     public static final String KEY_AVATAR = "avatar";
+    public static final String KEY_FIELD = "field";
 
     public static final String KEY_FIRST_NAME = "firstname";
     public static final String KEY_LAST_NAME = "lastname";
@@ -68,6 +69,7 @@ public class AppConstant {
     public static final String RELATIVE_URL_GET_NEWS_CATEGORIES = "/api/getNewsCategories";
     public static final String RELATIVE_URL_GET_NEWS_UPDATE_VIEW = "/api/updateViewNewsCounter/%s";
     public static final String RELATIVE_URL_GET_NEWS_DESCRIPTION_PAGE = "/news/getNewsPage/%s";
+    public static final String RELATIVE_URL_UPDATE_VIDEO_COUNTER = "api/updateStatistics";
 
     public static final String URL_YOUTUBE_THUMBNAIL = "http://img.youtube.com/vi/%s/hqdefault.jpg";
 
@@ -123,6 +125,21 @@ public class AppConstant {
         private final String text;
 
         private YO_MODULE(final String text) {
+            this.text = text;
+        }
+
+        @Override
+        public String toString() {
+            return text;
+        }
+    }
+
+    public enum COUNTER_FIELD {
+        VIEW("view"), SHARE("share");
+
+        private final String text;
+
+        private COUNTER_FIELD(final String text) {
             this.text = text;
         }
 

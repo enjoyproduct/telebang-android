@@ -543,6 +543,37 @@ public class RPC {
         });
     }
 
+    public static void updateVideoCounter(int customerID, int videoID, AppConstant.COUNTER_FIELD field, final APIResponseListener listener) {
+        RequestParams params = new RequestParams();
+        params.put(AppConstant.KEY_VIDEO_ID, videoID);
+        params.put(AppConstant.KEY_FIELD, field.toString());
+        params.put(AppConstant.KEY_USER_ID, customerID);
+
+        AppRestClient.post(AppConstant.RELATIVE_URL_UPDATE_VIDEO_COUNTER, params, new BaseJsonHttpResponseHandler<ResponseJSON>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ResponseJSON response) {
+                try {
+                    if (response.isResponseSuccessfully(listener)) {
+                        if (listener != null)
+                            listener.onSuccess(response.message);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ResponseJSON errorResponse) {
+                onError(throwable, listener);
+            }
+
+            @Override
+            protected ResponseJSON parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                return onResponse(rawJsonData);
+            }
+        });
+    }
+
     /* ======================================= END VIDEOS =======================================*/
 
     /* ======================================= START MODULE =======================================*/

@@ -60,6 +60,20 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppTheme" />
 
+        <activity android:name=".player.ExoPlayerActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:launchMode="singleTop"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.AppTheme"/>
+
+        <activity
+            android:name=".player.YoutubePlayerActivity"
+            android:screenOrientation="sensor"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/BlackNoTitleBarTheme">
+
+        </activity>
+
         <!-- Defining Download Service -->
         <service
             android:name=".service.DownloadVideoService"

@@ -75,4 +75,5 @@
     <string name="msg_password_error_size">Please choose a password between 6-20 characters</string>
     <string name="msg_change_pass_success">Password updated successfully</string>
     <string name="msg_update_acc_success">Profile updated successfully</string>
+    <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>
 </resources>
