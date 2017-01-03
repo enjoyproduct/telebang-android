@@ -66,6 +66,8 @@ public class MNewsCategoriesPageFragment extends BaseAppTabFragment implements A
 
     @Override
     public void onItemClickListener(int position, Object model) {
+        NewsCategoryJSON categoryJSON = (NewsCategoryJSON) model;
+        mHostActivity.addFragment(MNewsListByCategoryFragment.newInstance(categoryJSON));
     }
 
     void requestGetData() {

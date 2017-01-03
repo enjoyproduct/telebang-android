@@ -62,10 +62,12 @@ public class AppConstant {
     public static final String RELATIVE_URL_GET_VIDEO_BY_ID = "/api/getVideoById/%s";
     public static final String RELATIVE_URL_GET_VIDEO_COMMENTS = "/api/getListCommentVideo/%s/%s/%s";
     public static final String RELATIVE_URL_INSERT_COMMENT = "/api/insertCommentVideo";
-    public static final String RELATIVE_URL_SEARCH_BY_KEYWORD = "api/getListVideoByKeyword";
-    public static final String RELATIVE_URL_GET_NEWS = "api/getListNews/%s/%s";
-    public static final String RELATIVE_URL_GET_NEWS_CATEGORIES = "api/getNewsCategories";
-    public static final String RELATIVE_URL_GET_NEWS_UPDATE_VIEW = "api/updateViewNewsCounter/%s";
+    public static final String RELATIVE_URL_SEARCH_BY_KEYWORD = "/api/getListVideoByKeyword";
+    public static final String RELATIVE_URL_GET_NEWS = "/api/getListNews/%s/%s";
+    public static final String RELATIVE_URL_GET_NEWS_BY_CAT_ID = "/api/getNewsByCategoryID/%s/%s/%s";
+    public static final String RELATIVE_URL_GET_NEWS_CATEGORIES = "/api/getNewsCategories";
+    public static final String RELATIVE_URL_GET_NEWS_UPDATE_VIEW = "/api/updateViewNewsCounter/%s";
+    public static final String RELATIVE_URL_GET_NEWS_DESCRIPTION_PAGE = "/news/getNewsPage/%s";
 
     public static final String URL_YOUTUBE_THUMBNAIL = "http://img.youtube.com/vi/%s/hqdefault.jpg";
 

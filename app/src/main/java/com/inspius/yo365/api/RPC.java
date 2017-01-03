@@ -577,6 +577,36 @@ public class RPC {
         });
     }
 
+    public static void getNewsByCategoryID(final int catID, final int pageNumber, final APIResponseListener listener) {
+        String fmUrl = AppConstant.RELATIVE_URL_GET_NEWS_BY_CAT_ID;
+        String url = String.format(fmUrl, catID, pageNumber, AppConstant.LIMIT_NEWS);
+
+        AppRestClient.get(url, new BaseJsonHttpResponseHandler<ResponseJSON>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ResponseJSON response) {
+                try {
+                    if (response.isResponseSuccessfully(listener)) {
+                        List<NewsJSON> listData = new ObjectMapper().readValue(response.getContentString(), new TypeReference<List<NewsJSON>>() {
+                        });
+                        listener.onSuccess(listData);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ResponseJSON errorResponse) {
+                onError(throwable, listener);
+            }
+
+            @Override
+            protected ResponseJSON parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                return onResponse(rawJsonData);
+            }
+        });
+    }
+
     public static void getNewsCategories(final APIResponseListener listener) {
         AppRestClient.get(AppConstant.RELATIVE_URL_GET_NEWS_CATEGORIES, new BaseJsonHttpResponseHandler<ResponseJSON>() {
             @Override
@@ -612,7 +642,8 @@ public class RPC {
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ResponseJSON response) {
                 try {
                     if (response.isResponseSuccessfully(listener)) {
-                        listener.onSuccess(response.getContentString());
+                        if (listener != null)
+                            listener.onSuccess(response.getContentString());
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -55,7 +55,7 @@ public class AppRestClient {
         getClient().post(getAbsoluteUrl(url), params, responseHandler).setTag(url);
     }
 
-    private static String getAbsoluteUrl(String relativeUrl) {
+    public static String getAbsoluteUrl(String relativeUrl) {
         String url;
         if (InspiusUtils.isProductionEnvironment())
             url = AppConfig.BASE_URL_PRODUCTION + relativeUrl;

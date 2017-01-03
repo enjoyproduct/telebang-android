@@ -16,6 +16,7 @@ import com.inspius.yo365.app.AppConfig;
 import com.inspius.yo365.app.AppConstant;
 import com.inspius.yo365.app.MenuSetting;
 import com.inspius.yo365.base.BaseAppSlideFragment;
+import com.inspius.yo365.fragment.webview.StaticPageFragment;
 import com.inspius.yo365.helper.AppUtil;
 import com.inspius.yo365.helper.ImageUtil;
 import com.inspius.yo365.listener.AdapterActionListener;
@@ -165,7 +166,7 @@ public class SlideMenuFragment extends BaseAppSlideFragment implements AdapterAc
                 break;
 
             case ABOUT_US:
-                fragment = WebViewFragment.newInstance("About Us", AppConfig.URL_PAGE_ABOUT);
+                fragment = StaticPageFragment.newInstance("About Us", AppConfig.URL_PAGE_ABOUT);
                 break;
 
             case FEEDBACK:
@@ -173,11 +174,11 @@ public class SlideMenuFragment extends BaseAppSlideFragment implements AdapterAc
                 break;
 
             case TERM:
-                fragment = WebViewFragment.newInstance("Terms & Privacy Policy", AppConfig.URL_PAGE_TERM);
+                fragment = StaticPageFragment.newInstance("Terms & Privacy Policy", AppConfig.URL_PAGE_TERM);
                 break;
 
             case HELP:
-                fragment = WebViewFragment.newInstance("Help", AppConfig.URL_PAGE_HELP);
+                fragment = StaticPageFragment.newInstance("Help", AppConfig.URL_PAGE_HELP);
                 break;
             case NEWS:
                 fragment = MNewsSlideFragment.newInstance();

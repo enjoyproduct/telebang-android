@@ -4,14 +4,15 @@ import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.widget.TextView;
 
 import com.inspius.yo365.R;
 import com.inspius.yo365.adapter.ListNewsAdapter;
 import com.inspius.yo365.api.APIResponseListener;
 import com.inspius.yo365.api.RPC;
-import com.inspius.yo365.base.BaseAppTabFragment;
-import com.inspius.yo365.fragment.webview.WebViewFragment;
+import com.inspius.yo365.base.BaseAppSlideFragment;
 import com.inspius.yo365.listener.AdapterActionListener;
+import com.inspius.yo365.model.NewsCategoryJSON;
 import com.inspius.yo365.model.NewsJSON;
 import com.inspius.yo365.model.NewsModel;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
@@ -22,12 +23,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
- * Created by Billy on 11/3/16.
+ * A placeholder fragment containing a simple view.
  */
+public class MNewsListByCategoryFragment extends BaseAppSlideFragment implements AdapterActionListener {
+    public static final String TAG = MNewsListByCategoryFragment.class.getSimpleName();
 
-public class MNewsLatestPageFragment extends BaseAppTabFragment implements AdapterActionListener {
+    public static MNewsListByCategoryFragment newInstance(NewsCategoryJSON categoryModel) {
+        MNewsListByCategoryFragment fragment = new MNewsListByCategoryFragment();
+        fragment.categoryModel = categoryModel;
+        return fragment;
+    }
+
+    @BindView(R.id.tvnHeaderTitle)
+    TextView tvnHeaderTitle;
+
+    @Override
+    public int getLayout() {
+        return R.layout.m_fragment_news_slide_list;
+    }
+
+    @Override
+    public String getTagText() {
+        return TAG;
+    }
+
+
     @BindView(R.id.ultimate_recycler_view)
     UltimateRecyclerView ultimateRecyclerView;
 
@@ -37,14 +60,11 @@ public class MNewsLatestPageFragment extends BaseAppTabFragment implements Adapt
     private LinearLayoutManager linearLayoutManager;
     private ListNewsAdapter mAdapter = null;
     int pageNumber;
-
-    @Override
-    public int getLayout() {
-        return R.layout.m_fragment_news_slide_page;
-    }
+    private NewsCategoryJSON categoryModel;
 
     @Override
     public void onInitView() {
+        tvnHeaderTitle.setText(categoryModel.title);
 
         // init RecyclerView
         initRecyclerView();
@@ -52,11 +72,6 @@ public class MNewsLatestPageFragment extends BaseAppTabFragment implements Adapt
         // load data
         startAnimLoading();
         refreshVideoList();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
     }
 
     void initRecyclerView() {
@@ -109,7 +124,7 @@ public class MNewsLatestPageFragment extends BaseAppTabFragment implements Adapt
             mAdapter.clear();
         }
 
-        RPC.getNews(pageNumber, new APIResponseListener() {
+        RPC.getNewsByCategoryID(categoryModel.id, pageNumber, new APIResponseListener() {
             @Override
             public void onError(String message) {
                 stopAnimLoading();
@@ -144,5 +159,10 @@ public class MNewsLatestPageFragment extends BaseAppTabFragment implements Adapt
 
         if (ultimateRecyclerView != null)
             ultimateRecyclerView.setRefreshing(false);
+    }
+
+    @OnClick(R.id.imvHeaderBack)
+    void doBack(){
+        onBackPressed();
     }
 }

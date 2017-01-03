@@ -1,17 +1,19 @@
-package com.inspius.yo365.fragment;
+package com.inspius.yo365.fragment.webview;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.inspius.coreapp.helper.InspiusIntentUtils;
 import com.inspius.coreapp.helper.Logger;
 import com.inspius.yo365.R;
-import com.inspius.yo365.base.BaseAppSlideFragment;
-import com.inspius.yo365.helper.AppUtil;
+import com.inspius.yo365.base.StdFragment;
 import com.inspius.yo365.helper.ConnectionDetector;
 import com.wang.avi.AVLoadingIndicatorView;
 
@@ -21,14 +23,18 @@ import butterknife.OnClick;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class WebViewFragment extends BaseAppSlideFragment {
+public class WebViewFragment extends StdFragment {
     public static final String TAG = WebViewFragment.class.getSimpleName();
 
     public static WebViewFragment newInstance(String headerName, String urlContent) {
+        return newInstance(headerName, urlContent, urlContent);
+    }
+
+    public static WebViewFragment newInstance(String headerName, String urlContent, String urlShare) {
         WebViewFragment fragment = new WebViewFragment();
         fragment.headerName = headerName;
         fragment.urlContent = urlContent;
-
+        fragment.urlShare = urlShare;
         return fragment;
     }
 
@@ -38,14 +44,18 @@ public class WebViewFragment extends BaseAppSlideFragment {
     @BindView(R.id.tvnMessage)
     TextView tvnMessage;
 
+    @BindView(R.id.imvHeaderLeft)
+    ImageView imvHeaderLeft;
+
     @BindView(R.id.avloadingIndicatorView)
     AVLoadingIndicatorView avloadingIndicatorView;
 
     @BindView(R.id.webView)
     WebView mWebView;
 
-    private String headerName;
-    private String urlContent;
+    protected String headerName;
+    protected String urlContent;
+    protected String urlShare;
 
     @Override
     public int getLayout() {
@@ -80,14 +90,23 @@ public class WebViewFragment extends BaseAppSlideFragment {
     /**
      * Sets up the action bar.
      */
-    @OnClick(R.id.imvHeaderMenu)
-    void doShowMenu() {
-        mAppActivity.toggleDrawer();
+    @OnClick(R.id.imvHeaderLeft)
+    void doHeaderLeft() {
+        onLeftClicked();
+    }
+
+    void onLeftClicked() {
+        onBackPressed();
     }
 
     @OnClick(R.id.imvHeaderShare)
     void doShare() {
-        startActivity(AppUtil.shareApp(mContext));
+        onShareClicked();
+    }
+
+    void onShareClicked() {
+        Intent intent = InspiusIntentUtils.shareText(headerName, urlShare);
+        startActivity(intent);
     }
 
     public void updateHeaderTitle(String name) {

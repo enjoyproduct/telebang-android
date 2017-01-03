@@ -9,13 +9,13 @@
     app:contentInsetStart="0dp">
 
     <com.inspius.coreapp.widget.InspiusTintableImageView
-        android:id="@+id/imvHeaderMenu"
+        android:id="@+id/imvHeaderLeft"
         android:layout_width="@dimen/tab_height"
         android:layout_height="@dimen/tab_height"
         android:layout_gravity="start"
         android:background="?attr/selectableItemBackground"
         android:padding="10dp"
-        android:src="@drawable/ic_action_menu"
+        android:src="@drawable/ic_action_back"
         app:tint="@color/custom_icon_while_selector" />
 
     <com.inspius.coreapp.widget.InspiusTintableImageView
