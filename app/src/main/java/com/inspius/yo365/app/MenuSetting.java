@@ -41,8 +41,8 @@ public class MenuSetting {
         listMenuAtSlideMenu.add(new MenuModel(AppConstant.MENU_TYPE.DOWNLOAD, "Download List", R.drawable.ic_action_video_download, true));
 
         // Account item
-        listMenuAtSlideMenu.add(new MenuModel(AppConstant.MENU_TYPE.NEWS, "News/Blog", R.drawable.ic_slide_menu_account, true));
-
+        if (AppConfig.NEWS_MODULE == AppConstant.YO_MODULE.NEWS_1)
+            listMenuAtSlideMenu.add(new MenuModel(AppConstant.MENU_TYPE.NEWS, "News/Blog", R.drawable.ic_slide_menu_account, true));
 
         // About item
         listMenuAtSlideMenu.add(new MenuModel(AppConstant.MENU_TYPE.ABOUT_US, "About Us", R.drawable.ic_slide_menu_about, true));

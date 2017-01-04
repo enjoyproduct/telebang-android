@@ -21,26 +21,43 @@
             android:clearTaskOnLaunch="true"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppTheme">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <activity
             android:name=".activity.LoginActivity"
+            android:alwaysRetainTaskState="true"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppTheme" />
 
         <activity
-            android:name=".activity.VideoDetailActivity"
+            android:name=".activity.AppSlideActivity"
+            android:alwaysRetainTaskState="true"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppTheme"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".activity.VideoDetailActivity"
+            android:alwaysRetainTaskState="true"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppTheme" />
 
@@ -48,31 +65,74 @@
             android:name=".activity.VideoCommentActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppTheme"
             android:windowSoftInputMode="adjustPan" />
 
         <activity
-            android:name=".activity.AppSlideActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:label="@string/app_name"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppTheme" />
-
-        <activity android:name=".player.ExoPlayerActivity"
+            android:name=".player.ExoPlayerActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
-            android:launchMode="singleTop"
             android:label="@string/app_name"
-            android:theme="@style/Theme.AppTheme"/>
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.AppTheme" />
 
         <activity
             android:name=".player.YoutubePlayerActivity"
-            android:screenOrientation="sensor"
             android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"
+            android:screenOrientation="sensor"
             android:theme="@style/BlackNoTitleBarTheme">
 
         </activity>
+        <activity
+            android:name=".player.MusicPlayerActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:launchMode="singleTop"
+            android:theme="@style/BlackNoTitleBarTheme">
+
+        </activity>
+
+        <!-- Defining Module -->
+        <activity
+            android:name=".modules.video_detail_jw.MYoutubeVideoDetailActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".modules.video_detail_jw.MJWVideoDetailActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".modules.video_detail_jw.MWebVideoDetailActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".modules.video_detail_jw.MMusicDetailActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".modules.video_detail_jw.MExoDetailActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" />
+
+        <!--TODO Set your license key-->
+        <meta-data
+            android:name="JW_LICENSE_KEY"
+            android:value="@string/jw_license_key" />
+        <!-- Defining End Module -->
 
         <!-- Defining Download Service -->
         <service

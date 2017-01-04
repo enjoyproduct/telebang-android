@@ -57,7 +57,7 @@ public class YoutubePlayerActivity extends YouTubeFailureRecoveryActivity {
 
         setContentView(R.layout.activity_youtube_player);
         playerView = (YouTubePlayerView) findViewById(R.id.player);
-        playerView.initialize(DeveloperKey.DEVELOPER_KEY, this);
+        playerView.initialize(DeveloperKey.DEVELOPER_YOUTUBE_KEY, this);
 
         if (getIntent() == null)
             return;

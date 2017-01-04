@@ -15,6 +15,10 @@ import com.inspius.yo365.activity.VideoDetailActivity;
 import com.inspius.yo365.app.AppConfig;
 import com.inspius.yo365.app.AppConstant;
 import com.inspius.yo365.model.VideoModel;
+import com.inspius.yo365.modules.video_detail_jw.MExoDetailActivity;
+import com.inspius.yo365.modules.video_detail_jw.MMusicDetailActivity;
+import com.inspius.yo365.modules.video_detail_jw.MWebVideoDetailActivity;
+import com.inspius.yo365.modules.video_detail_jw.MYoutubeVideoDetailActivity;
 
 /**
  * Created by Billy on 12/27/16.
@@ -58,26 +62,27 @@ public class AppUtil {
 
     private static Intent getIntentVideoDetailJW(Context mContext, VideoModel videoModel, boolean isAutoPlay) {
         Intent intent = null;
-//        switch (videoModel.getVideoType()) {
-//            case YOUTUBE:
-//                intent = new Intent(mContext, MYoutubeVideoDetailActivity.class);
-//                break;
-//
-//            case UPLOAD:
+        switch (videoModel.getVideoType()) {
+            case YOUTUBE:
+                intent = new Intent(mContext, MYoutubeVideoDetailActivity.class);
+                break;
+
+            case UPLOAD:
 //                intent = new Intent(mContext, MJWVideoDetailActivity.class);
-//                break;
-//
-//            case MP3:
-//                intent = new Intent(mContext, MMp3DetailActivity.class);
-//                break;
-//
-//            default:
-//                intent = new Intent(mContext, MWebVideoDetailActivity.class);
-//                break;
-//        }
-//
-//        intent.putExtra(AppConstant.KEY_BUNDLE_AUTO_PLAY, isAutoPlay);
-//        intent.putExtra(AppConstant.KEY_BUNDLE_VIDEO, videoModel);
+                intent = new Intent(mContext, MExoDetailActivity.class);
+                break;
+
+            case MP3:
+                intent = new Intent(mContext, MMusicDetailActivity.class);
+                break;
+
+            default:
+                intent = new Intent(mContext, MWebVideoDetailActivity.class);
+                break;
+        }
+
+        intent.putExtra(AppConstant.KEY_BUNDLE_AUTO_PLAY, isAutoPlay);
+        intent.putExtra(AppConstant.KEY_BUNDLE_VIDEO, videoModel);
 
         return intent;
     }

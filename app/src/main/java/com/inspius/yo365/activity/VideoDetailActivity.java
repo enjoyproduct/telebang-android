@@ -1,5 +1,8 @@
 package com.inspius.yo365.activity;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.gms.ads.AdListener;
@@ -67,7 +70,13 @@ public class VideoDetailActivity extends StdActivity {
             mInterstitialAd.setAdListener(new AdListener() {
                 @Override
                 public void onAdClosed() {
-                    requestNewInterstitial();
+                    //requestNewInterstitial();
+                }
+
+                @Override
+                public void onAdLoaded() {
+                    super.onAdLoaded();
+                    showInterstitialAds();
                 }
             });
             requestNewInterstitial();

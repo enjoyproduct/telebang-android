@@ -59,6 +59,8 @@ repositories {
     flatDir {
         dirs 'libs'
     }
+    maven { url "https://jitpack.io" }
+    maven { url 'https://mvn.jwplayer.com/content/repositories/releases/' }
 }
 
 dependencies {
@@ -86,8 +88,12 @@ dependencies {
 
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile project(':TagViewLib')
-    compile 'com.google.android.exoplayer:exoplayer:r2.1.1'
 
+    compile 'com.google.android.exoplayer:exoplayer:r2.1.1'
     compile files('libs/YouTubeAndroidPlayerApi.jar')
+    compile 'com.github.iammert:MusicPlayerView:e3b937c729'
+    compile 'com.longtailvideo.jwplayer:jwplayer-core:+'
+    compile 'com.longtailvideo.jwplayer:jwplayer-common:+'
+
 }
 apply plugin: 'com.google.gms.google-services'

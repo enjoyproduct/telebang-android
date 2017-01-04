@@ -17,7 +17,8 @@ public class MainActivity extends StdActivity {
         setContentView(R.layout.activity_app);
         ButterKnife.bind(this);
 
-        initFragment();
+        if (savedInstanceState == null)
+            initFragment();
 
         InspiusUtils.printHashKey(this);
     }

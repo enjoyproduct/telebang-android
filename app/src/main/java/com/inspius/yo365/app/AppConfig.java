@@ -33,11 +33,12 @@ public class AppConfig {
      * false : hide ads
      */
     public static final boolean SHOW_ADS_BANNER = true;
-    public static final boolean SHOW_ADS_INTERSTITIAL = false;
+    public static final boolean SHOW_ADS_INTERSTITIAL = true;
 
     /**
      * CONFIG
      */
 
-    public static final AppConstant.YO_MODULE VIDEO_DETAIL_MODULE = AppConstant.YO_MODULE.DEFAULT;
+    public static final AppConstant.YO_MODULE VIDEO_DETAIL_MODULE = AppConstant.YO_MODULE.VIDEO_DETAIL_JW;
+    public static final AppConstant.YO_MODULE NEWS_MODULE = AppConstant.YO_MODULE.NEWS_1;
 }

@@ -1,14 +1,21 @@
-package com.inspius.yo365.fragment;
+package com.inspius.yo365.modules.video_detail_jw;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.inspius.coreapp.helper.InspiusIntentUtils;
 import com.inspius.coreapp.helper.InspiusUtils;
 import com.inspius.yo365.R;
@@ -17,45 +24,30 @@ import com.inspius.yo365.api.APIResponseListener;
 import com.inspius.yo365.api.RPC;
 import com.inspius.yo365.app.AppConfig;
 import com.inspius.yo365.app.AppConstant;
-import com.inspius.yo365.base.StdFragment;
 import com.inspius.yo365.greendao.DBVideoDownload;
 import com.inspius.yo365.greendao.DBWishListVideo;
 import com.inspius.yo365.helper.AppUtil;
 import com.inspius.yo365.helper.DialogUtil;
-import com.inspius.yo365.helper.ImageUtil;
+import com.inspius.yo365.manager.CustomerManager;
 import com.inspius.yo365.manager.DatabaseManager;
 import com.inspius.yo365.model.LikeStatusResponse;
 import com.inspius.yo365.model.VideoModel;
-import com.inspius.yo365.player.ExoPlayerActivity;
-import com.inspius.yo365.player.MusicPlayerActivity;
-import com.inspius.yo365.player.YoutubePlayerActivity;
 import com.inspius.yo365.service.DownloadRequestQueue;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * A placeholder fragment containing a simple view.
+ * Created by Billy on 12/1/16.
  */
-public class VideoDetailFragment extends StdFragment {
-    public static final String TAG = VideoDetailFragment.class.getSimpleName();
 
-    public static VideoDetailFragment newInstance(VideoModel videoModel, boolean shouldAutoPlay) {
-        VideoDetailFragment fragment = new VideoDetailFragment();
-        fragment.videoModel = videoModel;
-        fragment.shouldAutoPlay = shouldAutoPlay;
-        return fragment;
-    }
-
+public abstract class MBaseVideoDetailActivity extends AppCompatActivity {
     @BindView(R.id.tvnHeaderTitle)
     TextView tvnHeaderTitle;
 
     @BindView(R.id.tvnTitle)
     TextView tvnTitle;
-
-//    @BindView(R.id.tvnAuthor)
-//    TextView tvnAuthor;
 
     @BindView(R.id.tvnDescription)
     TextView tvnDescription;
@@ -78,41 +70,57 @@ public class VideoDetailFragment extends StdFragment {
     @BindView(R.id.tvnLike)
     TextView tvnLike;
 
-    @BindView(R.id.imvThumbnail)
-    ImageView imvThumbnail;
-
-//    @BindView(R.id.tvnSeries)
-//    TextView tvnSeries;
-
     @BindView(R.id.ad_view)
     AdView mAdView;
 
-    private VideoModel videoModel;
+    @BindView(R.id.linearContent)
+    LinearLayout linearContent;
+
+    @BindView(R.id.container)
+    FrameLayout frameContainer;
+
+    protected VideoModel videoModel;
     protected boolean shouldAutoPlay;
     private DBWishListVideo dbWishListVideo;
 
-    @Override
-    public int getLayout() {
-        return R.layout.fragment_video_detail;
-    }
+    protected int containerViewId = R.id.container;
+
+    private CustomerManager mCustomerManager;
+    protected Context mContext;
+    private InterstitialAd mInterstitialAd;
+
+    abstract void initPlayer();
 
     @Override
-    public String getTagText() {
-        return TAG;
-    }
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.m_activity_video_detail);
+        ButterKnife.bind(this);
 
-    @Override
-    public void onInitView() {
+        mCustomerManager = CustomerManager.getInstance();
+        mContext = getApplicationContext();
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        if (getIntent() == null)
+            return;
+
+        Bundle arguments = getIntent().getExtras();
+        if (arguments == null)
+            return;
+
+        if (!arguments.containsKey(AppConstant.KEY_BUNDLE_VIDEO))
+            return;
+
+        videoModel = (VideoModel) arguments.getSerializable(AppConstant.KEY_BUNDLE_VIDEO);
+        shouldAutoPlay = arguments.getBoolean(AppConstant.KEY_BUNDLE_AUTO_PLAY, false);
+
         tvnHeaderTitle.setText(videoModel.getCategoryName());
 
-        // init info
         initInfo();
-
-        // init ads
         initAds();
-
-        // update view counter
-        requestUpdateVideoCounter(AppConstant.COUNTER_FIELD.VIEW);
+        initPlayer();
     }
 
     void initInfo() {
@@ -121,8 +129,6 @@ public class VideoDetailFragment extends StdFragment {
 //        tvnAuthor.setText(videoModel.getAuthor());
         tvnDescription.setText(Html.fromHtml(videoModel.getDescription()));
         tvnViewCounter.setText(videoModel.getViewCounterStringFormat());
-
-        ImageLoader.getInstance().displayImage(videoModel.getThumbnail(), imvThumbnail, ImageUtil.optionsImageDefault);
 
         DBVideoDownload dbVideoDownload = DatabaseManager.getInstance().getVideoDownloadByVideoID(videoModel.getVideoId());
         if (dbVideoDownload != null)
@@ -173,6 +179,56 @@ public class VideoDetailFragment extends StdFragment {
         } else {
             mAdView.setVisibility(View.GONE);
         }
+
+        if (AppConfig.SHOW_ADS_INTERSTITIAL) {
+            // Create the InterstitialAd and set the adUnitId.
+            mInterstitialAd = new InterstitialAd(this);
+            // Defined in res/values/strings.xml
+            mInterstitialAd.setAdUnitId(getString(R.string.interstitial_ad_unit_id));
+
+            // Loading ads
+            mInterstitialAd.setAdListener(new AdListener() {
+                @Override
+                public void onAdClosed() {
+                    //requestNewInterstitial();
+                }
+
+                @Override
+                public void onAdLoaded() {
+                    super.onAdLoaded();
+                    showInterstitialAds();
+                }
+            });
+            requestNewInterstitial();
+        }
+    }
+
+    public void showInterstitialAds() {
+        if (!AppConfig.SHOW_ADS_INTERSTITIAL)
+            return;
+
+        // Show the ad if it's ready. Otherwise toast and restart the game.
+        if (mInterstitialAd != null && mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        } else {
+            requestNewInterstitial();
+        }
+    }
+
+    private void requestNewInterstitial() {
+        if (!AppConfig.SHOW_ADS_INTERSTITIAL)
+            return;
+
+        AdRequest adRequest;
+        if (InspiusUtils.isProductionEnvironment()) {
+            adRequest = new AdRequest.Builder().build();
+        } else {
+            adRequest = new AdRequest.Builder()
+                    .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                    .build();
+        }
+
+        mInterstitialAd.loadAd(adRequest);
     }
 
     void updateStateViewWishList() {
@@ -196,7 +252,7 @@ public class VideoDetailFragment extends StdFragment {
 
     @OnClick(R.id.imvHeaderBack)
     void doBack() {
-        getActivity().finish();
+        finish();
     }
 
     void checkLikeStatus() {
@@ -252,7 +308,7 @@ public class VideoDetailFragment extends StdFragment {
         }
 
         boolean isLike = imvLike.isSelected();
-        imvLike.setSelected(!isLike);
+        updateStateLikeButton(!isLike);
 
         RPC.requestUserLikeVideo(mCustomerManager.getAccountID(), videoModel.getVideoId(), new APIResponseListener() {
             @Override
@@ -299,7 +355,7 @@ public class VideoDetailFragment extends StdFragment {
         if (imvDownload.isSelected())
             return;
 
-        if (!AppUtil.verifyStoragePermissions(getActivity()))
+        if (!AppUtil.verifyStoragePermissions(this))
             return;
 
         updateStateDownloadButton(true);
@@ -328,39 +384,6 @@ public class VideoDetailFragment extends StdFragment {
 //        }
 
         return true;
-    }
-
-    @OnClick(R.id.imvPlay)
-    void doPlayClicked() {
-        doPlayVideo();
-    }
-
-    @OnClick(R.id.btnPlay)
-    void doPlayVideo() {
-        if (videoModel == null)
-            return;
-
-        if (!isCustomerPlayOrDownloadVideo())
-            return;
-
-        Intent intent = null;
-        switch (videoModel.getVideoType()) {
-            case YOUTUBE:
-                intent = new Intent(mContext, YoutubePlayerActivity.class);
-                break;
-
-            case MP3:
-                intent = new Intent(mContext, MusicPlayerActivity.class);
-                break;
-
-            default:
-                intent = new Intent(mContext, ExoPlayerActivity.class);
-                break;
-        }
-        intent.putExtra(AppConstant.KEY_BUNDLE_VIDEO, videoModel);
-        intent.putExtra(AppConstant.KEY_BUNDLE_AUTO_PLAY, true);
-
-        startActivity(intent);
     }
 
     @OnClick(R.id.linearComment)

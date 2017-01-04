@@ -63,6 +63,8 @@ public class SettingFragment extends BaseAppSlideFragment {
 
         if (mCustomerManager.isPremiumAccount())
             tvnVip.setVisibility(View.VISIBLE);
+        else
+            tvnVip.setVisibility(View.GONE);
 
         ImageLoader.getInstance().displayImage(mCustomerManager.getCustomerJSON().avatar, imgAvatar, ImageUtil.optionsImageAvatar);
     }

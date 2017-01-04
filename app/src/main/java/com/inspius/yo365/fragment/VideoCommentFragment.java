@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.inspius.yo365.R;
 import com.inspius.yo365.adapter.ListCommentVideoAdapter;
@@ -52,6 +53,9 @@ public class VideoCommentFragment extends StdFragment implements AdapterActionLi
     @BindView(R.id.edtCommentText)
     EditText edtCommentText;
 
+    @BindView(R.id.tvnHeaderTitle)
+    TextView tvnHeaderTitle;
+
     @BindView(R.id.linearLayoutNoComment)
     LinearLayout linearLayoutNoComment;
 
@@ -74,6 +78,8 @@ public class VideoCommentFragment extends StdFragment implements AdapterActionLi
 
     @Override
     public void onInitView() {
+        tvnHeaderTitle.setText(videoModel.getTitle());
+
         ultimateRecyclerView.setHasFixedSize(false);
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {

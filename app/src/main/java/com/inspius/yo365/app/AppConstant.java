@@ -1,11 +1,5 @@
 package com.inspius.yo365.app;
 
-import android.graphics.Bitmap;
-
-import com.inspius.yo365.R;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-
 /**
  * Created by Billy on 12/1/15.
  */
@@ -120,7 +114,7 @@ public class AppConstant {
     }
 
     public enum YO_MODULE {
-        DEFAULT("default"), VIDEO_DETAIL_JW("module-detail-jw");
+        DEFAULT("default"), VIDEO_DETAIL_JW("module-detail-jw"), NEWS_1("news_1"),;
 
         private final String text;
 

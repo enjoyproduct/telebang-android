@@ -12,6 +12,9 @@
     <string name="facebook_app_id">1907357799494032</string>
     <string name="fb_login_protocol_scheme">fb1907357799494032</string>
 
+    <!-- Change JW_LICENSE_KEY -->
+    <string name="jw_license_key">VhdGGWw+4IX/o0y9QxdrKIS6R/CddyhGD1i2UA==</string>
+
     <string name="slogan">Social Network Of Video</string>
     <string name="fm_version">Version %s</string>
     <string name="cm_submit">Submit</string>
