@@ -26,8 +26,11 @@ import com.inspius.yo365.helper.ImageUtil;
 import com.inspius.yo365.manager.DatabaseManager;
 import com.inspius.yo365.model.LikeStatusResponse;
 import com.inspius.yo365.model.VideoModel;
+import com.inspius.yo365.player.DailyMotionPlayerActivity;
 import com.inspius.yo365.player.ExoPlayerActivity;
+import com.inspius.yo365.player.JWPlayerActivity;
 import com.inspius.yo365.player.MusicPlayerActivity;
+import com.inspius.yo365.player.WebViewPlayerActivity;
 import com.inspius.yo365.player.YoutubePlayerActivity;
 import com.inspius.yo365.service.DownloadRequestQueue;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -353,14 +356,25 @@ public class VideoDetailFragment extends StdFragment {
                 intent = new Intent(mContext, MusicPlayerActivity.class);
                 break;
 
-            default:
+            case DAILY_MOTION:
+                intent = new Intent(mContext, DailyMotionPlayerActivity.class);
+                break;
+
+            case UPLOAD:
                 intent = new Intent(mContext, ExoPlayerActivity.class);
                 break;
-        }
-        intent.putExtra(AppConstant.KEY_BUNDLE_VIDEO, videoModel);
-        intent.putExtra(AppConstant.KEY_BUNDLE_AUTO_PLAY, true);
 
-        startActivity(intent);
+            default:
+                intent = new Intent(mContext, WebViewPlayerActivity.class);
+                break;
+        }
+
+        if (intent != null) {
+            intent.putExtra(AppConstant.KEY_BUNDLE_VIDEO, videoModel);
+            intent.putExtra(AppConstant.KEY_BUNDLE_AUTO_PLAY, true);
+
+            startActivity(intent);
+        }
     }
 
     @OnClick(R.id.linearComment)

@@ -1,5 +1,7 @@
 package com.inspius.yo365.app;
 
+import android.text.TextUtils;
+
 /**
  * Created by Billy on 12/1/15.
  */
@@ -11,9 +13,9 @@ public class AppConstant {
     public static int LIMIT_NEWS = 15;
     public static int REQUEST_ALBUM_PIC = 1;
 
-    public static final String KEY_BUNDLE_URL_PAGE = "url-page";
-    public static final String KEY_BUNDLE_TITLE = "title";
-    public static final String KEY_BUNDLE_URL_SHARE = "urlShare";
+    public static final String KEY_NOTIFICATION_CONTENT_TYPE = "content_type";
+    public static final String KEY_NOTIFICATION_CONTENT_ID = "content_id";
+    public static final int REQUEST_NOTIFICATION_DETAIL = 112;
 
     public static final String KEY_USERNAME = "username";
     public static final String KEY_PASSWORD = "password";
@@ -58,12 +60,9 @@ public class AppConstant {
     public static final String RELATIVE_URL_GET_VIDEO_COMMENTS = "/api/getListCommentVideo/%s/%s/%s";
     public static final String RELATIVE_URL_INSERT_COMMENT = "/api/insertCommentVideo";
     public static final String RELATIVE_URL_SEARCH_BY_KEYWORD = "/api/getListVideoByKeyword";
-    public static final String RELATIVE_URL_GET_NEWS = "/api/getListNews/%s/%s";
-    public static final String RELATIVE_URL_GET_NEWS_BY_CAT_ID = "/api/getNewsByCategoryID/%s/%s/%s";
-    public static final String RELATIVE_URL_GET_NEWS_CATEGORIES = "/api/getNewsCategories";
-    public static final String RELATIVE_URL_GET_NEWS_UPDATE_VIEW = "/api/updateViewNewsCounter/%s";
-    public static final String RELATIVE_URL_GET_NEWS_DESCRIPTION_PAGE = "/news/getNewsPage/%s";
     public static final String RELATIVE_URL_UPDATE_VIDEO_COUNTER = "api/updateStatistics";
+    public static final String RELATIVE_URL_PLAY_FACEBOOK = "/api/playFacebookVideo?video_url=%s";
+    public static final String RELATIVE_URL_PLAY_VIMEO = "%s?player_id=player&autoplay=1&title=0&byline=0&portrait=0&api=1&maxheight=480&maxwidth=800";
 
     public static final String URL_YOUTUBE_THUMBNAIL = "http://img.youtube.com/vi/%s/hqdefault.jpg";
 
@@ -140,6 +139,32 @@ public class AppConstant {
         @Override
         public String toString() {
             return text;
+        }
+    }
+
+    public enum NOTIFICATION_TYPE {
+        VIDEO("video"), NEWS("news"),;
+
+        private final String text;
+
+        private NOTIFICATION_TYPE(final String text) {
+            this.text = text;
+        }
+
+        @Override
+        public String toString() {
+            return text;
+        }
+
+        public static NOTIFICATION_TYPE fromString(String text) {
+            if (!TextUtils.isEmpty(text)) {
+                for (NOTIFICATION_TYPE b : NOTIFICATION_TYPE.values()) {
+                    if (text.equalsIgnoreCase(b.text)) {
+                        return b;
+                    }
+                }
+            }
+            return VIDEO;
         }
     }
 }

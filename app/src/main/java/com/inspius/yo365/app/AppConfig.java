@@ -33,7 +33,7 @@ public class AppConfig {
      * false : hide ads
      */
     public static final boolean SHOW_ADS_BANNER = true;
-    public static final boolean SHOW_ADS_INTERSTITIAL = true;
+    public static final boolean SHOW_ADS_INTERSTITIAL = false;
 
     /**
      * CONFIG

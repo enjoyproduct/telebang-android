@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.inspius.coreapp.widget.InspiusHackyViewPager;
 import com.inspius.yo365.R;
-import com.inspius.yo365.app.TabSetting;
 import com.inspius.yo365.base.BaseAppSlideFragment;
 import com.inspius.yo365.fragment.VideoSearchFragment;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
@@ -54,8 +53,8 @@ public class MNewsSlideFragment extends BaseAppSlideFragment {
     @Override
     public void onInitView() {
         final FragmentPagerItems pages = new FragmentPagerItems(mContext);
-        for (int titleResId : TabSetting.CUSTOM_NEWS_TAB.tabs()) {
-            FragmentPagerItem fragmentPagerItem = TabSetting.CUSTOM_NEWS_TAB.getFragmentPagerItem(mContext, titleResId);
+        for (int titleResId : MTabNewsSetting.CUSTOM_NEWS_TAB.tabs()) {
+            FragmentPagerItem fragmentPagerItem = MTabNewsSetting.CUSTOM_NEWS_TAB.getFragmentPagerItem(mContext, titleResId);
             pages.add(fragmentPagerItem);
         }
 

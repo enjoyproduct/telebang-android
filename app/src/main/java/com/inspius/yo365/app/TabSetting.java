@@ -14,8 +14,6 @@ import com.inspius.yo365.fragment.main_tab.AppCategoriesFragment;
 import com.inspius.yo365.fragment.main_tab.AppHomeFragment;
 import com.inspius.yo365.fragment.main_tab.AppTrendingFragment;
 import com.inspius.yo365.fragment.main_tab.AppWatchListFragment;
-import com.inspius.yo365.modules.news.MNewsCategoriesPageFragment;
-import com.inspius.yo365.modules.news.MNewsLatestPageFragment;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem;
 
@@ -99,41 +97,6 @@ public enum TabSetting {
                     return view;
                 }
             });
-        }
-    },
-
-    CUSTOM_NEWS_TAB() {
-        @Override
-        public int[] tabs() {
-            return new int[]{
-                    R.string.news_latest,
-                    R.string.news_categories
-            };
-        }
-
-        @Override
-        public FragmentPagerItem getFragmentPagerItem(Context context, int titleResId) {
-            FragmentPagerItem fragmentPagerItem = null;
-
-            switch (titleResId) {
-                case R.string.news_latest:
-                    fragmentPagerItem = FragmentPagerItem.of(context.getString(titleResId), MNewsLatestPageFragment.class);
-                    break;
-                case R.string.news_categories:
-                    fragmentPagerItem = FragmentPagerItem.of(context.getString(titleResId), MNewsCategoriesPageFragment.class);
-                    break;
-
-                default:
-                    fragmentPagerItem = FragmentPagerItem.of(context.getString(titleResId), MNewsLatestPageFragment.class);
-                    break;
-            }
-
-            return fragmentPagerItem;
-        }
-
-        @Override
-        public void setup(SmartTabLayout layout) {
-            super.setup(layout);
         }
     };
 

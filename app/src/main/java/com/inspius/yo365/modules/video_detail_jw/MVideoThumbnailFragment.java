@@ -15,6 +15,7 @@ import com.inspius.yo365.R;
 import com.inspius.yo365.app.AppConstant;
 import com.inspius.yo365.helper.ImageUtil;
 import com.inspius.yo365.model.VideoModel;
+import com.inspius.yo365.player.WebViewPlayerActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.BindView;
@@ -73,25 +74,10 @@ public class MVideoThumbnailFragment extends Fragment {
         if (videoModel == null)
             return;
 
-        Intent intent = null;
-        switch (videoModel.getVideoType()) {
-            case VIMEO:
-                //intent = new Intent(mContext, WebViewPlayerActivity.class);
-                break;
-
-            case FACEBOOK:
-                //intent = new Intent(mContext, WebViewPlayerActivity.class);
-                break;
-
-            case DAILY_MOTION:
-                //intent = new Intent(mContext, DailyMotionPlayerActivity.class);
-                break;
-
-            default:
-                break;
-        }
-
+        Intent intent = new Intent(mContext, WebViewPlayerActivity.class);
         intent.putExtra(AppConstant.KEY_BUNDLE_VIDEO, videoModel);
+        intent.putExtra(AppConstant.KEY_BUNDLE_AUTO_PLAY, true);
+
         startActivity(intent);
     }
 }

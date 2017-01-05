@@ -5,11 +5,11 @@ import com.inspius.yo365.fragment.webview.WebViewFragment;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MNewsDetailFragment extends WebViewFragment {
-    public static final String TAG = MNewsDetailFragment.class.getSimpleName();
+public class MNewsNotificationFragment extends WebViewFragment {
+    public static final String TAG = MNewsNotificationFragment.class.getSimpleName();
 
-    public static MNewsDetailFragment newInstance(MNewsModel newsModel) {
-        MNewsDetailFragment fragment = new MNewsDetailFragment();
+    public static MNewsNotificationFragment newInstance(MNewsModel newsModel) {
+        MNewsNotificationFragment fragment = new MNewsNotificationFragment();
         fragment.newsModel = newsModel;
 
         fragment.headerName = newsModel.getTitle();
@@ -25,5 +25,11 @@ public class MNewsDetailFragment extends WebViewFragment {
         super.onInitView();
 
         MNewsRPC.updateNewsViewCounter(newsModel.getID(), null);
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        getActivity().finish();
+        return false;
     }
 }

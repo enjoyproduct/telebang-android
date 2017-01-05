@@ -3,12 +3,9 @@ package com.inspius.yo365.modules.news;
 import android.view.View;
 
 import com.inspius.yo365.R;
-import com.inspius.yo365.adapter.ListNewsCategoriesAdapter;
 import com.inspius.yo365.api.APIResponseListener;
-import com.inspius.yo365.api.RPC;
 import com.inspius.yo365.base.BaseAppTabFragment;
 import com.inspius.yo365.listener.AdapterActionListener;
-import com.inspius.yo365.model.NewsCategoryJSON;
 import com.inspius.yo365.widget.GridDividerDecoration;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
 import com.marshalchen.ultimaterecyclerview.grid.BasicGridLayoutManager;
@@ -31,7 +28,7 @@ public class MNewsCategoriesPageFragment extends BaseAppTabFragment implements A
 
     private BasicGridLayoutManager mGridLayoutManager;
     private int columns = 3;
-    private ListNewsCategoriesAdapter mAdapter = null;
+    private MListNewsCategoriesAdapter mAdapter = null;
 
     @Override
     public int getLayout() {
@@ -55,7 +52,7 @@ public class MNewsCategoriesPageFragment extends BaseAppTabFragment implements A
         int spacing = getResources().getDimensionPixelSize(R.dimen.divider_grid_news_categories);
         ultimateRecyclerView.addItemDecoration(
                 new GridDividerDecoration(columns, spacing, includeEdge));
-        mAdapter = new ListNewsCategoriesAdapter();
+        mAdapter = new MListNewsCategoriesAdapter();
         mAdapter.setAdapterActionListener(this);
 
         mGridLayoutManager = new BasicGridLayoutManager(getContext(), columns, mAdapter);
@@ -66,13 +63,13 @@ public class MNewsCategoriesPageFragment extends BaseAppTabFragment implements A
 
     @Override
     public void onItemClickListener(int position, Object model) {
-        NewsCategoryJSON categoryJSON = (NewsCategoryJSON) model;
+        MNewsCategoryJSON categoryJSON = (MNewsCategoryJSON) model;
         mHostActivity.addFragment(MNewsListByCategoryFragment.newInstance(categoryJSON));
     }
 
     void requestGetData() {
         startAnimLoading();
-        RPC.getNewsCategories(new APIResponseListener() {
+        MNewsRPC.getNewsCategories(new APIResponseListener() {
             @Override
             public void onError(String message) {
                 stopAnimLoading();
@@ -82,7 +79,7 @@ public class MNewsCategoriesPageFragment extends BaseAppTabFragment implements A
             public void onSuccess(Object results) {
                 stopAnimLoading();
 
-                List<NewsCategoryJSON> data = (List<NewsCategoryJSON>) results;
+                List<MNewsCategoryJSON> data = (List<MNewsCategoryJSON>) results;
                 if (data == null || data.isEmpty())
                     return;
 

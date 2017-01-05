@@ -6,14 +6,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
 import com.inspius.yo365.R;
-import com.inspius.yo365.adapter.ListNewsAdapter;
 import com.inspius.yo365.api.APIResponseListener;
-import com.inspius.yo365.api.RPC;
 import com.inspius.yo365.base.BaseAppTabFragment;
-import com.inspius.yo365.fragment.webview.WebViewFragment;
 import com.inspius.yo365.listener.AdapterActionListener;
-import com.inspius.yo365.model.NewsJSON;
-import com.inspius.yo365.model.NewsModel;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
 import com.marshalchen.ultimaterecyclerview.ui.divideritemdecoration.HorizontalDividerItemDecoration;
 import com.wang.avi.AVLoadingIndicatorView;
@@ -35,7 +30,7 @@ public class MNewsLatestPageFragment extends BaseAppTabFragment implements Adapt
     AVLoadingIndicatorView avloadingIndicatorView;
 
     private LinearLayoutManager linearLayoutManager;
-    private ListNewsAdapter mAdapter = null;
+    private MListNewsAdapter mAdapter = null;
     int pageNumber;
 
     @Override
@@ -65,9 +60,9 @@ public class MNewsLatestPageFragment extends BaseAppTabFragment implements Adapt
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
             ultimateRecyclerView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         }
-        ultimateRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getContext()).sizeResId(R.dimen.divider_height_list_video_2).color(Color.TRANSPARENT).build());
+        ultimateRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getContext()).sizeResId(R.dimen.divider_height_list_news).color(Color.TRANSPARENT).build());
 
-        mAdapter = new ListNewsAdapter();
+        mAdapter = new MListNewsAdapter();
         mAdapter.setAdapterActionListener(this);
         linearLayoutManager = new LinearLayoutManager(getContext());
         ultimateRecyclerView.setLayoutManager(linearLayoutManager);
@@ -98,7 +93,7 @@ public class MNewsLatestPageFragment extends BaseAppTabFragment implements Adapt
 
     @Override
     public void onItemClickListener(int position, Object model) {
-        NewsModel newsModel = (NewsModel) model;
+        MNewsModel newsModel = (MNewsModel) model;
         mHostActivity.addFragment(MNewsDetailFragment.newInstance(newsModel));
     }
 
@@ -109,7 +104,7 @@ public class MNewsLatestPageFragment extends BaseAppTabFragment implements Adapt
             mAdapter.clear();
         }
 
-        RPC.getNews(pageNumber, new APIResponseListener() {
+        MNewsRPC.getNews(pageNumber, new APIResponseListener() {
             @Override
             public void onError(String message) {
                 stopAnimLoading();
@@ -119,13 +114,13 @@ public class MNewsLatestPageFragment extends BaseAppTabFragment implements Adapt
             public void onSuccess(Object results) {
                 stopAnimLoading();
 
-                List<NewsJSON> data = (List<NewsJSON>) results;
+                List<MNewsJSON> data = (List<MNewsJSON>) results;
                 if (data == null || data.isEmpty())
                     return;
 
-                List<NewsModel> listNews = new ArrayList<>();
-                for (NewsJSON news : data)
-                    listNews.add(new NewsModel(news));
+                List<MNewsModel> listNews = new ArrayList<>();
+                for (MNewsJSON news : data)
+                    listNews.add(new MNewsModel(news));
 
                 pageNumber++;
                 mAdapter.add(listNews);

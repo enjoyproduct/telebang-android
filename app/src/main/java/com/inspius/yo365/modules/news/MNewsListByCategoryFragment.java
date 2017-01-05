@@ -7,14 +7,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.inspius.yo365.R;
-import com.inspius.yo365.adapter.ListNewsAdapter;
 import com.inspius.yo365.api.APIResponseListener;
-import com.inspius.yo365.api.RPC;
 import com.inspius.yo365.base.BaseAppSlideFragment;
 import com.inspius.yo365.listener.AdapterActionListener;
-import com.inspius.yo365.model.NewsCategoryJSON;
-import com.inspius.yo365.model.NewsJSON;
-import com.inspius.yo365.model.NewsModel;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
 import com.marshalchen.ultimaterecyclerview.ui.divideritemdecoration.HorizontalDividerItemDecoration;
 import com.wang.avi.AVLoadingIndicatorView;
@@ -31,7 +26,7 @@ import butterknife.OnClick;
 public class MNewsListByCategoryFragment extends BaseAppSlideFragment implements AdapterActionListener {
     public static final String TAG = MNewsListByCategoryFragment.class.getSimpleName();
 
-    public static MNewsListByCategoryFragment newInstance(NewsCategoryJSON categoryModel) {
+    public static MNewsListByCategoryFragment newInstance(MNewsCategoryJSON categoryModel) {
         MNewsListByCategoryFragment fragment = new MNewsListByCategoryFragment();
         fragment.categoryModel = categoryModel;
         return fragment;
@@ -58,9 +53,9 @@ public class MNewsListByCategoryFragment extends BaseAppSlideFragment implements
     AVLoadingIndicatorView avloadingIndicatorView;
 
     private LinearLayoutManager linearLayoutManager;
-    private ListNewsAdapter mAdapter = null;
+    private MListNewsAdapter mAdapter = null;
     int pageNumber;
-    private NewsCategoryJSON categoryModel;
+    private MNewsCategoryJSON categoryModel;
 
     @Override
     public void onInitView() {
@@ -80,9 +75,9 @@ public class MNewsListByCategoryFragment extends BaseAppSlideFragment implements
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
             ultimateRecyclerView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         }
-        ultimateRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getContext()).sizeResId(R.dimen.divider_height_list_video_2).color(Color.TRANSPARENT).build());
+        ultimateRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getContext()).sizeResId(R.dimen.divider_height_list_news).color(Color.TRANSPARENT).build());
 
-        mAdapter = new ListNewsAdapter();
+        mAdapter = new MListNewsAdapter();
         mAdapter.setAdapterActionListener(this);
         linearLayoutManager = new LinearLayoutManager(getContext());
         ultimateRecyclerView.setLayoutManager(linearLayoutManager);
@@ -113,7 +108,7 @@ public class MNewsListByCategoryFragment extends BaseAppSlideFragment implements
 
     @Override
     public void onItemClickListener(int position, Object model) {
-        NewsModel newsModel = (NewsModel) model;
+        MNewsModel newsModel = (MNewsModel) model;
         mHostActivity.addFragment(MNewsDetailFragment.newInstance(newsModel));
     }
 
@@ -124,7 +119,7 @@ public class MNewsListByCategoryFragment extends BaseAppSlideFragment implements
             mAdapter.clear();
         }
 
-        RPC.getNewsByCategoryID(categoryModel.id, pageNumber, new APIResponseListener() {
+        MNewsRPC.getNewsByCategoryID(categoryModel.id, pageNumber, new APIResponseListener() {
             @Override
             public void onError(String message) {
                 stopAnimLoading();
@@ -134,13 +129,13 @@ public class MNewsListByCategoryFragment extends BaseAppSlideFragment implements
             public void onSuccess(Object results) {
                 stopAnimLoading();
 
-                List<NewsJSON> data = (List<NewsJSON>) results;
+                List<MNewsJSON> data = (List<MNewsJSON>) results;
                 if (data == null || data.isEmpty())
                     return;
 
-                List<NewsModel> listNews = new ArrayList<>();
-                for (NewsJSON news : data)
-                    listNews.add(new NewsModel(news));
+                List<MNewsModel> listNews = new ArrayList<>();
+                for (MNewsJSON news : data)
+                    listNews.add(new MNewsModel(news));
 
                 pageNumber++;
                 mAdapter.add(listNews);
@@ -162,7 +157,7 @@ public class MNewsListByCategoryFragment extends BaseAppSlideFragment implements
     }
 
     @OnClick(R.id.imvHeaderBack)
-    void doBack(){
+    void doBack() {
         onBackPressed();
     }
 }

@@ -123,6 +123,15 @@ public abstract class MBaseVideoDetailActivity extends AppCompatActivity {
         initPlayer();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        if (mInterstitialAd != null) {
+            mInterstitialAd.setAdListener(null);
+        }
+    }
+
     void initInfo() {
         tvnTitle.setText(videoModel.getTitle());
 //        tvnSeries.setText(videoModel.getSeries());

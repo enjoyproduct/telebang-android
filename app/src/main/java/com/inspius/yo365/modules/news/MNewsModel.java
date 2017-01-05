@@ -1,8 +1,6 @@
-package com.inspius.yo365.model;
+package com.inspius.yo365.modules.news;
 
 import com.inspius.yo365.api.AppRestClient;
-import com.inspius.yo365.app.AppConfig;
-import com.inspius.yo365.app.AppConstant;
 import com.inspius.yo365.helper.TimeUtil;
 import com.inspius.yo365.helper.VideoUtil;
 
@@ -10,16 +8,16 @@ import com.inspius.yo365.helper.VideoUtil;
  * Created by Billy on 12/31/16.
  */
 
-public class NewsModel {
-    private NewsJSON newsJSON;
+public class MNewsModel {
+    private MNewsJSON newsJSON;
     private String updateAt;
     private String detailPath;
 
-    public NewsModel(NewsJSON newsJSON) {
+    public MNewsModel(MNewsJSON newsJSON) {
         this.newsJSON = newsJSON;
 
         updateAt = TimeUtil.getDateTimeFormat(newsJSON.updateAt);
-        this.detailPath = String.format(AppRestClient.getAbsoluteUrl(AppConstant.RELATIVE_URL_GET_NEWS_DESCRIPTION_PAGE), newsJSON.id);
+        this.detailPath = String.format(AppRestClient.getAbsoluteUrl(MNewsConstant.RELATIVE_URL_GET_NEWS_DESCRIPTION_PAGE), newsJSON.id);
     }
 
     public String getUpdateAt() {

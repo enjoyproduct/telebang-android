@@ -51,6 +51,15 @@ public class VideoDetailActivity extends StdActivity {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+
+        if (mInterstitialAd != null) {
+            mInterstitialAd.setAdListener(null);
+        }
+    }
+
+    @Override
     protected int getLayoutResourceId() {
         return R.id.container;
     }

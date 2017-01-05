@@ -42,27 +42,28 @@ public class AppUtil {
         Intent intent = null;
         switch (AppConfig.VIDEO_DETAIL_MODULE) {
             case VIDEO_DETAIL_JW:
-                intent = getIntentVideoDetailJW(mContext, videoModel, isAutoPlay);
+                intent = getIntentVideoDetailJW(mContext, videoModel.getVideoType());
                 break;
 
             default:
-                intent = getIntentVideoDetailDefault(mContext, videoModel);
+                intent = getIntentVideoDetailDefault(mContext);
                 break;
         }
-        return intent;
-    }
 
-    private static Intent getIntentVideoDetailDefault(Context mContext, VideoModel videoModel) {
-        Intent intent = new Intent(mContext, VideoDetailActivity.class);
-        intent.putExtra(AppConstant.KEY_BUNDLE_AUTO_PLAY, false);
+        intent.putExtra(AppConstant.KEY_BUNDLE_AUTO_PLAY, isAutoPlay);
         intent.putExtra(AppConstant.KEY_BUNDLE_VIDEO, videoModel);
 
         return intent;
     }
 
-    private static Intent getIntentVideoDetailJW(Context mContext, VideoModel videoModel, boolean isAutoPlay) {
+    private static Intent getIntentVideoDetailDefault(Context mContext) {
+        Intent intent = new Intent(mContext, VideoDetailActivity.class);
+        return intent;
+    }
+
+    private static Intent getIntentVideoDetailJW(Context mContext, AppConstant.VIDEO_TYPE videoType) {
         Intent intent = null;
-        switch (videoModel.getVideoType()) {
+        switch (videoType) {
             case YOUTUBE:
                 intent = new Intent(mContext, MYoutubeVideoDetailActivity.class);
                 break;
@@ -80,9 +81,6 @@ public class AppUtil {
                 intent = new Intent(mContext, MWebVideoDetailActivity.class);
                 break;
         }
-
-        intent.putExtra(AppConstant.KEY_BUNDLE_AUTO_PLAY, isAutoPlay);
-        intent.putExtra(AppConstant.KEY_BUNDLE_VIDEO, videoModel);
 
         return intent;
     }

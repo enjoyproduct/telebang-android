@@ -2,6 +2,7 @@ package com.inspius.yo365.model;
 
 import android.text.TextUtils;
 
+import com.inspius.yo365.api.AppRestClient;
 import com.inspius.yo365.app.AppConstant;
 import com.inspius.yo365.helper.VideoUtil;
 import com.inspius.yo365.helper.YouTubeUrlParser;
@@ -17,6 +18,7 @@ public class VideoModel implements Serializable {
     private String viewCounter1;
     private String viewCounter2;
     private CategoryJSON categoryJSON;
+    private String videoPath;
 
     private String series;
     private AppConstant.VIDEO_TYPE videoType = AppConstant.VIDEO_TYPE.UPLOAD;
@@ -40,6 +42,13 @@ public class VideoModel implements Serializable {
             this.thumbnail = YouTubeUrlParser.getThumbnailPath(videoJSON.videoLinkJSON.url);
 
         this.categoryJSON = VideoUtil.getCategoryByID(videoJSON.categoryId);
+
+        videoPath = videoJSON.videoLinkJSON.url;
+        if (videoType == AppConstant.VIDEO_TYPE.VIMEO)
+            videoPath = String.format(AppConstant.RELATIVE_URL_PLAY_VIMEO, videoPath);
+
+        if (videoType == AppConstant.VIDEO_TYPE.FACEBOOK)
+            videoPath = String.format(AppRestClient.getAbsoluteUrl(AppConstant.RELATIVE_URL_PLAY_FACEBOOK), videoPath);
     }
 
     public String getTitle() {
@@ -64,7 +73,7 @@ public class VideoModel implements Serializable {
 
 
     public String getVideoPath() {
-        return videoJSON.videoLinkJSON.url;
+        return videoPath;
     }
 
     public AppConstant.VIDEO_TYPE getVideoType() {

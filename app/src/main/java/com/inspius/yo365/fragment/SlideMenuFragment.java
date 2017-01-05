@@ -182,6 +182,7 @@ public class SlideMenuFragment extends BaseAppSlideFragment implements AdapterAc
                 break;
             case NEWS:
                 fragment = MNewsSlideFragment.newInstance();
+
                 break;
         }
 

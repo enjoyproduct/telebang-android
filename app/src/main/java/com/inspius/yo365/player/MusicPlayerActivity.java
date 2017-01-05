@@ -1,62 +1,42 @@
 package com.inspius.yo365.player;
 
-import android.app.Activity;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.inspius.yo365.R;
-import com.inspius.yo365.app.AppConstant;
 import com.inspius.yo365.helper.ImageUtil;
-import com.inspius.yo365.model.VideoModel;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import butterknife.BindView;
 import co.mobiwise.library.MusicPlayerView;
 
 /**
  * Created by Admin on 30/6/2016.
  */
-public class MusicPlayerActivity extends Activity {
-
-    private VideoModel videoModel;
+public class MusicPlayerActivity extends BaseVideoPlayerActivity {
+    @BindView(R.id.mpv)
     MusicPlayerView mpv;
+
+    @BindView(R.id.textViewSong)
     TextView textViewSong;
+
+    @BindView(R.id.imvThumbnail)
     ImageView imvThumbnail;
 
     private MediaPlayer player;
     int length;
 
     @Override
+    public int getLayoutResID() {
+        return R.layout.activity_music_player;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        setContentView(R.layout.activity_music_player);
-
-        if (getIntent() == null)
-            return;
-
-        Bundle bundle = getIntent().getExtras();
-        if (bundle == null)
-            return;
-
-        if (!bundle.containsKey(AppConstant.KEY_BUNDLE_VIDEO))
-            return;
-
-        videoModel = (VideoModel) bundle.getSerializable(AppConstant.KEY_BUNDLE_VIDEO);
-        if (videoModel == null)
-            return;
-
-        textViewSong = (TextView) findViewById(R.id.textViewSong);
-        mpv = (MusicPlayerView) findViewById(R.id.mpv);
-        imvThumbnail = (ImageView) findViewById(R.id.imvThumbnail);
 
         mpv.setCoverURL(videoModel.getThumbnail());
         ImageLoader.getInstance().displayImage(videoModel.getThumbnail(), imvThumbnail, ImageUtil.optionsImageDefault);

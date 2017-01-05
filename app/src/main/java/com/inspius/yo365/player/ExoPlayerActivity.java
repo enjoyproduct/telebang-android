@@ -1,17 +1,12 @@
 package com.inspius.yo365.player;
 
-import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.Window;
-import android.view.WindowManager;
 
-import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.LoadControl;
 import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.Timeline;
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
 import com.google.android.exoplayer2.extractor.ExtractorsFactory;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
@@ -27,45 +22,23 @@ import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 import com.inspius.yo365.R;
-import com.inspius.yo365.app.AppConstant;
-import com.inspius.yo365.model.VideoModel;
 
 /**
  * Created by Billy on 1/3/17.
  */
 
-public class ExoPlayerActivity extends Activity {
-    protected VideoModel videoModel;
-    boolean shouldAutoPlay;
-
+public class ExoPlayerActivity extends BaseVideoPlayerActivity {
     private SimpleExoPlayerView simpleExoPlayerView;
     private SimpleExoPlayer player;
 
     @Override
+    public int getLayoutResID() {
+        return R.layout.activity_exo_player;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        setContentView(R.layout.activity_exo_player);
-
-        if (getIntent() == null)
-            return;
-
-        Bundle bundle = getIntent().getExtras();
-        if (bundle == null)
-            return;
-
-        if (!bundle.containsKey(AppConstant.KEY_BUNDLE_VIDEO))
-            return;
-
-        videoModel = (VideoModel) bundle.getSerializable(AppConstant.KEY_BUNDLE_VIDEO);
-        if (videoModel == null)
-            return;
-
-        this.shouldAutoPlay = bundle.getBoolean(AppConstant.KEY_BUNDLE_AUTO_PLAY);
 
         simpleExoPlayerView = (SimpleExoPlayerView) findViewById(R.id.player_view);
         simpleExoPlayerView.requestFocus();

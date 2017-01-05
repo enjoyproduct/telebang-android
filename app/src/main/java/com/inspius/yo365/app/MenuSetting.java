@@ -35,14 +35,14 @@ public class MenuSetting {
         listMenuAtSlideMenu.add(new MenuModel(AppConstant.MENU_TYPE.CATEGORIES, "Categories", R.drawable.ic_slide_menu_categories, true));
 
         // Watch item
-        listMenuAtSlideMenu.add(new MenuModel(AppConstant.MENU_TYPE.WATCH_LIST, "Watch List", R.drawable.ic_slide_menu_watch_list, true));
+        listMenuAtSlideMenu.add(new MenuModel(AppConstant.MENU_TYPE.WATCH_LIST, "My favourite", R.drawable.ic_slide_menu_watch_list, true));
 
         // Download item
         listMenuAtSlideMenu.add(new MenuModel(AppConstant.MENU_TYPE.DOWNLOAD, "Download List", R.drawable.ic_action_video_download, true));
 
         // Account item
         if (AppConfig.NEWS_MODULE == AppConstant.YO_MODULE.NEWS_1)
-            listMenuAtSlideMenu.add(new MenuModel(AppConstant.MENU_TYPE.NEWS, "News/Blog", R.drawable.ic_slide_menu_account, true));
+            listMenuAtSlideMenu.add(new MenuModel(AppConstant.MENU_TYPE.NEWS, "News/Blog", R.drawable.ic_slide_menu_news, true));
 
         // About item
         listMenuAtSlideMenu.add(new MenuModel(AppConstant.MENU_TYPE.ABOUT_US, "About Us", R.drawable.ic_slide_menu_about, true));
