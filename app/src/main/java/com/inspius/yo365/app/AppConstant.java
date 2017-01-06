@@ -41,6 +41,7 @@ public class AppConstant {
     public static final String KEY_KEYWORD = "keyword";
     public static final String KEY_LIMIT = "limit";
     public static final String KEY_PAGE_NUMBER = "page";
+    public static final String KEY_FIRST_OPEN_APP = "first-open-app";
 
     public static final String RELATIVE_URL_LOGIN = "/api/login";
     public static final String RELATIVE_URL_LOGIN_FACE_BOOK = "/api/loginFacebook";

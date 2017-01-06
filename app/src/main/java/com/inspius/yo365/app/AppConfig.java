@@ -41,4 +41,6 @@ public class AppConfig {
 
     public static final AppConstant.YO_MODULE VIDEO_DETAIL_MODULE = AppConstant.YO_MODULE.VIDEO_DETAIL_JW;
     public static final AppConstant.YO_MODULE NEWS_MODULE = AppConstant.YO_MODULE.NEWS_1;
+    public static final boolean IS_SHOW_INTRO = true; // show intro app
+
 }

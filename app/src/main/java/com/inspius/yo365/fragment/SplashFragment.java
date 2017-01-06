@@ -5,12 +5,15 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.widget.TextView;
 
+import com.inspius.coreapp.helper.InspiusSharedPrefUtils;
 import com.inspius.yo365.R;
 import com.inspius.yo365.activity.AppSlideActivity;
+import com.inspius.yo365.activity.IntroActivity;
 import com.inspius.yo365.activity.LoginActivity;
 import com.inspius.yo365.api.APIResponseListener;
 import com.inspius.yo365.api.RPC;
 import com.inspius.yo365.app.AppConfig;
+import com.inspius.yo365.app.AppConstant;
 import com.inspius.yo365.base.StdFragment;
 import com.inspius.yo365.model.DataCategoryJSON;
 import com.inspius.yo365.service.AppSession;
@@ -105,15 +108,29 @@ public class SplashFragment extends StdFragment {
 
             @Override
             public void onSuccess(Object results) {
-                Intent intent = new Intent(mContext, AppSlideActivity.class);
-                startActivity(intent);
-                getActivity().finish();
+                nextScreen();
             }
         });
     }
 
     void nextScreen() {
-        Intent intent = new Intent(mContext, LoginActivity.class);
+        Intent intent = null;
+        if (AppConfig.IS_SHOW_INTRO) {
+            boolean isFirstOpenApp = InspiusSharedPrefUtils.getBooleanFromPrefs(mContext, AppConstant.KEY_FIRST_OPEN_APP, true);
+            if (isFirstOpenApp) {
+                intent = new Intent(mContext, IntroActivity.class);
+                InspiusSharedPrefUtils.saveToPrefs(mContext, AppConstant.KEY_FIRST_OPEN_APP, false);
+            }
+        }
+
+        if (intent == null) {
+            if (mCustomerManager.isLogin()) {
+                intent = new Intent(mContext, AppSlideActivity.class);
+            } else {
+                intent = new Intent(mContext, LoginActivity.class);
+            }
+        }
+
         startActivity(intent);
         getActivity().finish();
     }
