@@ -10,8 +10,6 @@ import com.inspius.yo365.model.CustomerJSON;
 import com.inspius.yo365.model.DataCategoryJSON;
 import com.inspius.yo365.model.ImageFileModel;
 import com.inspius.yo365.model.LikeStatusResponse;
-import com.inspius.yo365.modules.news.MNewsCategoryJSON;
-import com.inspius.yo365.modules.news.MNewsJSON;
 import com.inspius.yo365.model.ResponseJSON;
 import com.inspius.yo365.model.VideoJSON;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
