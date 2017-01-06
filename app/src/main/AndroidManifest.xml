@@ -62,8 +62,8 @@
 
         <activity
             android:name=".activity.IntroActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
 
         <!-- Defining Player -->
         <activity
@@ -102,34 +102,35 @@
         <!-- Defining End Player -->
 
         <!-- Defining Module -->
-        <activity
-            android:name=".modules.video_detail_jw.MYoutubeVideoDetailActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" />
 
-        <activity
-            android:name=".modules.video_detail_jw.MJWVideoDetailActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" />
+        <!--<activity-->
+        <!--android:name=".modules.video_detail_jw.MYoutubeVideoDetailActivity"-->
+        <!--android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"-->
+        <!--android:label="@string/app_name"-->
+        <!--android:screenOrientation="portrait" />-->
 
-        <activity
-            android:name=".modules.video_detail_jw.MWebVideoDetailActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" />
+        <!--<activity-->
+        <!--android:name=".modules.video_detail_jw.MJWVideoDetailActivity"-->
+        <!--android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"-->
+        <!--android:label="@string/app_name"-->
+        <!--android:screenOrientation="portrait" />-->
 
-        <activity
-            android:name=".modules.video_detail_jw.MMusicDetailActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" />
+        <!--<activity-->
+        <!--android:name=".modules.video_detail_jw.MWebVideoDetailActivity"-->
+        <!--android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"-->
+        <!--android:label="@string/app_name"-->
+        <!--android:screenOrientation="portrait" />-->
 
-        <activity
-            android:name=".modules.video_detail_jw.MExoDetailActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:label="@string/app_name" />
+        <!--<activity-->
+        <!--android:name=".modules.video_detail_jw.MMusicDetailActivity"-->
+        <!--android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"-->
+        <!--android:label="@string/app_name"-->
+        <!--android:screenOrientation="portrait" />-->
+
+        <!--<activity-->
+        <!--android:name=".modules.video_detail_jw.MExoDetailActivity"-->
+        <!--android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"-->
+        <!--android:label="@string/app_name" />-->
 
         <!-- Defining End Module -->
 
