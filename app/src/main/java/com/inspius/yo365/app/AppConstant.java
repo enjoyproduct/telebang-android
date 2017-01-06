@@ -53,7 +53,7 @@ public class AppConstant {
     public static final String RELATIVE_URL_VIDEO_LATEST = "/api/getListVideoLasted/%s/%s";
     public static final String RELATIVE_URL_VIDEO_MOST = "/api/getListVideoMostView/%s/%s";
     public static final String RELATIVE_URL_VIDEO_TRENDING = "/api/getListVideoTrending/%s/%s";
-    public static final String RELATIVE_URL_CATEGORIES = "api/categories";
+    public static final String RELATIVE_URL_CATEGORIES = "/api/categories";
     public static final String RELATIVE_URL_GET_VIDEOS_BY_CATEGORY = "/api/getListVideoByCategory/%s/%s/%s";
     public static final String RELATIVE_URL_GET_USER_LIKE_STATUS = "/api/getLikeVideoStatus/%s/%s";
     public static final String RELATIVE_URL_USER_LIKE_VIDEO = "/api/likevideo";

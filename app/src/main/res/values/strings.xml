@@ -26,6 +26,8 @@
     <string name="menu_watch_list">Watch List</string>
     <string name="menu_setting">Setting</string>
     <string name="menu_search">Search Video</string>
+    <string name="menu_news">News</string>
+    <string name="menu_my_download">My Download</string>
 
     <!-- News -->
     <string name="news_latest">Latest</string>

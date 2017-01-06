@@ -184,7 +184,7 @@ public class VideoCommentFragment extends StdFragment implements AdapterActionLi
             return;
         }
 
-        String comment = edtCommentText.getText().toString();
+        String comment = edtCommentText.getText().toString().trim();
         if (!TextUtils.isEmpty(comment)) {
             final ProgressDialog loadingDialog = DialogUtil.showLoading(mContext, getString(R.string.msg_loading));
 

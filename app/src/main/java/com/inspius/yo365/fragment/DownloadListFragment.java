@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.inspius.coreapp.helper.InspiusIntentUtils;
 import com.inspius.yo365.R;
@@ -48,6 +49,9 @@ public class DownloadListFragment extends BaseAppSlideFragment implements Adapte
     @BindView(R.id.linearLayoutNoComment)
     LinearLayout linearLayoutNoComment;
 
+    @BindView(R.id.tvnHeaderTitle)
+    TextView tvnHeaderTitle;
+
     private LinearLayoutManager linearLayoutManager;
     private DownloadListVideoAdapter mAdapter = null;
     private List<DBVideoDownload> mData;
@@ -64,7 +68,7 @@ public class DownloadListFragment extends BaseAppSlideFragment implements Adapte
 
     @Override
     public void onInitView() {
-
+        tvnHeaderTitle.setText(getString(R.string.menu_my_download));
         // init RecyclerView
         initRecyclerView();
 

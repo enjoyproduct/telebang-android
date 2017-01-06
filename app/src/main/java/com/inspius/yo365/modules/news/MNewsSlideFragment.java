@@ -2,7 +2,6 @@ package com.inspius.yo365.modules.news;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.widget.TextView;
 
@@ -65,22 +64,7 @@ public class MNewsSlideFragment extends BaseAppSlideFragment {
 
         viewpager.setLocked(false);
 
-        viewpagerTab.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                updateHeaderTitle(pages.get(position).getTitle().toString());
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
+        updateHeaderTitle(getString(R.string.menu_news));
     }
 
     @Override

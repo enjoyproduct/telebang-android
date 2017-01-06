@@ -35,7 +35,7 @@ public class CustomerJSON {
         String fullName = "";
         fullName = String.format("%s %s", firstName, lastName).trim();
 
-        if (TextUtils.isEmpty(fullName))
+        if (TextUtils.isEmpty(fullName) && !TextUtils.isEmpty(username))
             fullName = username.trim();
 
         if (TextUtils.isEmpty(fullName))

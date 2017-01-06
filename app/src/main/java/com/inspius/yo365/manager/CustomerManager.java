@@ -73,8 +73,8 @@ public class CustomerManager {
         notificationStateLogin();
     }
 
-    private void parseLoginSystemSuccess(String email, String password, Object results, APIResponseListener listener) {
-        updateLoginSystem(email, password);
+    private void parseLoginSystemSuccess(String username, String password, Object results, APIResponseListener listener) {
+        updateLoginSystem(username, password);
         customerModel = (CustomerJSON) results;
 
         if (listener != null)
@@ -203,7 +203,7 @@ public class CustomerManager {
 
             @Override
             public void onSuccess(Object results) {
-                parseLoginSystemSuccess(email, password, results, listener);
+                parseLoginSystemSuccess(username, password, results, listener);
             }
         });
     }
