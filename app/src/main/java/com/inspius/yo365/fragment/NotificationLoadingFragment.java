@@ -1,6 +1,5 @@
 package com.inspius.yo365.fragment;
 
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 
 import com.inspius.yo365.R;
@@ -12,10 +11,6 @@ import com.inspius.yo365.helper.AppUtil;
 import com.inspius.yo365.helper.DialogUtil;
 import com.inspius.yo365.model.VideoJSON;
 import com.inspius.yo365.model.VideoModel;
-import com.inspius.yo365.modules.news.MNewsJSON;
-import com.inspius.yo365.modules.news.MNewsModel;
-import com.inspius.yo365.modules.news.MNewsNotificationFragment;
-import com.inspius.yo365.modules.news.MNewsRPC;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -105,28 +100,28 @@ public class NotificationLoadingFragment extends StdFragment {
     }
 
     void requestGetNewsDetail(int newID) {
-        MNewsRPC.getNewsByID(newID, new APIResponseListener() {
-            @Override
-            public void onError(String message) {
-                if (isDestroy)
-                    return;
-
-                DialogUtil.showMessageBox(mContext, message, false, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        onBackPressed();
-                    }
-                });
-            }
-
-            @Override
-            public void onSuccess(Object results) {
-                if (isDestroy)
-                    return;
-
-                MNewsJSON newsJSON = (MNewsJSON) results;
-                mHostActivity.addFragment(MNewsNotificationFragment.newInstance(new MNewsModel(newsJSON)));
-            }
-        });
+//        MNewsRPC.getNewsByID(newID, new APIResponseListener() {
+//            @Override
+//            public void onError(String message) {
+//                if (isDestroy)
+//                    return;
+//
+//                DialogUtil.showMessageBox(mContext, message, false, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        onBackPressed();
+//                    }
+//                });
+//            }
+//
+//            @Override
+//            public void onSuccess(Object results) {
+//                if (isDestroy)
+//                    return;
+//
+//                MNewsJSON newsJSON = (MNewsJSON) results;
+//                mHostActivity.addFragment(MNewsNotificationFragment.newInstance(new MNewsModel(newsJSON)));
+//            }
+//        });
     }
 }

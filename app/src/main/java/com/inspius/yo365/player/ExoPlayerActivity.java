@@ -28,7 +28,6 @@ import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 import com.inspius.yo365.R;
-import com.inspius.yo365.modules.video_detail_jw.MJWVideoDetailActivity;
 
 /**
  * Created by Billy on 1/3/17.
@@ -160,7 +159,7 @@ public class ExoPlayerActivity extends BaseVideoPlayerActivity implements ExoPla
 
     @Override
     public void onPlayerError(ExoPlaybackException error) {
-        Intent intent = new Intent(this, MJWVideoDetailActivity.class);
+        Intent intent = new Intent(this, JWPlayerActivity.class);
         intent.putExtras(this.getIntent().getExtras());
         startActivity(intent);
         finish();
