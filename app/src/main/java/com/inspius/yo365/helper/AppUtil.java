@@ -15,10 +15,6 @@ import com.inspius.yo365.activity.VideoDetailActivity;
 import com.inspius.yo365.app.AppConfig;
 import com.inspius.yo365.app.AppConstant;
 import com.inspius.yo365.model.VideoModel;
-import com.inspius.yo365.modules.video_detail_jw.MExoDetailActivity;
-import com.inspius.yo365.modules.video_detail_jw.MMusicDetailActivity;
-import com.inspius.yo365.modules.video_detail_jw.MWebVideoDetailActivity;
-import com.inspius.yo365.modules.video_detail_jw.MYoutubeVideoDetailActivity;
 
 /**
  * Created by Billy on 12/27/16.
@@ -63,25 +59,26 @@ public class AppUtil {
 
     private static Intent getIntentVideoDetailJW(Context mContext, AppConstant.VIDEO_TYPE videoType) {
         Intent intent = null;
-        switch (videoType) {
-            case YOUTUBE:
-                intent = new Intent(mContext, MYoutubeVideoDetailActivity.class);
-                break;
+        /**
+         switch (videoType) {
+         case YOUTUBE:
+         intent = new Intent(mContext, MYoutubeVideoDetailActivity.class);
+         break;
 
-            case UPLOAD:
-//                intent = new Intent(mContext, MJWVideoDetailActivity.class);
-                intent = new Intent(mContext, MExoDetailActivity.class);
-                break;
+         case UPLOAD:
+         //intent = new Intent(mContext, MJWVideoDetailActivity.class);
+         intent = new Intent(mContext, MExoDetailActivity.class);
+         break;
 
-            case MP3:
-                intent = new Intent(mContext, MMusicDetailActivity.class);
-                break;
+         case MP3:
+         intent = new Intent(mContext, MMusicDetailActivity.class);
+         break;
 
-            default:
-                intent = new Intent(mContext, MWebVideoDetailActivity.class);
-                break;
-        }
-
+         default:
+         intent = new Intent(mContext, MWebVideoDetailActivity.class);
+         break;
+         }
+         */
         return intent;
     }
 
