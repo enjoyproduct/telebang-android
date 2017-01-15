@@ -109,6 +109,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:ems="10"
+                    android:gravity="top"
                     android:hint="Your video description"
                     android:inputType="textMultiLine"
                     android:maxLines="5"
@@ -128,6 +129,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:ems="10"
+                    android:singleLine="false"
                     android:text="Choose video categories" />
             </LinearLayout>
         </ScrollView>
