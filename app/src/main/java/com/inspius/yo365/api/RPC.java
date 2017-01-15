@@ -576,7 +576,7 @@ public class RPC {
 
     /* ======================================= COMMON =======================================*/
 
-    private static void onError(Throwable throwable, final APIResponseListener listener) {
+    public static void onError(Throwable throwable, final APIResponseListener listener) {
         callbackError(throwable.getMessage(), listener);
 
 //        debugHeaders(LOG_TAG, headers);
@@ -587,7 +587,7 @@ public class RPC {
 //            debugResponse(LOG_TAG, errorResponse);
     }
 
-    private static ResponseJSON onResponse(String rawJsonData) throws IOException {
+    public static ResponseJSON onResponse(String rawJsonData) throws IOException {
         ResponseJSON responseJSON = new ObjectMapper().readValue(rawJsonData, ResponseJSON.class);
 
         return responseJSON;

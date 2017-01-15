@@ -53,6 +53,8 @@ public class AppRestClient {
 
     public static void post(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
         getClient().post(getAbsoluteUrl(url), params, responseHandler).setTag(url);
+        if (params != null)
+            Logger.d(TAG, "params : " + params.toString());
     }
 
     public static String getAbsoluteUrl(String relativeUrl) {

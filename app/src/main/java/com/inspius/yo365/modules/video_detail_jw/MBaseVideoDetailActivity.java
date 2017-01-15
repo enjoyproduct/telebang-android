@@ -136,6 +136,7 @@ public abstract class MBaseVideoDetailActivity extends AppCompatActivity {
         tvnTitle.setText(videoModel.getTitle());
 //        tvnSeries.setText(videoModel.getSeries());
 //        tvnAuthor.setText(videoModel.getAuthor());
+        tvnCreateAt.setText(videoModel.getUpdateAt());
         tvnDescription.setText(Html.fromHtml(videoModel.getDescription()));
         tvnViewCounter.setText(videoModel.getViewCounterStringFormat());
 
@@ -373,7 +374,7 @@ public abstract class MBaseVideoDetailActivity extends AppCompatActivity {
             DownloadRequestQueue.getInstance().downloadVideo(videoModel);
         } else {
             updateStateDownloadButton(false);
-            DialogUtil.showMessageBox(mContext, "Download Unsupported File Formats");
+            DialogUtil.showMessageBox(this, "Download Unsupported File Formats");
         }
     }
 

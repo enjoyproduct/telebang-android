@@ -44,6 +44,10 @@ public class MenuSetting {
         if (AppConfig.NEWS_MODULE == AppConstant.YO_MODULE.NEWS_1)
             listMenuAtSlideMenu.add(new MenuModel(AppConstant.MENU_TYPE.NEWS, "News/Blog", R.drawable.ic_slide_menu_news, true));
 
+        // Account item
+        if (AppConfig.UPLOAD_MODULE == AppConstant.YO_MODULE.UPLOAD_VIDEO_1)
+            listMenuAtSlideMenu.add(new MenuModel(AppConstant.MENU_TYPE.UPLOAD_VIDEO, "Upload Video", R.drawable.ic_slide_menu_news, true));
+
         // About item
         listMenuAtSlideMenu.add(new MenuModel(AppConstant.MENU_TYPE.ABOUT_US, "About Us", R.drawable.ic_slide_menu_about, true));
 

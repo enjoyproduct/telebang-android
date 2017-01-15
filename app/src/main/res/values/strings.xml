@@ -18,6 +18,8 @@
     <string name="slogan">Social Network Of Video</string>
     <string name="fm_version">Version %s</string>
     <string name="cm_submit">Submit</string>
+    <string name="cm_ok">Ok</string>
+    <string name="cm_cancel">Cancel</string>
 
     <!-- Tab Menu -->
     <string name="menu_home">Home</string>
@@ -32,6 +34,16 @@
     <!-- News -->
     <string name="news_latest">Latest</string>
     <string name="news_categories">Categories</string>
+
+    <!--Upload-->
+    <string name="upload_choose_video">Choose Video</string>
+    <string name="upload_choose_thumbnail">Choose thumbnail</string>
+    <string name="upload_categories">Categories</string>
+    <string name="upload_thumbnail">Thumbnail</string>
+    <string name="upload_description">Description</string>
+    <string name="upload_video_title">Title</string>
+    <string name="upload_select_categories">Select categories</string>
+    <string name="menu_upload">Upload Video</string>
 
     <!-- Customer -->
     <string name="username">Username</string>

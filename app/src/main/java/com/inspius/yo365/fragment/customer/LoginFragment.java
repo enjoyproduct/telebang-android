@@ -124,7 +124,6 @@ public class LoginFragment extends BaseLoginFragment {
             @Override
             public void onSuccess(Object results) {
                 mLoginActivity.hideLoading();
-
                 mLoginActivity.onLoginSuccess();
             }
         });

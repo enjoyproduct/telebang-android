@@ -80,7 +80,7 @@ public class AppConstant {
      * ENUM
      */
     public enum MENU_TYPE {
-        HOME, CATEGORIES, WATCH_LIST, MY_ACCOUNT, ABOUT_US, TERM, FEEDBACK, HELP, SHARE, DOWNLOAD, NEWS
+        HOME, CATEGORIES, WATCH_LIST, MY_ACCOUNT, ABOUT_US, TERM, FEEDBACK, HELP, SHARE, DOWNLOAD, NEWS, UPLOAD_VIDEO
     }
 
     public enum LOGIN_TYPE {
@@ -114,7 +114,7 @@ public class AppConstant {
     }
 
     public enum YO_MODULE {
-        DEFAULT("default"), VIDEO_DETAIL_JW("module-detail-jw"), NEWS_1("news_1"),;
+        DEFAULT("default"), VIDEO_DETAIL_JW("module-detail-jw"), NEWS_1("news_1"), UPLOAD_VIDEO_1("upload_video_1");
 
         private final String text;
 
