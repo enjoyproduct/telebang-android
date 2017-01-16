@@ -12,6 +12,7 @@ import com.marshalchen.ultimaterecyclerview.UltimateGridLayoutAdapter;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerviewViewHolder;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -46,8 +47,7 @@ public class GridAllCategoryAdapter extends UltimateGridLayoutAdapter<CategoryJS
 //
 //            holder.tvnName.getPaint().setMaskFilter(filter);
 
-            ImageLoader.getInstance().displayImage(model.image, holder.imvBackground, ImageUtil.optionsImageDefault);
-            ImageLoader.getInstance().displayImage(model.icon, holder.imvIcon, ImageUtil.optionsImageDefault);
+            ImageLoader.getInstance().displayImage(model.image, holder.imvThumbnail, ImageUtil.optionsImageDefault);
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -61,7 +61,7 @@ public class GridAllCategoryAdapter extends UltimateGridLayoutAdapter<CategoryJS
 
     @Override
     protected int getNormalLayoutResId() {
-        return R.layout.item_category;
+        return R.layout.item_category_2;
     }
 
     @Override
@@ -83,11 +83,8 @@ public class GridAllCategoryAdapter extends UltimateGridLayoutAdapter<CategoryJS
     }
 
     public class HolderGirdCell extends UltimateRecyclerviewViewHolder {
-        @BindView(R.id.imvBackground)
-        ImageView imvBackground;
-
-        @BindView(R.id.imvIcon)
-        ImageView imvIcon;
+        @BindView(R.id.imvThumbnail)
+        ImageView imvThumbnail;
 
         @BindView(R.id.tvnName)
         TextView tvnName;

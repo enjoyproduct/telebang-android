@@ -128,6 +128,21 @@ public class AppConstant {
         }
     }
 
+    public enum YO_SCREEN {
+        DEFAULT("default"), HOME_1("home_1"), HOME_2("home_2"), VIDEO_CATEGORIES_1("video_categories_1"), VIDEO_CATEGORIES_2("video_categories_2");
+
+        private final String text;
+
+        private YO_SCREEN(final String text) {
+            this.text = text;
+        }
+
+        @Override
+        public String toString() {
+            return text;
+        }
+    }
+
     public enum COUNTER_FIELD {
         VIEW("view"), SHARE("share");
 

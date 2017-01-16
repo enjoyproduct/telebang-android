@@ -39,6 +39,9 @@ public class AppConfig {
      * CONFIG
      */
 
+    public static final AppConstant.YO_SCREEN HOME_SCREEN = AppConstant.YO_SCREEN.HOME_1;
+    public static final AppConstant.YO_SCREEN VIDEO_CATEGORIES_SCREEN = AppConstant.YO_SCREEN.VIDEO_CATEGORIES_1;
+
     public static final AppConstant.YO_MODULE VIDEO_DETAIL_MODULE = AppConstant.YO_MODULE.DEFAULT;
     public static final AppConstant.YO_MODULE NEWS_MODULE = AppConstant.YO_MODULE.DEFAULT;
     public static final AppConstant.YO_MODULE UPLOAD_MODULE = AppConstant.YO_MODULE.DEFAULT;

@@ -42,7 +42,7 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="30dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_action_menu"
+        android:src="@drawable/ic_news_default"
         app:tint="@color/custom_icon_item_category_selector" />
 
 

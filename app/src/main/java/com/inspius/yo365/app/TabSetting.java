@@ -14,6 +14,10 @@ import com.inspius.yo365.fragment.main_tab.AppCategoriesFragment;
 import com.inspius.yo365.fragment.main_tab.AppHomeFragment;
 import com.inspius.yo365.fragment.main_tab.AppTrendingFragment;
 import com.inspius.yo365.fragment.main_tab.AppWatchListFragment;
+import com.inspius.yo365.fragment.main_tab.TopCategoriesFragment;
+import com.inspius.yo365.fragment.main_tab.home_tab.HomeLatestFragment;
+import com.inspius.yo365.fragment.main_tab.home_tab.HomeMostViewFragment;
+import com.inspius.yo365.fragment.main_tab.home_tab.HomeTabFragment;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem;
 
@@ -39,10 +43,18 @@ public enum TabSetting {
 
             switch (titleResId) {
                 case R.string.menu_home:
-                    fragmentPagerItem = FragmentPagerItem.of(context.getString(titleResId), AppHomeFragment.class);
+                    if (AppConfig.HOME_SCREEN == AppConstant.YO_SCREEN.DEFAULT || AppConfig.HOME_SCREEN == AppConstant.YO_SCREEN.HOME_1)
+                        fragmentPagerItem = FragmentPagerItem.of(context.getString(titleResId), AppHomeFragment.class);
+                    else if (AppConfig.HOME_SCREEN == AppConstant.YO_SCREEN.HOME_2) {
+                        fragmentPagerItem = FragmentPagerItem.of(context.getString(titleResId), HomeTabFragment.class);
+                    }
                     break;
                 case R.string.menu_categories:
-                    fragmentPagerItem = FragmentPagerItem.of(context.getString(titleResId), AppCategoriesFragment.class);
+                    if (AppConfig.VIDEO_CATEGORIES_SCREEN == AppConstant.YO_SCREEN.DEFAULT || AppConfig.VIDEO_CATEGORIES_SCREEN == AppConstant.YO_SCREEN.VIDEO_CATEGORIES_1)
+                        fragmentPagerItem = FragmentPagerItem.of(context.getString(titleResId), AppCategoriesFragment.class);
+                    else
+                        fragmentPagerItem = FragmentPagerItem.of(context.getString(titleResId), TopCategoriesFragment.class);
+
                     break;
                 case R.string.menu_trending:
                     fragmentPagerItem = FragmentPagerItem.of(context.getString(titleResId), AppTrendingFragment.class);
@@ -97,6 +109,39 @@ public enum TabSetting {
                     return view;
                 }
             });
+        }
+    }, CUSTOM_HOME_TAB() {
+        @Override
+        public int[] tabs() {
+            return new int[]{
+                    R.string.home_latest,
+                    R.string.home_most_view
+            };
+        }
+
+        @Override
+        public FragmentPagerItem getFragmentPagerItem(Context context, int titleResId) {
+            FragmentPagerItem fragmentPagerItem = null;
+
+            switch (titleResId) {
+                case R.string.home_latest:
+                    fragmentPagerItem = FragmentPagerItem.of(context.getString(titleResId), HomeLatestFragment.class);
+                    break;
+                case R.string.home_most_view:
+                    fragmentPagerItem = FragmentPagerItem.of(context.getString(titleResId), HomeMostViewFragment.class);
+                    break;
+
+                default:
+                    fragmentPagerItem = FragmentPagerItem.of(context.getString(titleResId), HomeLatestFragment.class);
+                    break;
+            }
+
+            return fragmentPagerItem;
+        }
+
+        @Override
+        public void setup(SmartTabLayout layout) {
+            super.setup(layout);
         }
     };
 
