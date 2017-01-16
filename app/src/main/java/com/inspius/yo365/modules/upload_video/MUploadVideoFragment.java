@@ -255,6 +255,9 @@ public class MUploadVideoFragment extends BaseAppSlideFragment {
         setEnabled(true);
 
         edtTitle.setText("");
+        editDescription.setText("");
+        tvnCategories.setText("Choose video categories");
+        mSelectedItems.clear();
         tvnFileName.setText("No file");
         btnChooseVideo.setText(getString(R.string.upload_choose_video));
         imvVideoThumbnail.setImageResource(R.drawable.no_image_default);
