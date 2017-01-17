@@ -126,6 +126,7 @@ public class WebViewPlayerActivity extends BaseVideoPlayerActivity {
 
         // Javascript inabled on webview
         mWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.getSettings().setDomStorageEnabled(true);
     }
 
     @OnClick(R.id.tvnMessage)
