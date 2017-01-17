@@ -24,6 +24,7 @@ import com.bumptech.glide.request.target.Target;
 import com.inspius.coreapp.helper.InspiusIntentUtils;
 import com.inspius.yo365.R;
 import com.inspius.yo365.base.BaseAppSlideFragment;
+import com.inspius.yo365.base.BaseAppTabFragment;
 import com.inspius.yo365.fragment.VideoSearchFragment;
 import com.inspius.yo365.helper.AppUtil;
 import com.inspius.yo365.helper.DialogUtil;
@@ -43,16 +44,13 @@ import butterknife.OnClick;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MUploadVideoFragment extends BaseAppSlideFragment {
-    public static final String TAG = MUploadVideoFragment.class.getSimpleName();
+public class MAppUploadVideoFragment extends BaseAppTabFragment {
+    public static final String TAG = MAppUploadVideoFragment.class.getSimpleName();
 
-    public static MUploadVideoFragment newInstance() {
-        MUploadVideoFragment fragment = new MUploadVideoFragment();
+    public static MAppUploadVideoFragment newInstance() {
+        MAppUploadVideoFragment fragment = new MAppUploadVideoFragment();
         return fragment;
     }
-
-    @BindView(R.id.tvnHeaderTitle)
-    TextView tvnHeaderTitle;
 
     @BindView(R.id.tvnFileName)
     TextView tvnFileName;
@@ -82,7 +80,7 @@ public class MUploadVideoFragment extends BaseAppSlideFragment {
 
     @Override
     public int getLayout() {
-        return R.layout.m_fragment_upload_video;
+        return R.layout.m_app_fragment_upload_video;
     }
 
     @Override
@@ -93,21 +91,8 @@ public class MUploadVideoFragment extends BaseAppSlideFragment {
     @Override
     public void onInitView() {
         mSelectedItems = new ArrayList<>();  // Where we track the selected items
-        updateHeaderTitle(getString(R.string.menu_upload));
 
         listCategory = AppSession.getInstance().getCategoryData().listCategory;
-    }
-
-    @OnClick(R.id.imvHeaderMenu)
-    void doShowMenu() {
-        mAppActivity.toggleDrawer();
-    }
-
-    void updateHeaderTitle(String name) {
-        if (TextUtils.isEmpty(name))
-            name = getString(R.string.app_name);
-
-        tvnHeaderTitle.setText(name);
     }
 
     @Override
@@ -177,11 +162,6 @@ public class MUploadVideoFragment extends BaseAppSlideFragment {
         }
     }
 
-    @OnClick(R.id.imvHeaderSearch)
-    void doShowSearch() {
-        mHostActivity.addFragment(VideoSearchFragment.newInstance());
-    }
-
     @OnClick(R.id.btnSubmit)
     void doSubmit() {
         if (!mCustomerManager.isLogin()) {
@@ -197,6 +177,7 @@ public class MUploadVideoFragment extends BaseAppSlideFragment {
         String title = edtTitle.getText().toString();
         if (TextUtils.isEmpty(title)) {
             DialogUtil.showMessageBox(mContext, "Please enter title video");
+
             return;
         }
 
@@ -216,7 +197,7 @@ public class MUploadVideoFragment extends BaseAppSlideFragment {
         final ProgressDialog dialogLoading = DialogUtil.showLoading(mContext, "Processing...");
         MVideoUploadModel mVideo = new MVideoUploadModel(title, thumbnailFile, videoFile);
 
-        mVideo.setVideoDes(description);
+        mVideo.setVideoDes(editDescription.getText().toString());
 
         if (mSelectedItems.size() > 0) {
             int catIds[] = new int[mSelectedItems.size()];

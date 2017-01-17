@@ -37,7 +37,7 @@
     <string name="news_categories">Categories</string>
 
     <!--Upload-->
-    <string name="upload_choose_video">Choose Video</string>
+    <string name="upload_choose_video">Choose Video File</string>
     <string name="upload_choose_thumbnail">Choose thumbnail</string>
     <string name="upload_categories">Categories</string>
     <string name="upload_thumbnail">Thumbnail</string>

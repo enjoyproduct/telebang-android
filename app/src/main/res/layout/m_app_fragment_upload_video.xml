@@ -6,11 +6,6 @@
     android:orientation="vertical">
 
     <include
-        layout="@layout/inc_header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <include
         layout="@layout/m_inc_upload_video"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

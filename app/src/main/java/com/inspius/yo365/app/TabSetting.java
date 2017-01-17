@@ -18,6 +18,7 @@ import com.inspius.yo365.fragment.main_tab.TopCategoriesFragment;
 import com.inspius.yo365.fragment.main_tab.home_tab.HomeLatestFragment;
 import com.inspius.yo365.fragment.main_tab.home_tab.HomeMostViewFragment;
 import com.inspius.yo365.fragment.main_tab.home_tab.HomeTabFragment;
+import com.inspius.yo365.modules.upload_video.MAppUploadVideoFragment;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem;
 
@@ -33,7 +34,8 @@ public enum TabSetting {
                     R.string.menu_home,
                     R.string.menu_categories,
                     R.string.menu_trending,
-                    R.string.menu_watch_list
+                    R.string.menu_watch_list,
+                    //R.string.menu_upload
             };
         }
 
@@ -62,6 +64,11 @@ public enum TabSetting {
                 case R.string.menu_watch_list:
                     fragmentPagerItem = FragmentPagerItem.of(context.getString(titleResId), AppWatchListFragment.class);
                     break;
+
+//                case R.string.menu_upload:
+//                    fragmentPagerItem = FragmentPagerItem.of(context.getString(titleResId), MAppUploadVideoFragment.class);
+//                    break;
+
                 default:
                     fragmentPagerItem = FragmentPagerItem.of(context.getString(titleResId), AppHomeFragment.class);
                     break;
@@ -103,8 +110,14 @@ public enum TabSetting {
                             icon.setImageDrawable(res.getDrawable(R.drawable.ic_tab_watch_list));
                             name.setText(res.getString(R.string.menu_watch_list));
                             break;
+//                        case 4:
+//                            icon.setImageDrawable(res.getDrawable(R.drawable.ic_tab_upload));
+//                            name.setText(res.getString(R.string.menu_upload));
+//                            break;
+
                         default:
-                            throw new IllegalStateException("Invalid position: " + position);
+                            icon.setImageDrawable(res.getDrawable(R.drawable.ic_tab_home));
+                            name.setText(res.getString(R.string.app_name));
                     }
                     return view;
                 }
