@@ -187,7 +187,7 @@ public class SlideMenuFragment extends BaseAppSlideFragment implements AdapterAc
 
             case UPLOAD_VIDEO:
                 //fragment = MUploadVideoFragment.newInstance();
-
+                //fragment = AppFragment.newInstance(4);
                 break;
         }
 
