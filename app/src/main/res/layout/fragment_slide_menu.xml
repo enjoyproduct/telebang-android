@@ -10,9 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bgr_account_slide_menu"
+        android:orientation="vertical"
         android:paddingTop="@dimen/tool_bar_top_padding">
 
         <RelativeLayout
+            android:id="@+id/relativeProfile"
             android:layout_width="match_parent"
             android:layout_height="90dp"
             android:padding="20dp">
@@ -49,8 +51,8 @@
                     android:id="@+id/tvn_customer_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Billy Vnit"
                     android:lines="1"
+                    android:text="Billy Vnit"
                     android:textColor="@android:color/white"
                     android:textSize="14sp" />
 
@@ -58,12 +60,28 @@
                     android:id="@+id/tvn_customer_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="billy@inspius.com"
                     android:lines="1"
+                    android:text="billy@inspius.com"
                     android:textColor="#B3ffffff"
                     android:textSize="12sp" />
             </LinearLayout>
 
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLogin"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:text="Login/Signup"
+                android:textColor="@android:color/white" />
         </RelativeLayout>
     </LinearLayout>
 

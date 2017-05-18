@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/DaoExampleGenerator/DaoExampleGenerator.iml" filepath="$PROJECT_DIR$/DaoExampleGenerator/DaoExampleGenerator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TagViewLib/TagViewLib.iml" filepath="$PROJECT_DIR$/TagViewLib/TagViewLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/paystack/paystack.iml" filepath="$PROJECT_DIR$/paystack/paystack.iml" />
+      <module fileurl="file://$PROJECT_DIR$/telebang.iml" filepath="$PROJECT_DIR$/telebang.iml" />
+    </modules>
+  </component>
+</project>

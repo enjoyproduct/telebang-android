@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="80dp">
+
+    <ImageView
+        android:id="@+id/imvBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/no_image_default" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#F2ffffff" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.inspius.coreapp.widget.InspiusTintableImageView
+            android:id="@+id/imvIcon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_news_default"
+            app:tint="@color/custom_icon_item_category_selector" />
+
+        <TextView
+            android:id="@+id/tvnName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Category Name"
+            android:textColor="@color/text_category_name_selector"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/tvnSubCounter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(4)"
+            android:textColor="@color/text_category_name_selector"
+            />
+
+        <ImageView
+            android:id="@+id/list_item_genre_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="0"
+            android:src="@drawable/ic_arrow_down" />
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignParentBottom="true"
+        android:background="#1A000000"></View>
+</RelativeLayout>

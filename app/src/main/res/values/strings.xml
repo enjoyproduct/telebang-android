@@ -1,6 +1,6 @@
 <resources>
     <!-- Change App Name -->
-    <string name="app_name">Yo365</string>
+    <string name="app_name">teleBang</string>
 
     <!-- Change AdMob Banner Id -->
     <string name="banner_ad_unit_id">ca-app-pub-8000676937410247/5916810013</string>
@@ -9,13 +9,13 @@
     <string name="interstitial_ad_unit_id">ca-app-pub-8000676937410247/2823742819</string>
 
     <!-- Change Facebook Dev Id -->
-    <string name="facebook_app_id">1907357799494032</string>
-    <string name="fb_login_protocol_scheme">fb1907357799494032</string>
+    <string name="facebook_app_id">201599816845832</string>
+    <string name="fb_login_protocol_scheme">fb201599816845832</string>
 
     <!-- Change JW_LICENSE_KEY -->
-    <string name="jw_license_key">VhdGGWw+4IX/o0y9QxdrKIS6R/CddyhGD1i2UA==</string>
+    <string name="jw_license_key">yQuEvvWqfVygWoZknn6VHDkXtjAZXoeLc+pWGg==</string>
 
-    <string name="slogan">Social Network Of Video</string>
+    <string name="slogan">Videos and shorts</string>
     <string name="fm_version">Version %s</string>
     <string name="cm_submit">Submit</string>
     <string name="cm_ok">Ok</string>
@@ -32,6 +32,12 @@
     <string name="menu_my_download">My Download</string>
     <string name="home_latest">Latest</string>
     <string name="home_most_view">Most View</string>
+    <string name="menu_favourite">My Favourite</string>
+    <string name="menu_on_air">On Air</string>
+    <string name="menu_completed">Completed</string>
+    <string name="menu_series">Series</string>
+    <string name="menu_more">More</string>
+
     <!-- News -->
     <string name="news_latest">Latest</string>
     <string name="news_categories">Categories</string>
@@ -60,7 +66,7 @@
     <string name="email">Email</string>
     <string name="login_password_confirm">Confirm Password</string>
     <string name="login_with_facebook">Sign in with Facebook</string>
-    <string name="login_with_sign_up">New to Yo365? Sign up now</string>
+    <string name="login_with_sign_up">New to teleBang? Sign up now</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="phone_number">Phone Number</string>
@@ -95,4 +101,10 @@
     <string name="msg_change_pass_success">Password updated successfully</string>
     <string name="msg_update_acc_success">Profile updated successfully</string>
     <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>
+
+
+    <string name="card_number">Card number</string>
+    <string name="cvv">CVV</string>
+    <string name="mm">MM</string>
+    <string name="yyyy">YYYY</string>
 </resources>

@@ -33,7 +33,8 @@ public class Constants {
 	 * list from:
 	 *  https://gist.github.com/Keeguon/2310008
 	 */
-	public static String KEYSEARCH="[ \n" + "]";;
+	public static String KEYSEARCH="[ \n" + "]";
+
 	public static String getKeySearch(){
 		return KEYSEARCH;
 	}

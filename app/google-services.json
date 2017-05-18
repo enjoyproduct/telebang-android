@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "504282031577",
-    "firebase_url": "https://yo365-cd7d6.firebaseio.com",
-    "project_id": "yo365-cd7d6",
-    "storage_bucket": "yo365-cd7d6.appspot.com"
+    "project_number": "585933899472",
+    "firebase_url": "https://telebang-1295.firebaseio.com",
+    "project_id": "telebang-1295",
+    "storage_bucket": "telebang-1295.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:504282031577:android:26b765fcf8680e52",
+        "mobilesdk_app_id": "1:585933899472:android:72ce836e192d7abc",
         "android_client_info": {
-          "package_name": "com.inspius.yo365"
+          "package_name": "com.neo2.telebang"
         }
       },
       "oauth_client": [
         {
-          "client_id": "504282031577-b9cleot7ft642snk1nkmf4dug0i28d2b.apps.googleusercontent.com",
+          "client_id": "585933899472-h8hc0ervkrpknvokb20lmei9tku94o79.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBmXwHQ7Z6ESVMeyRV6vB63IO1yrVPMcBU"
+          "current_key": "AIzaSyAzGV2XpaemiX0iIioFYHrNbs-9n8luOH0"
         }
       ],
       "services": {

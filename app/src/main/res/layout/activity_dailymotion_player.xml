@@ -5,7 +5,7 @@
     android:background="@color/background"
     android:orientation="vertical">
 
-    <com.inspius.yo365.widget.DMWebVideoView
+    <com.neo2.telebang.widget.DMWebVideoView
         android:id="@+id/dmWebVideoView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
