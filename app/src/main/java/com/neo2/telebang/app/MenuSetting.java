@@ -79,6 +79,9 @@ public class MenuSetting {
 
         // Share item
         listMenuAtSlideMenu.add(new MenuModel(AppConstant.MENU_TYPE.SHARE, "Share", R.drawable.ic_slide_menu_share, true));
+
+        // Subscription item
+        listMenuAtSlideMenu.add(new MenuModel(AppConstant.MENU_TYPE.SUBSCRIPTION, "Subscription", R.drawable.ic_slide_menu_news, true));
     }
 
     private void settingAccountMenu() {

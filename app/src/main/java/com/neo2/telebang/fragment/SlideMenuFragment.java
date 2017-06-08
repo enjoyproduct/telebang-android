@@ -231,6 +231,9 @@ public class SlideMenuFragment extends BaseAppSlideFragment implements AdapterAc
                 //fragment = HomeFragment_1.newInstance(4);UPLOAD
                 fragment = StaticPageFragment.newInstance("Upload Module", AppConfig.URL_PAGE_UPLOAD);
                 break;
+            case SUBSCRIPTION:
+                fragment = SubscriptionHistoryFragment.newInstance();
+                break;
         }
 
         if (fragment == null)

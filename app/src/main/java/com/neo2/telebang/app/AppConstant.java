@@ -52,6 +52,8 @@ public class AppConstant {
 
     public static final String KEY_PAYSTACK_AUTH_CODE = "paystack_auth_code";
     public static final String KEY_SUBSCRIBED_DATE = "subscribed_date";
+    public static final String KEY_SUBSCRIBED_TYPE = "subscribed_type";
+    public static final String KEY_CARD_NUMBER = "card_number";
 
     public static final String RELATIVE_URL_LOGIN = "/api/login";
     public static final String RELATIVE_URL_LOGIN_FACE_BOOK = "/api/loginFacebook";
@@ -73,11 +75,15 @@ public class AppConstant {
     public static final String RELATIVE_URL_SEARCH_BY_KEYWORD = "/api/getListVideoByKeyword";
     public static final String RELATIVE_URL_UPDATE_VIDEO_COUNTER = "/api/updateStatistics";
     public static final String RELATIVE_URL_PLAY_FACEBOOK = "/api/playFacebookVideo?video_url=%s";
-    public static final String RELATIVE_URL_PLAY_VIMEO = "%s?player_id=player&autoplay=1&title=0&byline=0&portrait=0&api=1&maxheight=480&maxwidth=800";
-    public static final String RELATIVE_URL_GET_SERIES = "api/getListSeries/%s/%s/%s";
-    public static final String RELATIVE_URL_GET_VIDEO_BY_SERIES = "api/getListVideoBySeries/%s/%s/%s";
+    public static final String RELATIVE_URL_PLAY_VIMEO = "/%s?player_id=player&autoplay=1&title=0&byline=0&portrait=0&api=1&maxheight=480&maxwidth=800";
+    public static final String RELATIVE_URL_GET_SERIES = "/api/getListSeries/%s/%s/%s";
+    public static final String RELATIVE_URL_GET_VIDEO_BY_SERIES = "/api/getListVideoBySeries/%s/%s/%s";
     public static final String RELATIVE_URL_REGISTER_DEVICE = "api/registerDevice";
-    public static final String RELATIVE_URL_UPDATE_SUBSCRIPTION = "api/update_subscription";
+    public static final String RELATIVE_URL_GET_NEW_ACCESS_CODE = "/api/get_new_access_code";
+    public static final String RELATIVE_URL_VIERITY_SUBSCRIPTION = "/api/verify_subscription";
+    public static final String RELATIVE_URL_UPDATE_SUBSCRIPTION = "/api/update_subscription";
+    public static final String RELATIVE_URL_GET_SUBSCRIPTIONS = "/api/getSubscriptionHistory";
+
     public static final String URL_YOUTUBE_THUMBNAIL = "http://img.youtube.com/vi/%s/hqdefault.jpg";
 
     public static final String KEY_BUNDLE_VIDEO = "video";
@@ -85,7 +91,9 @@ public class AppConstant {
 
     public static final String PAYSTACK_SECRETE_KEY= "sk_test_1254a67b29e8ffafa4ed35e59493991761c70922";
     public static final String PAYSTACK_PUBLICK_KEY = "pk_test_072172819201269dc2248e051196e7db6fd84dc5";
-    public static final String PAYSTACK_BACKEND_URL = "https://telebang.herokuapp.com";
+//    public static final String PAYSTACK_BACKEND_URL = "https://telebang.herokuapp.com";
+    public static final String PAYSTACK_BACKEND_URL = "https://radiant-retreat-16556.herokuapp.com";
+//    public static final String PAYSTACK_BACKEND_URL = "https://radiant-retreat-16556.herokuapp.com";
 
     /**
      * Date, Time format
@@ -97,7 +105,7 @@ public class AppConstant {
      * ENUM
      */
     public enum MENU_TYPE {
-        HOME_1, HOME_2, HOME_3, CATEGORIES, WATCH_LIST, MY_ACCOUNT, ABOUT_US, TERM, FEEDBACK, HELP, SHARE, DOWNLOAD, NEWS, UPLOAD_VIDEO, SERIES
+        HOME_1, HOME_2, HOME_3, CATEGORIES, WATCH_LIST, MY_ACCOUNT, ABOUT_US, TERM, FEEDBACK, HELP, SHARE, DOWNLOAD, NEWS, UPLOAD_VIDEO, SERIES, SUBSCRIPTION
     }
 
     public enum LOGIN_TYPE {

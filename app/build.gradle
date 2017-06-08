@@ -69,10 +69,15 @@ dependencies {
     compile "com.android.support:recyclerview-v7:${SUPPORT_PACKAGE_VERSION}"
     compile "com.android.support:design:${SUPPORT_PACKAGE_VERSION}"
     compile(name: 'InspiusCore-release', ext: 'aar')
-    compile 'com.jakewharton:butterknife:8.4.0'
-    apt 'com.jakewharton:butterknife-compiler:8.4.0'
-    compile 'com.marshalchen.ultimaterecyclerview:library:0.7.0'
     //compile 'co.paystack.android:paystack:3.0.1'
+
+
+    compile project(':TagViewLib')
+    compile project(':paystack')
+
+    compile files('libs/YouTubeAndroidPlayerApi.jar')
+    compile 'com.jakewharton:butterknife:8.4.0'
+    compile 'com.marshalchen.ultimaterecyclerview:library:0.7.0'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.4'
     compile 'com.wang.avi:library:2.1.3'
     compile 'com.loopj.android:android-async-http:1.4.9'
@@ -83,20 +88,16 @@ dependencies {
     compile 'org.greenrobot:greendao:3.2.0'
     compile 'joda-time:joda-time:2.9.7'
     compile 'com.github.paolorotolo:appintro:4.1.0'
-
-    compile 'com.google.firebase:firebase-core:10.0.1'
-    compile 'com.google.firebase:firebase-ads:10.0.1'
-    compile 'com.google.firebase:firebase-crash:10.0.1'
-    compile 'com.google.firebase:firebase-messaging:10.0.1'
-
+    compile 'com.google.firebase:firebase-core:10.2.1'
+    compile 'com.google.firebase:firebase-ads:10.2.1'
+    compile 'com.google.firebase:firebase-crash:10.2.1'
+    compile 'com.google.firebase:firebase-messaging:10.2.1'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
-    compile project(':TagViewLib')
-    compile project(':paystack')
-
     compile 'com.google.android.exoplayer:exoplayer:r2.1.1'
-    compile files('libs/YouTubeAndroidPlayerApi.jar')
     compile 'com.github.iammert:MusicPlayerView:e3b937c729'
     compile 'com.longtailvideo.jwplayer:jwplayer-core:+'
     compile 'com.longtailvideo.jwplayer:jwplayer-common:+'
+    compile 'com.android.support:support-v4:25.3.1'
+    apt 'com.jakewharton:butterknife-compiler:8.4.0'
 }
 apply plugin: 'com.google.gms.google-services'

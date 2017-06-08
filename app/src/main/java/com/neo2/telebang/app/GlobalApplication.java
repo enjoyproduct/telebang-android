@@ -37,6 +37,7 @@ public class GlobalApplication extends InspiusApplication {
     public void onCreate() {
         super.onCreate();
 
+
         MultiDex.install(getBaseContext());
         mInstance = this;
         initImageLoader(mAppContext);

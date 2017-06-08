@@ -250,8 +250,8 @@ public class CustomerManager {
      * @param timestamp
      * @param listener
      */
-    public void callUpdateSubscription(final String paystack_auth_code, final int timestamp, final APIResponseListener listener) {
-        RPC.updateSubscription(getAccountID(), paystack_auth_code, timestamp, new APIResponseListener() {
+    public void callUpdateSubscription(String cardNum, final String paystack_auth_code, final int timestamp, final int type, final APIResponseListener listener) {
+        RPC.updateSubscription(getAccountID(), cardNum,  paystack_auth_code, timestamp, type, new APIResponseListener() {
             @Override
             public void onError(String message) {
                 listener.onError(message);

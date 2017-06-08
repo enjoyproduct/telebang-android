@@ -12,6 +12,7 @@ import com.neo2.telebang.model.ImageFileModel;
 import com.neo2.telebang.model.LikeStatusResponse;
 import com.neo2.telebang.model.ResponseJSON;
 import com.neo2.telebang.model.SeriesJSON;
+import com.neo2.telebang.model.SubscriptionJSON;
 import com.neo2.telebang.model.VideoJSON;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -33,11 +34,71 @@ public class RPC {
 
     /* ======================================= CUSTOMER =======================================*/
 
-    public static void updateSubscription(final int accountID, final String paystack_auth_code, int timestamp, final APIResponseListener listener) {
+    public static void get_new_access_code(final int accountID,  int type, final APIResponseListener listener) {
+        RequestParams params = new RequestParams();
+        params.put(AppConstant.KEY_USER_ID, String.valueOf(accountID));
+        params.put(AppConstant.KEY_SUBSCRIBED_TYPE, String.valueOf(type));
+
+        AppRestClient.post(AppConstant.RELATIVE_URL_GET_NEW_ACCESS_CODE, params, new BaseJsonHttpResponseHandler<ResponseJSON>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ResponseJSON response) {
+                try {
+                    if (response.isResponseSuccessfully(listener)) {
+                        listener.onSuccess(response.getContentString());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    callbackError(e.getMessage(), listener);
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ResponseJSON errorResponse) {
+                onError(throwable, listener);
+            }
+
+            @Override
+            protected ResponseJSON parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                return onResponse(rawJsonData);
+            }
+        });
+    }
+    public static void verify_subscription(final int accountID, final String paystack_auth_code, final APIResponseListener listener) {
+        RequestParams params = new RequestParams();
+        params.put(AppConstant.KEY_PAYSTACK_AUTH_CODE, paystack_auth_code);
+        params.put(AppConstant.KEY_USER_ID, String.valueOf(accountID));
+
+        AppRestClient.post(AppConstant.RELATIVE_URL_VIERITY_SUBSCRIPTION, params, new BaseJsonHttpResponseHandler<ResponseJSON>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ResponseJSON response) {
+                try {
+                    if (response.isResponseSuccessfully(listener)) {
+                        listener.onSuccess(response.getContentString());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    callbackError(e.getMessage(), listener);
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ResponseJSON errorResponse) {
+                onError(throwable, listener);
+            }
+
+            @Override
+            protected ResponseJSON parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                return onResponse(rawJsonData);
+            }
+        });
+    }
+    public static void updateSubscription(final int accountID, String cardNum, final String paystack_auth_code, int timestamp, int type, final APIResponseListener listener) {
         RequestParams params = new RequestParams();
         params.put(AppConstant.KEY_USER_ID, String.valueOf(accountID));
         params.put(AppConstant.KEY_PAYSTACK_AUTH_CODE, paystack_auth_code);
         params.put(AppConstant.KEY_SUBSCRIBED_DATE, String.valueOf(timestamp));
+        params.put(AppConstant.KEY_CARD_NUMBER, cardNum);
+        params.put(AppConstant.KEY_SUBSCRIBED_TYPE, String.valueOf(type));
 
         AppRestClient.post(AppConstant.RELATIVE_URL_UPDATE_SUBSCRIPTION, params, new BaseJsonHttpResponseHandler<ResponseJSON>() {
             @Override
@@ -264,6 +325,35 @@ public class RPC {
     }
 
     /* ======================================= END CUSTOMER =======================================*/
+    /* ======================================= START SUBSCRIPTION =======================================*/
+    public static void getSubscriptions(final int user_id, final APIResponseListener listener) {
+        RequestParams params = new RequestParams();
+        params.put(AppConstant.KEY_USER_ID, String.valueOf(user_id));
+        AppRestClient.post(AppConstant.RELATIVE_URL_GET_SUBSCRIPTIONS, params, new BaseJsonHttpResponseHandler<ResponseJSON>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ResponseJSON response) {
+                if (response.isResponseSuccessfully(listener))
+                    try {
+                        List<SubscriptionJSON> listData = new ObjectMapper().readValue(response.getContentString(), new TypeReference<List<SubscriptionJSON>>() {
+                        });
+                        listener.onSuccess(listData);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ResponseJSON errorResponse) {
+                onError(throwable, listener);
+            }
+
+            @Override
+            protected ResponseJSON parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                return onResponse(rawJsonData);
+            }
+        });
+    }
+    /* ======================================= END SUBSCRIPTION =======================================*/
 
     /* ======================================= START VIDEOS =======================================*/
 

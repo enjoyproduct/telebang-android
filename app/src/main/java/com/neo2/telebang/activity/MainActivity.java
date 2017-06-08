@@ -9,6 +9,7 @@ import com.neo2.telebang.app.AppConstant;
 import com.neo2.telebang.base.StdActivity;
 import com.neo2.telebang.fragment.NotificationLoadingFragment;
 import com.neo2.telebang.fragment.SplashFragment;
+import com.neo2.telebang.helper.ExceptionHandler;
 
 import butterknife.ButterKnife;
 import co.paystack.android.PaystackSdk;
@@ -28,7 +29,8 @@ public class MainActivity extends StdActivity {
             } else
                 goToSplashScreen();
         }
-
+        ///set exception handler
+        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
 
         InspiusUtils.printHashKey(this);
     }

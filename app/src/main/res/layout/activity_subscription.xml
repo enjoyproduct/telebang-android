@@ -10,34 +10,35 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.neo2.telebang.activity.SubscriptionActivity">
     <TextView
+        android:id="@+id/tv_subscription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginTop="30dp"
         android:text="You will be charged 25 NGR"
         android:textColor="#000000"
         android:textAlignment="center"
         />
-    <com.wang.avi.AVLoadingIndicatorView xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/avloadingIndicatorView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        app:indicatorColor="@color/loading_ball"
-        app:indicatorName="BallTrianglePathIndicator" />
+
     <RelativeLayout
         android:id="@+id/layout_custom_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
         android:gravity="center_vertical"
-        android:layout_centerInParent="true"
+        android:layout_marginTop="100dp"
         >
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+        </Spinner>
         <LinearLayout
             android:id="@+id/layout_card_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:layout_below="@+id/spinner"
+            android:layout_marginTop="20dp"
             android:gravity="center_horizontal"
             android:orientation="horizontal">
 
@@ -75,6 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/layout_card_num"
+            android:layout_marginTop="20dp"
             android:layout_toLeftOf="@id/divider_horizontal"
             android:gravity="right"
             android:hint="@string/mm"
@@ -88,6 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/layout_card_num"
+            android:layout_marginTop="20dp"
             android:layout_toRightOf="@id/divider_horizontal"
             android:gravity="left"
             android:hint="@string/yyyy"
@@ -98,11 +101,20 @@
 
         <Button
             android:id="@+id/button_perform_transaction"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
             android:layout_below="@id/edit_expiry_year"
             android:layout_centerHorizontal="true"
             android:padding="8dp"
             android:text="Charge"/>
     </RelativeLayout>
+    <com.wang.avi.AVLoadingIndicatorView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/avloadingIndicatorView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        app:indicatorColor="@color/loading_ball"
+        app:indicatorName="BallTrianglePathIndicator" />
 </RelativeLayout>

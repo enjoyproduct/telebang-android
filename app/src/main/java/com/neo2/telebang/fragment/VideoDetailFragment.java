@@ -340,12 +340,28 @@ public class VideoDetailFragment extends StdFragment {
 
     @OnClick(R.id.imvPlay)
     void doPlayClicked() {
+        //check login status
         if (CustomerManager.getInstance().getUsername().equals("")) {
             DialogUtil.showMessageBox(getActivity(), "Please login");
-            return;
+            return ;
         }
         if (checkVIP()) {
-            doPlayVideo();
+            playVideo();
+        } else {
+            Intent intent = new Intent(getActivity(), SubscriptionActivity.class);
+            getActivity().startActivityForResult(intent, 1000);
+        }
+    }
+
+    @OnClick(R.id.btnPlay)
+    void doPlayVideo() {
+        //check login status
+        if (CustomerManager.getInstance().getUsername().equals("")) {
+            DialogUtil.showMessageBox(getActivity(), "Please login");
+            return ;
+        }
+        if (checkVIP()) {
+            playVideo();
         } else {
             Intent intent = new Intent(getActivity(), SubscriptionActivity.class);
             getActivity().startActivityForResult(intent, 1000);
@@ -354,20 +370,35 @@ public class VideoDetailFragment extends StdFragment {
     boolean checkVIP() {
         //for test
 //        return  false;
-        if (videoModel.getVip() == 0) {
+        if (videoModel.getVipPlay() == 0) {
             return true;
         } else {
+            //check last subscription date
+            int lastSubscribedType = InspiusSharedPrefUtils.getFromPrefs(getContext(), AppConstant.KEY_SUBSCRIBED_TYPE, 0);
             int lastSubscribedTimestamp = InspiusSharedPrefUtils.getFromPrefs(getContext(), AppConstant.KEY_SUBSCRIBED_DATE, 0);
             int currentTimeStamp = TimeUtil.getCurrentTimeStamp();
-//            if ((currentTimeStamp - lastSubscribedTimestamp) > (3600 * 24 * 30)) {
+//            if ((currentTimeStamp - lastSubscribedTimestamp) > (3600 * 24 * 30 * countMonth(lastSubscribedType))) {
             if ((currentTimeStamp - lastSubscribedTimestamp) > (60)) {
                 return false;
             }
             return  true;
         }
     }
-    @OnClick(R.id.btnPlay)
-    void doPlayVideo() {
+    int countMonth(int type) {
+        switch (type) {
+            case 0:
+                return 1;
+            case 1:
+                return 3;
+            case 2:
+                return 6;
+            case 3:
+                return 12;
+            default:
+                return 1;
+        }
+    }
+    void playVideo() {
         if (videoModel == null)
             return;
 
@@ -419,7 +450,7 @@ public class VideoDetailFragment extends StdFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1000 && resultCode == Activity.RESULT_OK) {
+        if (requestCode == 1000 && resultCode == Activity.RESULT_OK) { //subscription success
             doPlayVideo();
         }
     }

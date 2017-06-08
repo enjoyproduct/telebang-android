@@ -18,6 +18,9 @@ public class AppConfig {
     public static final String BASE_URL_PRODUCTION = "http://telebang.com/index.php";
     public static final String BASE_URL_DEVELOPMENT = "http://telebang.com/index.php";
 
+//    public static final String BASE_URL_PRODUCTION = "http://192.168.2.17/telebang/index.php";
+//    public static final String BASE_URL_DEVELOPMENT = "http://192.168.2.17/telebang/index.php";
+
     public static final String URL_PAGE_TERM = "https://codecanyon.net/item/yo365-smart-network-of-videos/19275244";
     public static final String URL_PAGE_HELP = "http://inspius.com/envato/forums/forum/android/yo365-smart-network-of-videos/";
     public static final String URL_PAGE_ABOUT = "https://codecanyon.net/item/yo365-smart-network-of-videos/19275244";
