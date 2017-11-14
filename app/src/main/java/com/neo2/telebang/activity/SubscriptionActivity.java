@@ -57,6 +57,11 @@ public class SubscriptionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subscription);
+
+        PaystackSdk.setPublicKey(AppConstant.PAYSTACK_PUBLICK_KEY);
+        PaystackSdk.initialize(getApplicationContext());
+
+
         tvSubscription = (TextView)findViewById(R.id.tv_subscription);
         mEditCardNum = (EditText)findViewById(R.id.edit_card_number);
         mEditCVC = (EditText)findViewById(R.id.edit_cvc);
@@ -119,8 +124,8 @@ public class SubscriptionActivity extends AppCompatActivity {
         charge = new Charge();
         // Perform transaction/initialize on our server to get an access code
         // documentation: https://developers.paystack.co/reference#initialize-a-transaction
-        new fetchAccessCodeFromServer().execute(AppConstant.PAYSTACK_BACKEND_URL+"/new-access-code");
-//        getNewAccessCode();
+//        new fetchAccessCodeFromServer().execute(AppConstant.PAYSTACK_BACKEND_URL+"/new-access-code");
+        getNewAccessCode();
     }
     /**
      * Method to validate the form, and set errors on the edittexts.
@@ -184,7 +189,8 @@ public class SubscriptionActivity extends AppCompatActivity {
 
     private void chargeCard() {
         transaction = null;
-        PaystackSdk.chargeCard(this, charge, new Paystack.TransactionCallback() {
+
+        PaystackSdk.chargeCard(SubscriptionActivity.this,   this.charge, new Paystack.TransactionCallback() {
             // This is called only after transaction is successful
             @Override
             public void onSuccess(Transaction transaction) {
@@ -193,6 +199,7 @@ public class SubscriptionActivity extends AppCompatActivity {
 //                Toast.makeText(SubscriptionActivity.this, transaction.getReference(), Toast.LENGTH_LONG).show();
                 Toast.makeText(SubscriptionActivity.this, "Subscription Success", Toast.LENGTH_LONG).show();
 //                new verifyOnServer().execute(transaction.getReference());
+                verifySubscription(transaction.getReference());
                 updateSubscribe(transaction.getReference());
             }
             // This is called only before requesting OTP
@@ -221,7 +228,7 @@ public class SubscriptionActivity extends AppCompatActivity {
                     Toast.makeText(SubscriptionActivity.this, transaction.getReference() + " concluded with error: " + error.getMessage(), Toast.LENGTH_LONG).show();
 //                    mTextError.setText(String.format("%s  concluded with error: %s %s", transaction.getReference(), error.getClass().getSimpleName(), error.getMessage()));
 //                    new verifyOnServer().execute(transaction.getReference());
-//                    verifySubscription(transaction.getReference());
+                    verifySubscription(transaction.getReference());
                 } else {
                     Toast.makeText(SubscriptionActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
 //                    mTextError.setText(String.format("Error: %s %s", error.getClass().getSimpleName(), error.getMessage()));

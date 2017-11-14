@@ -91,9 +91,7 @@ public class AppConstant {
 
     public static final String PAYSTACK_SECRETE_KEY= "sk_test_1254a67b29e8ffafa4ed35e59493991761c70922";
     public static final String PAYSTACK_PUBLICK_KEY = "pk_test_072172819201269dc2248e051196e7db6fd84dc5";
-//    public static final String PAYSTACK_BACKEND_URL = "https://telebang.herokuapp.com";
-    public static final String PAYSTACK_BACKEND_URL = "https://radiant-retreat-16556.herokuapp.com";
-//    public static final String PAYSTACK_BACKEND_URL = "https://radiant-retreat-16556.herokuapp.com";
+    public static final String PAYSTACK_BACKEND_URL = "https://telebang.herokuapp.com";
 
     /**
      * Date, Time format

@@ -44,7 +44,8 @@ public class RPC {
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ResponseJSON response) {
                 try {
                     if (response.isResponseSuccessfully(listener)) {
-                        listener.onSuccess(response.getContentString());
+                        String code = response.getContentString().replace("\"", "");
+                        listener.onSuccess(code);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

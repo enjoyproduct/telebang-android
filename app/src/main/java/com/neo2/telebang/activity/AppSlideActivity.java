@@ -21,10 +21,6 @@ public class AppSlideActivity extends StdActivity implements BaseAppSlideActivit
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-        PaystackSdk.initialize(getApplicationContext());
-        PaystackSdk.setPublicKey(AppConstant.PAYSTACK_PUBLICK_KEY);
-
         setContentView(R.layout.activity_app_slide);
         ButterKnife.bind(this);
     }

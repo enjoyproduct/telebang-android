@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "585933899472",
-    "firebase_url": "https://telebang-1295.firebaseio.com",
-    "project_id": "telebang-1295",
-    "storage_bucket": "telebang-1295.appspot.com"
+    "project_number": "933702385177",
+    "firebase_url": "https://telebang-17840.firebaseio.com",
+    "project_id": "telebang-17840",
+    "storage_bucket": "telebang-17840.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:585933899472:android:72ce836e192d7abc",
+        "mobilesdk_app_id": "1:933702385177:android:72ce836e192d7abc",
         "android_client_info": {
           "package_name": "com.neo2.telebang"
         }
       },
       "oauth_client": [
         {
-          "client_id": "585933899472-h8hc0ervkrpknvokb20lmei9tku94o79.apps.googleusercontent.com",
+          "client_id": "933702385177-taek5up8mv8epc99s03eo2ok0qsfaovf.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAzGV2XpaemiX0iIioFYHrNbs-9n8luOH0"
+          "current_key": "AIzaSyAvXAJS5MWUCjc__QdvaHwRCfvr4-CuqgA"
         }
       ],
       "services": {

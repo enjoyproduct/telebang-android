@@ -377,8 +377,8 @@ public class VideoDetailFragment extends StdFragment {
             int lastSubscribedType = InspiusSharedPrefUtils.getFromPrefs(getContext(), AppConstant.KEY_SUBSCRIBED_TYPE, 0);
             int lastSubscribedTimestamp = InspiusSharedPrefUtils.getFromPrefs(getContext(), AppConstant.KEY_SUBSCRIBED_DATE, 0);
             int currentTimeStamp = TimeUtil.getCurrentTimeStamp();
-//            if ((currentTimeStamp - lastSubscribedTimestamp) > (3600 * 24 * 30 * countMonth(lastSubscribedType))) {
-            if ((currentTimeStamp - lastSubscribedTimestamp) > (60)) {
+           if ((currentTimeStamp - lastSubscribedTimestamp) > (3600 * 24 * 30 * countMonth(lastSubscribedType))) {
+           // if ((currentTimeStamp - lastSubscribedTimestamp) > (60)) {
                 return false;
             }
             return  true;

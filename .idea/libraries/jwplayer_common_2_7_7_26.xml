@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="jwplayer-common-2.7.7+26">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.longtailvideo.jwplayer/jwplayer-common/2.7.7+26/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.longtailvideo.jwplayer/jwplayer-common/2.7.7+26/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

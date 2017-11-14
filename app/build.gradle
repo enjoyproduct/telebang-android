@@ -44,6 +44,7 @@ android {
     dexOptions {
         javaMaxHeapSize "4g"
     }
+    buildToolsVersion '25.0.0'
 }
 buildscript {
     repositories {
@@ -70,6 +71,7 @@ dependencies {
     compile "com.android.support:design:${SUPPORT_PACKAGE_VERSION}"
     compile(name: 'InspiusCore-release', ext: 'aar')
     //compile 'co.paystack.android:paystack:3.0.1'
+    compile 'com.google.android.gms:play-services:10.2.0'
 
 
     compile project(':TagViewLib')
