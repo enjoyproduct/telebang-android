@@ -368,8 +368,7 @@ public class VideoDetailFragment extends StdFragment {
         }
     }
     boolean checkVIP() {
-        //for test
-//        return  false;
+
         if (videoModel.getVipPlay() == 0) {
             return true;
         } else {

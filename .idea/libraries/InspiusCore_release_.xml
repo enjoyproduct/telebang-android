@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="InspiusCore-release-">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/InspiusCore-release/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/InspiusCore-release/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/3dc8d17d09dfdc70a8d3d82ca0ac0e6c8402a0d9/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/3dc8d17d09dfdc70a8d3d82ca0ac0e6c8402a0d9/output/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

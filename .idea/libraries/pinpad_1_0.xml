@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="pinpad-1.0">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/paystack/build/intermediates/exploded-aar/co.paystack.android.design.widget/pinpad/1.0/res" />
-      <root url="jar://$PROJECT_DIR$/paystack/build/intermediates/exploded-aar/co.paystack.android.design.widget/pinpad/1.0/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.android/build-cache/f4a0a1b9b43666cefee539c00c76c6ff7bae8a63/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/f4a0a1b9b43666cefee539c00c76c6ff7bae8a63/output/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

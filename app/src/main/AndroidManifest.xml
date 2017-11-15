@@ -216,8 +216,12 @@
 
         <activity
             android:name=".activity.SubscriptionActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"></activity>
-        <activity android:name=".activity.ExceptionViewActivity"></activity>
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation">
+
+        </activity>
+        <activity android:name=".activity.ExceptionViewActivity">
+
+        </activity>
     </application>
 
 </manifest>

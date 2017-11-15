@@ -76,7 +76,7 @@ public class SettingFragment extends BaseAppSlideFragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == AppConstant.REQUEST_ALBUM_PIC) {
-            if (resultCode == Activity.RESULT_OK) {
+            if (resultCode == Activity.RESULT_OK && data.getData() != null) {
                 ImageFileModel imageObj = ImageUtil.getImageFileFromUri(mContext, data.getData());
                 requestChangeAvatar(imageObj);
             }

@@ -200,7 +200,7 @@ public class SubscriptionActivity extends AppCompatActivity {
                 Toast.makeText(SubscriptionActivity.this, "Subscription Success", Toast.LENGTH_LONG).show();
 //                new verifyOnServer().execute(transaction.getReference());
                 verifySubscription(transaction.getReference());
-                updateSubscribe(transaction.getReference());
+
             }
             // This is called only before requesting OTP
             // Save reference so you may send to server if
@@ -271,6 +271,7 @@ public class SubscriptionActivity extends AppCompatActivity {
                 if (result != null) {
 //                SubscriptionActivity.this.mTextBackendMessage.setText(String.format("Gateway response: %s", result));
                     DialogUtil.showMessageBox(SubscriptionActivity.this, String.valueOf(result));
+                    updateSubscribe(transaction.getReference());
                 }
             }
         });
@@ -281,7 +282,7 @@ public class SubscriptionActivity extends AppCompatActivity {
             cardNum = cardNum.substring(cardNum.length() - 4);
         }
         final int currentTimestamp = TimeUtil.getCurrentTimeStamp();
-        CustomerManager.getInstance().callUpdateSubscription(cardNum, paystack_auth_code, spinner.getSelectedItemPosition(), currentTimestamp, new APIResponseListener() {
+        CustomerManager.getInstance().callUpdateSubscription(cardNum, paystack_auth_code, currentTimestamp, spinner.getSelectedItemPosition(), new APIResponseListener() {
             @Override
             public void onError(String message) {
                 stopAnimLoading();

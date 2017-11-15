@@ -78,7 +78,7 @@ public class AppConstant {
     public static final String RELATIVE_URL_PLAY_VIMEO = "/%s?player_id=player&autoplay=1&title=0&byline=0&portrait=0&api=1&maxheight=480&maxwidth=800";
     public static final String RELATIVE_URL_GET_SERIES = "/api/getListSeries/%s/%s/%s";
     public static final String RELATIVE_URL_GET_VIDEO_BY_SERIES = "/api/getListVideoBySeries/%s/%s/%s";
-    public static final String RELATIVE_URL_REGISTER_DEVICE = "api/registerDevice";
+    public static final String RELATIVE_URL_REGISTER_DEVICE = "/api/registerDevice";
     public static final String RELATIVE_URL_GET_NEW_ACCESS_CODE = "/api/get_new_access_code";
     public static final String RELATIVE_URL_VIERITY_SUBSCRIPTION = "/api/verify_subscription";
     public static final String RELATIVE_URL_UPDATE_SUBSCRIPTION = "/api/update_subscription";

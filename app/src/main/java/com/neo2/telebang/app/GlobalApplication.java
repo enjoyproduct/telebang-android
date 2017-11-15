@@ -16,7 +16,7 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
 import android.graphics.Bitmap;
-import android.support.multidex.MultiDex;
+//import android.support.multidex.MultiDex;
 
 /**
  * Created by Billy on 9/3/15.
@@ -38,7 +38,7 @@ public class GlobalApplication extends InspiusApplication {
         super.onCreate();
 
 
-        MultiDex.install(getBaseContext());
+//        MultiDex.install(getBaseContext());
         mInstance = this;
         initImageLoader(mAppContext);
 
@@ -50,7 +50,7 @@ public class GlobalApplication extends InspiusApplication {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-        MultiDex.install(this);
+//        MultiDex.install(this);
     }
 
     public static synchronized GlobalApplication getInstance() {

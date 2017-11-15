@@ -27,7 +27,7 @@ public class Validation {
         if (!TextUtils.isEmpty(username))
             size = username.length();
 
-        if (size < 6 || size > 30) {
+        if (size < 4 || size > 30) {
             msgResponse = USERNAME_LONG_MSG;
         }
 
@@ -67,7 +67,7 @@ public class Validation {
         if (!TextUtils.isEmpty(password))
             size = password.length();
 
-        if (size < 6) {
+        if (size < 5) {
             msgResponse = PASSWORD_LONG_MSG;
         }
 

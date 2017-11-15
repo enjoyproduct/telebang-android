@@ -44,7 +44,6 @@ android {
     dexOptions {
         javaMaxHeapSize "4g"
     }
-    buildToolsVersion '25.0.0'
 }
 buildscript {
     repositories {

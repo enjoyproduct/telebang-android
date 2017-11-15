@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="firebase-ads-10.2.1">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.google.firebase/firebase-ads/10.2.1/res" />
-      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.google.firebase/firebase-ads/10.2.1/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.android/build-cache/7f2f32659102224afe369a83c8c3b7d11548545d/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/7f2f32659102224afe369a83c8c3b7d11548545d/output/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
