@@ -3,16 +3,15 @@ apply plugin: "com.jfrog.bintray"
 apply plugin: 'com.github.dcendents.android-maven'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion COMPILE_SDK_VERSION as int
+    buildToolsVersion BUILD_TOOLS_VERSION
     lintOptions {
         abortOnError false
     }
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode rootProject.ext.versionCode
-        versionName rootProject.ext.versionName
+        minSdkVersion MIN_SDK_VERSION
+        targetSdkVersion TARGET_SDK_VERSION
+
     }
     buildTypes {
         release {
@@ -28,7 +27,7 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.squareup.okhttp3:okhttp:3.4.2'
-    compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
+    compile "com.android.support:appcompat-v7:${SUPPORT_PACKAGE_VERSION}"
 
     compile 'co.paystack.android.design.widget:pinpad:1.0'
 }
@@ -47,7 +46,7 @@ ext {
     artifact = 'paystack'
 
     libraryDescription = 'An android sdk for working with paystack'
-    libraryVersion = rootProject.ext.versionName
+    libraryVersion = "1.0"
 
     developerId = 'paystack'
     developerName = 'Paystack'

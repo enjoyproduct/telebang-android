@@ -48,7 +48,7 @@ public class CustomerManager {
 
     }
 
-    private AppConstant.LOGIN_TYPE getLoginCacheType() {
+    public AppConstant.LOGIN_TYPE getLoginCacheType() {
         String email = getUsername();
         String password = getPassword();
 
@@ -379,7 +379,7 @@ public class CustomerManager {
         }
     }
 
-    private String getFacebookAccessToken() {
+    public String getFacebookAccessToken() {
         return InspiusSharedPrefUtils.getFromPrefs(mContext, AppConstant.KEY_ACCESS_TOKEN, "");
     }
 }

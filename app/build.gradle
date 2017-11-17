@@ -1,32 +1,31 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
 
+
 android {
+
     compileSdkVersion COMPILE_SDK_VERSION as int
     buildToolsVersion BUILD_TOOLS_VERSION
 
     defaultConfig {
-        applicationId APPLICATION_ID
-        minSdkVersion MIN_SDK_VERSION as int
-        targetSdkVersion TARGET_SDK_VERSION as int
-        versionCode VERSION_CODE as int
-        versionName VERSION_NAME
-
+        applicationId 'com.neo2.telebang'
+        minSdkVersion MIN_SDK_VERSION
+        targetSdkVersion TARGET_SDK_VERSION
+        versionCode 2
+        versionName "1.0"
         multiDexEnabled true
     }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
 
+        }
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
     lintOptions {
         xmlReport false
         warningsAsErrors true
@@ -34,15 +33,15 @@ android {
         showAll true
         disable 'OldTargetApi', 'UnusedAttribute', 'LongLogTag'
     }
-
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/NOTICE'
     }
-
     dexOptions {
         javaMaxHeapSize "4g"
+    }
+    productFlavors {
     }
 }
 buildscript {
@@ -68,14 +67,11 @@ dependencies {
     compile "com.android.support:appcompat-v7:${SUPPORT_PACKAGE_VERSION}"
     compile "com.android.support:recyclerview-v7:${SUPPORT_PACKAGE_VERSION}"
     compile "com.android.support:design:${SUPPORT_PACKAGE_VERSION}"
+    compile "com.android.support:support-v4:${SUPPORT_PACKAGE_VERSION}"
     compile(name: 'InspiusCore-release', ext: 'aar')
-    //compile 'co.paystack.android:paystack:3.0.1'
-    compile 'com.google.android.gms:play-services:10.2.0'
-
-
+    compile 'com.google.android.gms:play-services:11.0.2'
     compile project(':TagViewLib')
     compile project(':paystack')
-
     compile files('libs/YouTubeAndroidPlayerApi.jar')
     compile 'com.jakewharton:butterknife:8.4.0'
     compile 'com.marshalchen.ultimaterecyclerview:library:0.7.0'
@@ -98,7 +94,8 @@ dependencies {
     compile 'com.github.iammert:MusicPlayerView:e3b937c729'
     compile 'com.longtailvideo.jwplayer:jwplayer-core:+'
     compile 'com.longtailvideo.jwplayer:jwplayer-common:+'
-    compile 'com.android.support:support-v4:25.3.1'
+
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
 }
+
 apply plugin: 'com.google.gms.google-services'

@@ -341,7 +341,7 @@ public class VideoDetailFragment extends StdFragment {
     @OnClick(R.id.imvPlay)
     void doPlayClicked() {
         //check login status
-        if (CustomerManager.getInstance().getUsername().equals("")) {
+        if (!checkLoginStatus()) {
             DialogUtil.showMessageBox(getActivity(), "Please login");
             return ;
         }
@@ -356,7 +356,7 @@ public class VideoDetailFragment extends StdFragment {
     @OnClick(R.id.btnPlay)
     void doPlayVideo() {
         //check login status
-        if (CustomerManager.getInstance().getUsername().equals("")) {
+        if (!checkLoginStatus()) {
             DialogUtil.showMessageBox(getActivity(), "Please login");
             return ;
         }
@@ -367,8 +367,25 @@ public class VideoDetailFragment extends StdFragment {
             getActivity().startActivityForResult(intent, 1000);
         }
     }
-    boolean checkVIP() {
 
+    boolean checkLoginStatus() {
+        AppConstant.LOGIN_TYPE type = CustomerManager.getInstance().getLoginCacheType();
+        switch (type) {
+            case NOT_LOGIN:
+                return false;
+            case SYSTEM:
+                if (CustomerManager.getInstance().getUsername().equals("")) {
+                    return false;
+                }
+            case FACEBOOK:
+                if (CustomerManager.getInstance().getFacebookAccessToken().equals("")) {
+                    return false;
+                }
+        }
+        return true;
+    }
+
+    boolean checkVIP() {
         if (videoModel.getVipPlay() == 0) {
             return true;
         } else {
@@ -383,6 +400,7 @@ public class VideoDetailFragment extends StdFragment {
             return  true;
         }
     }
+
     int countMonth(int type) {
         switch (type) {
             case 0:
@@ -397,6 +415,7 @@ public class VideoDetailFragment extends StdFragment {
                 return 1;
         }
     }
+
     void playVideo() {
         if (videoModel == null)
             return;
