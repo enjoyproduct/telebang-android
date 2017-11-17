@@ -39,7 +39,7 @@ public class FirebaseIDService extends FirebaseInstanceIdService {
         InspiusSharedPrefUtils.saveToPrefs(getApplicationContext(), AppConstant.KEY_DEVICE_TOKEN, token);
 
         // Add custom implementation, as needed.
-        if (!TextUtils.isEmpty(token))
-            RPC.registerDeviceNotification(token, null);
+//        if (!TextUtils.isEmpty(token))
+//            RPC.registerDeviceNotification(token, null);
     }
 }

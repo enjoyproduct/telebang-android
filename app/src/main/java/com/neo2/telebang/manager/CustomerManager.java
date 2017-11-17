@@ -49,10 +49,10 @@ public class CustomerManager {
     }
 
     public AppConstant.LOGIN_TYPE getLoginCacheType() {
-        String email = getUsername();
+        String username = getUsername();
         String password = getPassword();
 
-        if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password))
+        if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password))
             return AppConstant.LOGIN_TYPE.SYSTEM;
 
         if (!TextUtils.isEmpty(getFacebookAccessToken()))

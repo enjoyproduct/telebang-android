@@ -751,7 +751,7 @@ public class RPC {
             }
         });
     }
-
+    //not necessary code
     public static void registerDeviceNotification(final String token, final APIResponseListener listener) {
         RequestParams params = new RequestParams();
         params.put(AppConstant.KEY_DEVICE_TOKEN, token);

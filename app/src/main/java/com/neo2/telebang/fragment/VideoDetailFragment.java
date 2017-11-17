@@ -341,7 +341,7 @@ public class VideoDetailFragment extends StdFragment {
     @OnClick(R.id.imvPlay)
     void doPlayClicked() {
         //check login status
-        if (!checkLoginStatus()) {
+        if (checkLoginStatus()) {
             DialogUtil.showMessageBox(getActivity(), "Please login");
             return ;
         }
@@ -356,7 +356,7 @@ public class VideoDetailFragment extends StdFragment {
     @OnClick(R.id.btnPlay)
     void doPlayVideo() {
         //check login status
-        if (!checkLoginStatus()) {
+        if (checkLoginStatus()) {
             DialogUtil.showMessageBox(getActivity(), "Please login");
             return ;
         }
